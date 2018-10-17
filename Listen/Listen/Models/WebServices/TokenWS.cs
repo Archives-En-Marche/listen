@@ -51,6 +51,36 @@ namespace Listen.Models.WebServices
                 return null;
             }
         }
+
+        public async Task<Token> RefreshTokenAsync(string refresh_token)
+        {
+            if (!string.IsNullOrEmpty(refresh_token))
+            {
+                var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
+                var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
+                var client = new RestClient(base_url);
+                var request = new RestRequest("/oauth/v2/token", Method.POST);
+                request.AddParameter("client_id", "2b494496-4eae-4946-9ae1-efa3f593595c");
+                request.AddParameter("client_secret", "vcyrJys1sdvaTCXN0BFfOuw2A8KxdA9QkYDMErViM68=");
+                request.AddParameter("grant_type", "refresh_token");
+                request.AddParameter("refresh_token", refresh_token);
+                var cts = new CancellationTokenSource(timeout);
+                var result = await client.ExecuteTaskAsync(request, cts.Token);
+                if (result.StatusCode == HttpStatusCode.OK)
+                {
+                    return JsonConvert.DeserializeObject<Token>(result.Content); ;
+                }
+                else
+                {
+                    return null;
+                }
+                    ;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 
     public class TokenInfo
@@ -58,16 +88,31 @@ namespace Listen.Models.WebServices
         [JsonProperty(PropertyName = "token_type")]
         public string TokenType { get; set; }
 
-        [JsonProperty(PropertyName = "expires_in")] 
+        [JsonProperty(PropertyName = "expires_in")]
         public string ExpiresIn { get; set; }
 
-        [JsonProperty(PropertyName = "access_token")] 
+        [JsonProperty(PropertyName = "access_token")]
         public string AccessToken { get; set; }
 
-        [JsonProperty(PropertyName = "grant_types")] 
+        [JsonProperty(PropertyName = "grant_types")]
         public List<string> GrantTypes { get; set; }
 
-        [JsonProperty(PropertyName = "scopes")] 
+        [JsonProperty(PropertyName = "scopes")]
         public List<string> Scopes { get; set; }
+    }
+
+    public class Token
+    {
+        [JsonProperty(PropertyName = "token_type")]
+        public string TokenType { get; set; }
+
+        [JsonProperty(PropertyName = "expires_in")]
+        public string ExpiresIn { get; set; }
+
+        [JsonProperty(PropertyName = "access_token")]
+        public string AccessToken { get; set; }
+
+        [JsonProperty(PropertyName = "refresh_token")]
+        public string RefreshToken { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Listen.Helpers;
 using Listen.Models.RealmObjects;
+using Listen.Models.WebServices;
 using Realms;
 
 namespace Listen.Models.RealmAccess
@@ -65,14 +66,34 @@ namespace Listen.Models.RealmAccess
             }
         }
 
+        public async Task UpdateTokenAsync(Token token)
+        {
+            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+            var realm = Realm.GetInstance(db_name);
+
+            var users = realm.All<User>();
+            var user = users.FirstOrDefault();
+            if (token != null && user != null)
+            {
+                await realm.WriteAsync(r =>
+                {
+                    var _users = r.All<User>();
+                    var current = _users.First();
+                    current.Token = token.AccessToken;
+                    current.RefreshToken = token.RefreshToken;
+                    current.LastAccess = DateTimeOffset.Now;
+                });
+            }
+        }
+
         public User GetUser()
         {
             //return await Task.Factory.StartNew(() =>
             //{
-                var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-                var realm = Realm.GetInstance(db_name);
-                var users = realm.All<User>();
-                return users.FirstOrDefault();
+            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+            var realm = Realm.GetInstance(db_name);
+            var users = realm.All<User>();
+            return users.FirstOrDefault();
             //});
         }
     }

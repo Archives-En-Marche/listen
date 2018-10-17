@@ -40,7 +40,10 @@ namespace Listen.Droid.Renderers
                     scope: null,
                     authorizeUrl: new Uri("https://staging.en-marche.fr/oauth/v2/auth"),
                     redirectUrl: new Uri("https://staging.en-marche.fr"),
-                    accessTokenUrl: new Uri("https://staging.en-marche.fr/oauth/v2/token"));
+                    accessTokenUrl: new Uri("https://staging.en-marche.fr/oauth/v2/token"))
+                {
+                    ShowErrors = false
+                };
 
                 auth.Completed += async (sender, eventArgs) =>
                 {

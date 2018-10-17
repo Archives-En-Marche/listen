@@ -57,6 +57,9 @@ namespace Listen
                 if (user != null)
                 {
                     var token = user.Token;
+                    var refresh = user?.RefreshToken;
+
+                    //var newtoken = await TokenWS.Instance.RefreshTokenAsync(refresh);
 
                     // -- Check if TOKEN not expire
                     var infos = await TokenWS.Instance.GetInfoAsync(token);
