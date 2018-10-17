@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-
+using System.Text;
+using System.Threading;
 using Foundation;
+using PopolLib.iOS.Services;
+using PopolLib.Services;
 using UIKit;
+using Xamarin.Forms;
 
 namespace Listen.iOS
 {
@@ -20,13 +25,37 @@ namespace Listen.iOS
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
+
+            DependencyService.Register<IProgressHUD, IOSProgressHUD>();
+
+            App.ScreenSize = new Size(UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Height);
+
+            var fr = new CultureInfo("fr-FR");
+            Thread.CurrentThread.CurrentCulture = fr;
+
             LoadApplication(new App());
 
-            return base.FinishedLaunching(app, options);
+            // -- Liste des Fonts dans l'application
+            var fontList = new StringBuilder();
+            var familyNames = UIFont.FamilyNames;
+            foreach (var familyName in familyNames)
+            {
+                fontList.Append(String.Format("Family: {0}\n", familyName));
+                Console.WriteLine("Family: {0}\n", familyName);
+                var fontNames = UIFont.FontNamesForFamilyName(familyName);
+                foreach (var fontName in fontNames)
+                {
+                    Console.WriteLine("\tFont: {0}\n", fontName);
+                    fontList.Append(String.Format("\tFont: {0}\n", fontName));
+                }
+            };
+
+            Console.WriteLine(fontList.ToString());
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
     }
 }

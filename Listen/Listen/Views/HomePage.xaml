@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.HomePage">
+    <ContentPage.Content>
+        <StackLayout Padding="20,60,20,20" Spacing="30">
+            <Label Text="J'écoute" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black" FontSize="24">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Regular.ttf</On>
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+            <Button Text="Accèder au(x) Questionnaire(s)" TextColor="White" FontSize="20" Command="{Binding QuestionnaireCommand}" BackgroundColor="{StaticResource LightRedColor}" HeightRequest="170" HorizontalOptions="FillAndExpand">
+                <Button.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Regular.ttf</On>
+                    </OnPlatform>
+                </Button.FontFamily>
+            </Button>
+            <Button Text="Informations" TextColor="White" FontSize="20" Command="{Binding InfosCommand}" BackgroundColor="{StaticResource LightBlueColor}" HeightRequest="100" HorizontalOptions="FillAndExpand">
+                <Button.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Regular.ttf</On>
+                    </OnPlatform>
+                </Button.FontFamily>
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
