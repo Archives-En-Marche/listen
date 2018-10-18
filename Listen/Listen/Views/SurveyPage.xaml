@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:flv="clr-namespace:PopolLib.VisualElements.FastListView;assembly=PopolLib"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  x:Class="Listen.Views.SurveyPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <flv:FastListView BackgroundColor="White"
+              ItemsSource="{Binding Surveys}"
+              ScrollEnabled="true"
+              SelectedCommand="{Binding SelectedCommand}"
+              SeparatorColor="#0f1e5a"
+              SeparatorVisibility="None"
+              VerticalOptions="FillAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

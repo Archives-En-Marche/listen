@@ -10,6 +10,8 @@ using System.Text;
 using System.Globalization;
 using System.Threading;
 using Android.Graphics.Drawables;
+using Android.Graphics;
+using Android.Content;
 
 namespace Listen.Droid
 {
@@ -22,6 +24,7 @@ namespace Listen.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             var fr = new CultureInfo("fr-FR");

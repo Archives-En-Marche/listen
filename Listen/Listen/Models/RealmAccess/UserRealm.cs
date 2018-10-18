@@ -86,15 +86,18 @@ namespace Listen.Models.RealmAccess
             }
         }
 
-        public User GetUser()
+        public async Task<User> GetUser()
         {
-            //return await Task.Factory.StartNew(() =>
-            //{
-            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-            var realm = Realm.GetInstance(db_name);
-            var users = realm.All<User>();
-            return users.FirstOrDefault();
-            //});
+            return await Task.Factory.StartNew(() =>
+            {
+                var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+                using (var realm = Realm.GetInstance(db_name))
+                {
+                    var users = realm.All<User>();
+                    var user = users.FirstOrDefault();
+                    return user?.Clone();
+                }
+            });
         }
     }
 }

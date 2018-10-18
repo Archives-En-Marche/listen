@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Listen.Helpers;
+using Listen.Managers;
 using Listen.Models.RealmAccess;
 using Listen.Models.WebServices;
 using Listen.Services;
@@ -50,7 +51,9 @@ namespace Listen
                 // -- On charge les questionnaires
                 hud.Show("Chargement ...");
 
-                var user = UserRealm.Instance.GetUser();
+                var user = await UserManager.Instance.GetUser();
+
+                await ServerManager.Instance.GetSurveysAsync();
 
                 var displayLoginPage = false;
 

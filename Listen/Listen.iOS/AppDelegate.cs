@@ -9,6 +9,7 @@ using PopolLib.iOS.Services;
 using PopolLib.Services;
 using UIKit;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace Listen.iOS
 {
@@ -28,6 +29,15 @@ namespace Listen.iOS
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             Xamarin.Calabash.Start();
+
+            var normalTextAttributes = new UITextAttributes();
+            normalTextAttributes.Font = UIFont.FromName("Gill Sans", 20.0f); // -- Unselected
+            normalTextAttributes.TextColor = UIColor.White;
+            UINavigationBar.Appearance.SetTitleTextAttributes(normalTextAttributes);
+
+            UINavigationBar.Appearance.BarTintColor = Color.FromHex("#243366").ToUIColor();
+            UINavigationBar.Appearance.TintColor = UIColor.White;
+           
             global::Xamarin.Forms.Forms.Init();
 
             DependencyService.Register<IProgressHUD, IOSProgressHUD>();

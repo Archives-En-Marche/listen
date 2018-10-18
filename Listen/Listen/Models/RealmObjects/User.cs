@@ -15,5 +15,19 @@ namespace Listen.Models.RealmObjects
         public string Token { get; set; }
         public string RefreshToken { get; set; }
         public DateTimeOffset LastAccess { get; set; }
+
+        public User Clone()
+        {
+            return new User()
+            {
+                LastName = this.LastName,
+                FirstName = this.FirstName,
+                Phone = this.Phone,
+                Mail = this.Mail,
+                Token = this.Token,
+                RefreshToken = this.RefreshToken,
+                LastAccess = this.LastAccess
+            };
+        }
     }
 }

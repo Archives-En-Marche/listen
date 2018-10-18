@@ -8,12 +8,16 @@ namespace Listen.VisualElements
     {
         public InternalNavigationPage()
         {
+            BarBackgroundColor = Color.White;
+            BarTextColor = Color.White;
         }
 
         public InternalNavigationPage(Page root) : base(root)
         {
-
+            BarBackgroundColor = Color.White;
+            BarTextColor = Color.White;
         }
+
         protected override void OnChildAdded(Element child)
         {
             base.OnChildAdded(child);
@@ -21,6 +25,7 @@ namespace Listen.VisualElements
             if (!(child is HomePage))
             {
                 this.BarBackgroundColor = Color.FromHex("#243366");
+                this.BarTextColor = Color.White;
             }
             else
             {

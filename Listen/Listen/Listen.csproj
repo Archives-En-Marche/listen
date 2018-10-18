@@ -18,6 +18,8 @@
     <PackageReference Include="RestSharp" Version="106.5.4" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Xamarin.Auth.Extensions" Version="1.6.0.2" />
+    <PackageReference Include="ReactiveUI" Version="9.0.1" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="9.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\..\PERSO\PopolLib\PopolLib\PopolLib.csproj" />
@@ -34,5 +36,10 @@
     <Folder Include="Services\" />
     <Folder Include="OAuth\" />
     <Folder Include="Models\WebServices\" />
+    <Folder Include="Views\ViewCells\" />
+    <Folder Include="ViewModels\ViewCell\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\ViewCells\SurveyViewCell.cs" />
   </ItemGroup>
 </Project>

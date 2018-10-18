@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flv:FastViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:flv="clr-namespace:PopolLib.VisualElements.FastListView;assembly=PopolLib"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  x:Class="Listen.Views.ViewCells.SurveyViewCell">
+    <StackLayout Spacing="0">
+        <StackLayout BackgroundColor="White" Padding="20,20,20,20" Spacing="20">
+            <Label FontSize="15" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Text}" TextColor="Black">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Regular.ttf</On>
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+        </StackLayout>
+    </StackLayout>
+</flv:FastViewCell>

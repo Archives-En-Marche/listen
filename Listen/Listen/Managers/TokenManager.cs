@@ -30,5 +30,10 @@ namespace Listen.Managers
 
             return newtoken;
         }
+
+        public async Task<TokenInfo> GetInfoAsync(string token)
+        {
+            return await TokenWS.Instance.GetInfoAsync(token);
+        }
     }
 }

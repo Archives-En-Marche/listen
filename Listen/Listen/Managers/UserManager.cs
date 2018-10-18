@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Listen.Models.RealmAccess;
+using Listen.Models.RealmObjects;
+using Listen.Models.WebServices;
 
 namespace Listen.Managers
 {
@@ -20,9 +22,19 @@ namespace Listen.Managers
             }
         }
 
+        public async Task<User> GetUser()
+        {
+            return await UserRealm.Instance.GetUser();
+        }
+
         public async Task AddOrUpdateAsync(string lastname, string firstname, string phone, string mail, string token, string refreshtoken)
         {
             await UserRealm.Instance.AddOrUpdateAsync(lastname, firstname, phone, mail, token, refreshtoken);
+        }
+
+        public async Task UpdateTokenAsync(Token token)
+        {
+            await UserRealm.Instance.UpdateTokenAsync(token);
         }
     }
 }
