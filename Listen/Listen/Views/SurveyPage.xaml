@@ -5,12 +5,13 @@
   x:Class="Listen.Views.SurveyPage">
     <ContentPage.Content>
         <StackLayout>
-            <flv:FastListView BackgroundColor="White"
+            <flv:FastListView BackgroundColor="{StaticResource paleGrey}"
               ItemsSource="{Binding Surveys}"
               ScrollEnabled="true"
+              HasUnevenRows="true"
               SelectedCommand="{Binding SelectedCommand}"
-              SeparatorColor="#0f1e5a"
-              SeparatorVisibility="None"
+              SeparatorColor="{StaticResource white}"
+              SeparatorVisibility="Default"
               VerticalOptions="FillAndExpand"/>
         </StackLayout>
     </ContentPage.Content>

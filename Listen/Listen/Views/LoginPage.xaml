@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  x:Class="Listen.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout Padding="0,0,0,20">
+            <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" MinimumHeightRequest="500">
+                <Image.Source>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="iOS">Images/illustration.png</On>
+                        <On Platform="Android">illustration.png</On>
+                    </OnPlatform>
+                </Image.Source>
+            </Image>
+            <ContentView VerticalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="90" HorizontalOptions="Center">
+                <StackLayout Spacing="10">
+                    <Frame HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
+                        <visual:LetterSpacingLabel LetterSpacing="0.25" Text="CONNEXION" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Bold.ttf</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ConnectCommand}" CommandParameter="{Binding .}" />
+                            </Label.GestureRecognizers>
+                        </visual:LetterSpacingLabel>
+                    </Frame>
+                    <Label Text="Connectez-vous avec votre compte adhérent." FontSize="14" TextColor="{StaticResource brownGrey}" HorizontalOptions="Center" HorizontalTextAlignment="Center">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS">Roboto</On>
+                                <On Platform="Android">Roboto-Regular.ttf</On>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                </StackLayout>
+            </ContentView>
+            <Label HeightRequest="18" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,10">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="PAS ENCORE ADHÉRENT ?" FontSize="12" FontAttributes="Bold" ForegroundColor="{StaticResource brownGrey}" />
+                        <Span Text=" S’INSCRIRE" FontSize="12" FontAttributes="Bold" ForegroundColor="{StaticResource slateGrey}" />
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Bold.ttf</On>
+                    </OnPlatform>
+                </Label.FontFamily>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AccountCommand}" CommandParameter="{Binding .}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

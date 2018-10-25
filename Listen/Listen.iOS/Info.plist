@@ -20,15 +20,11 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>Listen</string>
+	<string>J&apos;écoute</string>
 	<key>CFBundleIdentifier</key>
 	<string>fr.edecision.listen</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-	<key>UILaunchStoryboardName</key>
-	<string></string>
-	<key>CFBundleName</key>
-	<string>Listen</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIAppFonts</key>
@@ -55,11 +51,13 @@
 		<string>Fonts/Roboto-Thin.ttf</string>
 		<string>Fonts/Roboto-ThinItalic.ttf</string>
 	</array>
-	<key>XSLaunchImageAssets</key>
-	<string>Assets.xcassets/LaunchImage.launchimage</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>XSLaunchImageAssets</key>
+	<string>Assets.xcassets/LaunchImage.launchimage</string>
+	<key>CFBundleName</key>
+	<string>J&apos;écoute</string>
 </dict>
 </plist>

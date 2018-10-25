@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Realm.Database" Version="3.2.1" />
@@ -38,6 +38,7 @@
     <Folder Include="Models\WebServices\" />
     <Folder Include="Views\ViewCells\" />
     <Folder Include="ViewModels\ViewCell\" />
+    <Folder Include="ViewModels\Tags\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\ViewCells\SurveyViewCell.cs" />

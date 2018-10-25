@@ -24,27 +24,50 @@ namespace Listen.Models.RealmAccess
             }
         }
 
-        public async Task AddOrUpdateAsync(string lastname, string firstname, string phone, string mail, string token, string refreshtoken)
+        public async Task AddOrUpdateAsync(string lastname, string firstname, string mail, string country, string zipcode, string uuid, string token, string refreshtoken)
         {
             var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
             var realm = Realm.GetInstance(db_name);
 
             var users = realm.All<User>();
-
             if (users.Count() == 0) // -- ADD
             {
                 await realm.WriteAsync(r =>
                 {
-                    var u = new User()
+                    var u = new User();
+                    if (!string.IsNullOrEmpty(lastname))
                     {
-                        LastName = lastname,
-                        FirstName = firstname,
-                        Phone = phone,
-                        Mail = mail,
-                        Token = token,
-                        RefreshToken = refreshtoken,
-                        LastAccess = DateTimeOffset.Now
-                    };
+                        u.LastName = lastname;
+                    }
+                    if (!string.IsNullOrEmpty(firstname))
+                    {
+                        u.FirstName = firstname;
+                    }
+                    if (!string.IsNullOrEmpty(country))
+                    {
+                        u.Country = country;
+                    }
+                    if (!string.IsNullOrEmpty(zipcode))
+                    {
+                        u.ZipCode = zipcode;
+                    }
+                    if (!string.IsNullOrEmpty(uuid))
+                    {
+                        u.Uuid = uuid;
+                    }
+                    if (!string.IsNullOrEmpty(mail))
+                    {
+                        u.Mail = mail;
+                    }
+                    if (!string.IsNullOrEmpty(token))
+                    {
+                        u.Token = token;
+                    }
+                    if (!string.IsNullOrEmpty(refreshtoken))
+                    {
+                        u.RefreshToken = refreshtoken;
+                    }
+                    u.LastAccess = DateTimeOffset.Now;
 
                     r.Add(u);
                 });
@@ -55,12 +78,38 @@ namespace Listen.Models.RealmAccess
                 {
                     var _users = r.All<User>();
                     var current = _users.First();
-                    current.LastName = lastname;
-                    current.FirstName = firstname;
-                    current.Phone = phone;
-                    current.Mail = mail;
-                    current.Token = token;
-                    current.RefreshToken = refreshtoken;
+                    if (!string.IsNullOrEmpty(lastname))
+                    {
+                        current.LastName = lastname;
+                    }
+                    if (!string.IsNullOrEmpty(firstname))
+                    {
+                        current.FirstName = firstname;
+                    }
+                    if (!string.IsNullOrEmpty(country))
+                    {
+                        current.Country = country;
+                    }
+                    if (!string.IsNullOrEmpty(zipcode))
+                    {
+                        current.ZipCode = zipcode;
+                    }
+                    if (!string.IsNullOrEmpty(uuid))
+                    {
+                        current.Uuid = uuid;
+                    }
+                    if (!string.IsNullOrEmpty(mail))
+                    {
+                        current.Mail = mail;
+                    }
+                    if (!string.IsNullOrEmpty(token))
+                    {
+                        current.Token = token;
+                    }
+                    if (!string.IsNullOrEmpty(refreshtoken))
+                    {
+                        current.RefreshToken = refreshtoken;
+                    }
                     current.LastAccess = DateTimeOffset.Now;
                 });
             }
@@ -97,6 +146,16 @@ namespace Listen.Models.RealmAccess
                     var user = users.FirstOrDefault();
                     return user?.Clone();
                 }
+            });
+        }
+
+        public async Task DeleteUserAsync()
+        {
+            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+            var realm = Realm.GetInstance(db_name);
+            await realm.WriteAsync(r =>
+            {
+                r.RemoveAll<User>();
             });
         }
     }

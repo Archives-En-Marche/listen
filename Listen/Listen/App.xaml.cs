@@ -38,77 +38,16 @@ namespace Listen
 #endif
             Settings.AppSettings.AddOrUpdateValue("WS_TIME_OUT", 30000);
             Settings.AppSettings.AddOrUpdateValue("DB_NAME", "listen.realm");
+            Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://staging.en-marche.fr");
+            Settings.AppSettings.AddOrUpdateValue("GS_STORAGE_URI", "paris-et-moi.appspot.com");
 
-            MainPage = new InternalNavigationPage(new HomePage(new HomePageViewModel(this)));
+            MainPage = new InternalNavigationPage(new HomePage(this, new HomePageViewModel(this)));
         }
 
-        protected override async void OnStart()
+        protected override void OnStart()
         {
             // Handle when your app starts
-            var hud = DependencyService.Get<IProgressHUD>();
-            try
-            {
-                // -- On charge les questionnaires
-                hud.Show("Chargement ...");
-
-                var user = await UserManager.Instance.GetUser();
-
-                await ServerManager.Instance.GetSurveysAsync();
-
-                var displayLoginPage = false;
-
-                if (user != null)
-                {
-                    var token = user.Token;
-                    var refresh = user?.RefreshToken;
-
-                    //var newtoken = await TokenWS.Instance.RefreshTokenAsync(refresh);
-
-                    // -- Check if TOKEN not expire
-                    var infos = await TokenWS.Instance.GetInfoAsync(token);
-                    if (infos == null)
-                    {
-                        displayLoginPage = true;
-                    }
-                    else
-                    {
-                        // -- Refresh TOKEN ?
-                    }
-                }
-                else
-                {
-                    displayLoginPage = true;
-                }
-
-                if (displayLoginPage)
-                {
-                    // -- On présente la page de login
-                    await ((NavigationPage)MainPage).Navigation.PushModalAsync(new InternalNavigationPage(new LoginPage(new LoginPageViewModel(this))));
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-
-                hud.Dismiss();
-            }
-            finally
-            {
-                hud.Dismiss();
-                //if (Application.Current.Properties.ContainsKey("FirstUse"))
-                //{
-                //    //Do things when it's NOT the first use...
-                //}
-                //else
-                //{
-                //    //Do things when it IS the first use...
-                //    await ((NavigationPage)MainPage).Navigation.PushModalAsync(new InternalNavigationPage(new ParametresPage(new ParametresPageViewModel(this))));
-                //}
-
-                //var permissions = DependencyService.Get<IPermissions>();
-                //await permissions.RequestPermissionsAsync();
-            }
+            //var hud = DependencyService.Get<IProgressHUD>();
         }
 
         protected override void OnSleep()

@@ -22,18 +22,19 @@ namespace Listen.iOS.Renderers
 
             if (!IsShown)
             {
-
                 IsShown = true;
 
                 var auth = new OAuth2Authenticator(
                     "2b494496-4eae-4946-9ae1-efa3f593595c",
                     "vcyrJys1sdvaTCXN0BFfOuw2A8KxdA9QkYDMErViM68=",
-                    null,
+                    "jecoute_surveys",
                     new Uri("https://staging.en-marche.fr/oauth/v2/auth"),
                     new Uri("https://staging.en-marche.fr"),
                     new Uri("https://staging.en-marche.fr/oauth/v2/token"))
                 {
-                    ShowErrors = false
+                    ShowErrors = false,
+                    AllowCancel = false,
+                    Title = ""
                 };
 
                 auth.Completed += async (sender, eventArgs) =>
@@ -76,10 +77,20 @@ namespace Listen.iOS.Renderers
                     Debug.WriteLine(e.Message);
                 };
 
-
-                // This is what actually launches the auth web UI.
-                PresentViewController(auth.GetUI(), true, null);
-
+                var page = Element as LoginPage;
+                if (page != null)
+                {
+                    var _vm = page.BindingContext as LoginPageViewModel;
+                    if (_vm != null)
+                    {
+                        _vm.ConnectCommand = new Command(() =>
+                        {
+                            // This is what actually launches the auth web UI.
+                            PresentViewController(auth.GetUI(), true, null);
+                         });
+                    }
+                }
+ 
             }
 
         }

@@ -62,7 +62,7 @@ namespace Listen.Models.RealmAccess
                     {
                         var _s = new SurveyRealmObject()
                         {
-                            Uuid = s.Uuid,
+                            Uuid = s.Id,
                             Name = s.Name,
                             Questions = JsonConvert.SerializeObject(s.Questions),
                         };

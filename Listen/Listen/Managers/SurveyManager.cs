@@ -8,6 +8,7 @@ using Listen.Models.RealmObjects;
 using Realms;
 using PopolLib.Extensions;
 using Listen.Models.RealmAccess;
+using Xamarin.Forms;
 
 namespace Listen.Managers
 {
@@ -29,7 +30,18 @@ namespace Listen.Managers
 
         public async Task<IList<Survey>> GetSurveysAsync()
         {
-            return await SurveyRealm.Instance.GetSurveysAsync();
+            var list = await SurveyRealm.Instance.GetSurveysAsync();
+            if (list?.Count == 0)
+            {
+                // -- On chage les surveys
+                await ServerManager.Instance.GetSurveysAsync();
+                return await SurveyRealm.Instance.GetSurveysAsync();
+            }
+            else
+            {
+                MessagingCenter.Send<SurveyManager, IList<Survey>>(this, "UpdateUI", list);
+                return list;
+            }
         }
 
         public async Task AddOrUpdateAsync(IList<Models.WebServices.Survey> surveys)

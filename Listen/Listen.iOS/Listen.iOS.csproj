@@ -98,29 +98,33 @@
     <Compile Include="Renderers\LoginPageRenderer.cs" />
     <None Include="FodyWeavers.xml" />
     <Compile Include="Renderers\CustomPageRenderer.cs" />
+    <Compile Include="Renderers\LabelRender\AlignmentExtensions.cs" />
+    <Compile Include="Renderers\LabelRender\ColorExtensions.cs" />
+    <Compile Include="Renderers\LabelRender\FontExtensions.cs" />
+    <Compile Include="Renderers\LabelRender\FormattedStringExtensions.cs" />
+    <Compile Include="Renderers\LabelRender\ISpatialElement.cs" />
+    <Compile Include="Renderers\LabelRender\LabelExtensions.cs" />
+    <Compile Include="Renderers\LabelRender\LabelRenderer.cs" />
+    <Compile Include="Renderers\LabelRender\Region.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_40.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_60.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_87.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_120.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_180.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_1024.png" />
-    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\IOS_Splash-Screen_2436.png" />
-    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\IOS_Splash-Screen_2208.png" />
-    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\IOS_Splash-Screen_1334.png" />
-    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\IOS_Splash-Screen_1136.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-29%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-29%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-60%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-60%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-76%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-83.5%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iPhone_640x1136.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iPhone_1242x2208.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iPhone_750x1334.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iPhone_X.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -129,7 +133,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
     <PackageReference Include="Xamarin.TestCloud.Agent" Version="0.21.4" />
     <PackageReference Include="MvvmLightLibsStd10">
       <Version>5.4.1.1</Version>
@@ -166,6 +170,7 @@
     <Folder Include="Resources\Fonts\" />
     <Folder Include="Resources\Images\" />
     <Folder Include="Renderers\" />
+    <Folder Include="Renderers\LabelRender\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Fonts\Roboto-Black.ttf" />
@@ -189,8 +194,25 @@
     <BundleResource Include="Resources\Fonts\gillsans-book-italic.ttf" />
     <BundleResource Include="Resources\Fonts\gillsans-bold.ttf" />
     <BundleResource Include="Resources\Fonts\gillsans-bold-italic.ttf" />
+    <BundleResource Include="Resources\Images\right_arrow%403x.png" />
+    <BundleResource Include="Resources\Images\right_arrow%402x.png" />
+    <BundleResource Include="Resources\Images\jecoute%402x.png" />
+    <BundleResource Include="Resources\Images\jecoute%403x.png" />
+    <BundleResource Include="Resources\Images\laremLogoEmail%403x.png" />
+    <BundleResource Include="Resources\Images\laremLogoEmail%402x.png" />
+    <BundleResource Include="Resources\Images\illustration%403x.png" />
+    <BundleResource Include="Resources\Images\illustration%402x.png" />
+    <BundleResource Include="Resources\Images\mic%402x.png" />
+    <BundleResource Include="Resources\Images\mic%403x.png" />
+    <BundleResource Include="Resources\Images\path%403x.png" />
+    <BundleResource Include="Resources\Images\path%402x.png" />
+    <BundleResource Include="Resources\Images\trolley%403x.png" />
+    <BundleResource Include="Resources\Images\trolley%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork%402x" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
 </Project>

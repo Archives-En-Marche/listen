@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using Listen.Models.RealmObjects;
+using Listen.Models.WebServices;
 using Listen.Views.ViewCells;
+using Newtonsoft.Json;
 using PopolLib.Contracts.FastListView;
 using Xamarin.Forms;
+using Survey = Listen.Models.RealmObjects.Survey;
 
 namespace Listen.ViewModels.ViewCell
 {
@@ -10,11 +14,17 @@ namespace Listen.ViewModels.ViewCell
     {
         public string Text { get; set; }
 
+        public string Count { get; set; }
+
         public Survey Survey { get; set; }
 
         public SurveyViewCellViewModel(Survey survey)
         {
             Text = survey.Name;
+
+            var questions = JsonConvert.DeserializeObject<List<Question>>(survey.Questions);
+            Count = questions?.Count.ToString() + " questions";
+
             Survey = survey;
         }
 

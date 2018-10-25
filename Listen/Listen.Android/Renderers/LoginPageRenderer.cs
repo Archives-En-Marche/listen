@@ -37,12 +37,14 @@ namespace Listen.Droid.Renderers
                 var auth = new OAuth2Authenticator(
                     clientId: "2b494496-4eae-4946-9ae1-efa3f593595c",
                     clientSecret: "vcyrJys1sdvaTCXN0BFfOuw2A8KxdA9QkYDMErViM68=",
-                    scope: null,
+                    scope: "jecoute_surveys",
                     authorizeUrl: new Uri("https://staging.en-marche.fr/oauth/v2/auth"),
                     redirectUrl: new Uri("https://staging.en-marche.fr"),
                     accessTokenUrl: new Uri("https://staging.en-marche.fr/oauth/v2/token"))
                 {
-                    ShowErrors = false
+                    ShowErrors = false,
+                    AllowCancel = false,
+                    Title = ""
                 };
 
                 auth.Completed += async (sender, eventArgs) =>
@@ -74,9 +76,21 @@ namespace Listen.Droid.Renderers
                     Console.WriteLine(_e.Message);
                 };
 
-                //auth.AllowCancel = false;
-                activity.StartActivity(auth.GetUI(activity));
-                done = true;
+                var page = Element as LoginPage;
+                if (page != null)
+                {
+                    var _vm = page.BindingContext as LoginPageViewModel;
+                    if (_vm != null)
+                    {
+                        _vm.ConnectCommand = new Command(() =>
+                        {
+                            // This is what actually launches the auth web UI.
+                            activity.StartActivity(auth.GetUI(activity));
+                            done = true;
+                        });
+                    }
+                }
+
             }
         }
     }

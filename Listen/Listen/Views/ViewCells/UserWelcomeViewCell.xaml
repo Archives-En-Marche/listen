@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flv:FastViewCell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:flv="clr-namespace:PopolLib.VisualElements.FastListView;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.ViewCells.UserWelcomeViewCell">
+    <StackLayout Spacing="0" BackgroundColor="{StaticResource paleGrey}">
+        <StackLayout Padding="30,22,20,22">
+            <Label FontSize="24" HorizontalOptions="Start" FontAttributes="Bold" HorizontalTextAlignment="Start" Text="{Binding Fullname}" TextColor="{StaticResource darkSlateBlue}">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Bold.ttf</On>
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+           <Label FontSize="24" HorizontalOptions="Start" HorizontalTextAlignment="Start" Text="{Binding Departement}" TextColor="{StaticResource brownishGrey}">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Regular.ttf</On>
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+        </StackLayout>
+    </StackLayout>
+</flv:FastViewCell>

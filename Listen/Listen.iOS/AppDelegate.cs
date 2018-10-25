@@ -31,13 +31,16 @@ namespace Listen.iOS
             Xamarin.Calabash.Start();
 
             var normalTextAttributes = new UITextAttributes();
-            normalTextAttributes.Font = UIFont.FromName("Gill Sans", 20.0f); // -- Unselected
-            normalTextAttributes.TextColor = UIColor.White;
+       
+            normalTextAttributes.Font = UIFont.FromName("Roboto-Bold", 16.0f); // -- Unselected
+            normalTextAttributes.TextColor = Color.FromHex("#174163").ToUIColor();
             UINavigationBar.Appearance.SetTitleTextAttributes(normalTextAttributes);
 
-            UINavigationBar.Appearance.BarTintColor = Color.FromHex("#243366").ToUIColor();
-            UINavigationBar.Appearance.TintColor = UIColor.White;
-           
+            UINavigationBar.Appearance.BarTintColor = Color.FromHex("#f6fbff").ToUIColor();
+            UINavigationBar.Appearance.TintColor = Color.FromHex("#174163").ToUIColor();
+
+            UINavigationBar.Appearance.ShadowImage = new UIImage();
+
             global::Xamarin.Forms.Forms.Init();
 
             DependencyService.Register<IProgressHUD, IOSProgressHUD>();
@@ -64,7 +67,7 @@ namespace Listen.iOS
                 }
             };
 
-            Console.WriteLine(fontList.ToString());
+            //Console.WriteLine(fontList.ToString());
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
     }

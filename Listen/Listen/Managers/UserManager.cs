@@ -22,19 +22,24 @@ namespace Listen.Managers
             }
         }
 
-        public async Task<User> GetUser()
+        public async Task<User> GetUserAsync()
         {
             return await UserRealm.Instance.GetUser();
         }
 
-        public async Task AddOrUpdateAsync(string lastname, string firstname, string phone, string mail, string token, string refreshtoken)
+        public async Task AddOrUpdateAsync(string lastname, string firstname, string mail, string country, string zipcode, string uuid, string token, string refreshtoken)
         {
-            await UserRealm.Instance.AddOrUpdateAsync(lastname, firstname, phone, mail, token, refreshtoken);
+            await UserRealm.Instance.AddOrUpdateAsync(lastname, firstname, mail, country, zipcode, uuid, token, refreshtoken);
         }
 
         public async Task UpdateTokenAsync(Token token)
         {
             await UserRealm.Instance.UpdateTokenAsync(token);
+        }
+
+        public async Task DeleteUserAsync()
+        {
+            await UserRealm.Instance.DeleteUserAsync();
         }
     }
 }

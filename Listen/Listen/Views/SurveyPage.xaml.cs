@@ -9,7 +9,6 @@ namespace Listen.Views
     {
         public SurveyPage(ViewModelBase vm)
         {
-            this.Title = "Questionnaires";
             BindingContext = vm;
             NavigationPage.SetBackButtonTitle(this, "");
             InitializeComponent();

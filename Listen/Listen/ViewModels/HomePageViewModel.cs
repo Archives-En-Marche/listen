@@ -17,7 +17,7 @@ namespace Listen.ViewModels
     {
         INavigation _nav;
 
-        public ReactiveCommand QuestionnaireCommand { get; set; }
+        public ICommand QuestionnaireCommand { get; set; }
 
         public ICommand InfosCommand { get; set; }
 
@@ -28,27 +28,26 @@ namespace Listen.ViewModels
 
             InfosCommand = new Command(async () =>
             {
-                await Task.Delay(2000);
-                //await _nav.PushAsync(new ParametresPage(new ParametresPageViewModel(_nav)));
+                //await Task.Delay(2000);
+                await _nav.PushAsync(new InfosPage(new InfosPageViewModel(_nav)));
             });
 
-            QuestionnaireCommand = ReactiveCommand.CreateFromTask(async () =>
+            QuestionnaireCommand = new Command(async () =>
             {
-
                 var hud = DependencyService.Get<IProgressHUD>();
-                hud.Show("Chargement ...");
-                var surveys = await SurveyManager.Instance.GetSurveysAsync();
+                //hud.Show("Chargement ...");
+                //var surveys = await SurveyManager.Instance.GetSurveysAsync();
 
-                hud.Dismiss();
+                //hud.Dismiss();
 
-                if (surveys?.Count > 0)
+                //if (surveys?.Count > 0)
                 {
-                    await _nav.PushAsync(new SurveyPage(new SurveyPageViewModel(_nav, surveys)));
+                    await _nav.PushAsync(new SurveyPage(new SurveyPageViewModel(_nav, null)));
                 }
-                else
+                //else
                 {
-                    var dialog = DependencyService.Get<IDialogService>();
-                    dialog.Show("Erreur", "Aucun formulaires disponibles.", "Oui", (_obj) => { });
+                    //var dialog = DependencyService.Get<IDialogService>();
+                    //dialog.Show("Erreur", "Aucun formulaires disponibles.", "Oui", (_obj) => { });
                 }
             });
         }

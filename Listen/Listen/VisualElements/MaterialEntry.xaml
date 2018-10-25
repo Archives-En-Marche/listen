@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.VisualElements.MaterialEntry">
+    <ContentView.Content>
+        <Grid ColumnSpacing="16" Margin="0,8" HorizontalOptions="FillAndExpand" WidthRequest="313">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Label x:Name="HiddenLabel" FontSize="12" IsVisible="False" Margin="0" TextColor="{StaticResource brownGrey}">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Regular.ttf</On>
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+            <local:BorderlessEntry FontAttributes="Bold" FontSize="20" x:Name="EntryField" Text="{Binding Text, Mode=TwoWay}" Margin="0,12,0,0" TextColor="{StaticResource denim}">
+                <Entry.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <OnPlatform.iOS>Roboto</OnPlatform.iOS>
+                        <OnPlatform.Android>Roboto-Bold.ttf</OnPlatform.Android>
+                        <OnPlatform.WinPhone>
+                        </OnPlatform.WinPhone>
+                    </OnPlatform>
+                </Entry.FontFamily>
+            </local:BorderlessEntry>
+            <BoxView x:Name="BottomBorder" BackgroundColor="{StaticResource veryLightPinkTwo}" Grid.Row="1" HeightRequest="1" Margin="0" HorizontalOptions="FillAndExpand" />
+            <BoxView x:Name="HiddenBottomBorder" BackgroundColor="{StaticResource veryLightPinkTwo}" Grid.Row="1" HeightRequest="1" Margin="0" WidthRequest="0" HorizontalOptions="Center" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

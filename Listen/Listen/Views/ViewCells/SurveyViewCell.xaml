@@ -3,9 +3,25 @@
   xmlns:flv="clr-namespace:PopolLib.VisualElements.FastListView;assembly=PopolLib"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   x:Class="Listen.Views.ViewCells.SurveyViewCell">
-    <StackLayout Spacing="0">
-        <StackLayout BackgroundColor="White" Padding="20,20,20,20" Spacing="20">
-            <Label FontSize="15" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Text}" TextColor="Black">
+    <StackLayout Spacing="26" Padding="30,22,20,22" Orientation="Horizontal" HeightRequest="42" BackgroundColor="White">
+        <Image VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="17" HeightRequest="29">
+            <Image.Source>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="iOS">Images/mic.png</On>
+                    <On Platform="Android">mic.png</On>
+                </OnPlatform>
+            </Image.Source>
+        </Image>
+        <StackLayout BackgroundColor="White" HeightRequest="42" VerticalOptions="Center">
+            <Label FontSize="18" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" HorizontalTextAlignment="Start" Text="{Binding Text}" TextColor="Black">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Regular.ttf</On>
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+            <Label FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" HorizontalTextAlignment="Start" Text="{Binding Count}" TextColor="{StaticResource brownGrey}">
                 <Label.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="iOS">Roboto</On>

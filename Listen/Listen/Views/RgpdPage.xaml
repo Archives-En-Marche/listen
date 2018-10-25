@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:Listen.VisualElements;assembly=Listen" xmlns:visual2="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:tev="clr-namespace:PopolLib.VisualElements.TagEntryView;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.RgpdPage">
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="White">
+            <StackLayout WidthRequest="313" Spacing="0">
+                <Label Margin="0,30,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Text="Pouvons-nous vous contacter pour vous tenir au courant de cette consultation ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS">Roboto</On>
+                            <On Platform="Android">Roboto-Regular.ttf</On>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <tev:TagEntryView WidthRequest="313" Margin="0,35,0,0" Spacing="27" TagItems="{Binding Q1YesNoItems}" TagTappedCommand="{Binding Q1YesNoCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                    <tev:TagEntryView.TagItemTemplate>
+                        <DataTemplate>
+                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
+                                <Label FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="iOS">Roboto</On>
+                                            <On Platform="Android">Roboto-Regular.ttf</On>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </visual2:RoundedStackLayout>
+                        </DataTemplate>
+                    </tev:TagEntryView.TagItemTemplate>
+                </tev:TagEntryView>
+                <visual:MaterialEntry Text="{Binding Prenom}" Margin="0,60,0,0" WidthRequest="313" Placeholder="Prénom" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
+                <visual:MaterialEntry Text="{Binding Nom}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Nom" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
+                <visual:MaterialEntry Text="{Binding Email}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Email" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
+                <visual:MaterialEntry Text="{Binding Telephone}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Téléphone" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
+                <Label FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Text="Pouvons-nous vous contacter pour devenir adhérent de La République En Marche ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start" Margin="0,60,0,0">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS">Roboto</On>
+                            <On Platform="Android">Roboto-Regular.ttf</On>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <tev:TagEntryView WidthRequest="313" Margin="0,35,0,0" Spacing="27" TagItems="{Binding Q2YesNoItems}" TagTappedCommand="{Binding Q2YesNoCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                    <tev:TagEntryView.TagItemTemplate>
+                        <DataTemplate>
+                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
+                                <Label FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="iOS">Roboto</On>
+                                            <On Platform="Android">Roboto-Regular.ttf</On>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </visual2:RoundedStackLayout>
+                        </DataTemplate>
+                    </tev:TagEntryView.TagItemTemplate>
+                </tev:TagEntryView>
+                <ContentView Margin="0,35,0,0" VerticalOptions="Start" WidthRequest="313" HeightRequest="60" HorizontalOptions="Center">
+                    <Frame HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4" VerticalOptions="Start">
+                        <visual2:LetterSpacingLabel LetterSpacing="0.25" Text="CONTINUER" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Bold.ttf</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ValiderCommand}" CommandParameter="{Binding .}" />
+                            </Label.GestureRecognizers>
+                        </visual2:LetterSpacingLabel>
+                    </Frame>
+                </ContentView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

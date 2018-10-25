@@ -33,7 +33,7 @@ namespace Listen.Models.WebServices
                 var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
                 var client = new RestClient(base_url);
                 var request = new RestRequest("/api/jecoute/survey", Method.GET);
-                request.AddHeader("Authorization", "Beaver: " + token);
+                request.AddHeader("Authorization", "Bearer " + token);
                 var cts = new CancellationTokenSource(timeout);
                 var result = await client.ExecuteTaskAsync(request, cts.Token);
 
@@ -55,6 +55,8 @@ namespace Listen.Models.WebServices
 
     public class Choice
     {
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         [JsonProperty("content")]
         public string Content { get; set; }
@@ -62,6 +64,8 @@ namespace Listen.Models.WebServices
 
     public class Question
     {
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         [JsonProperty("content")]
         public string Content { get; set; }
@@ -75,9 +79,8 @@ namespace Listen.Models.WebServices
 
     public class Survey
     {
-
-        [JsonProperty("uuid")]
-        public string Uuid { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         [JsonProperty("questions")]
         public IList<Question> Questions { get; set; }

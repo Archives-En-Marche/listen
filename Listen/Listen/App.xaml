@@ -8,6 +8,23 @@
             <Color x:Key="LightYellowColor">#ebfa65</Color>
             <Color x:Key="LightGreenColor">#243366</Color>
             <Color x:Key="LightGreyColor">#eeeeee</Color>
+            
+            <Color x:Key="battleshipGrey">#FF6C6D7A</Color>
+            <Color x:Key="brownGrey">#FF999999</Color>
+            <Color x:Key="brownishGrey">#FF666666</Color>
+            <Color x:Key="darkSlateBlue">#FF174163</Color>
+            <Color x:Key="dodgerBlue">#FF4A89F6</Color>
+            <Color x:Key="lightNavy">#FF1A5B91</Color>
+            <Color x:Key="lightPeach">#FFFCD2BE</Color>
+            <Color x:Key="paleGrey">#FFF6FBFF</Color>
+            <Color x:Key="powderBlue">#FFB4DDFF</Color>
+            <Color x:Key="slateGrey">#FF50515B</Color>
+            <Color x:Key="veryLightPink">#FFFFEAE0</Color>
+            <Color x:Key="white">#f5f5f5</Color>
+            <Color x:Key="denim">#3a5d7a</Color>
+            <Color x:Key="veryLightPinkTwo">#dddddd</Color>
+            <Color x:Key="whiteTwo">#fbfbfb</Color>
+             
         </ResourceDictionary>
     </Application.Resources>
 </Application>

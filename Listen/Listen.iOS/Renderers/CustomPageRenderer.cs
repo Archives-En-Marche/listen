@@ -30,7 +30,7 @@ namespace Listen.iOS.Renderers
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, false);
+                    UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.Default, false);
                     GetCurrentViewController().SetNeedsStatusBarAppearanceUpdate();
                 });
             }

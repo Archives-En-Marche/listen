@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="fr.edecision.listen">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <provider android:name="android.support.v4.content.FileProvider" android:authorities="fr.edecision.listen.fileprovider" android:exported="false" android:grantUriPermissions="true">
-        <meta-data android:name="android.support.fr.edecision.parisetmoi" android:resource="@xml/file_paths"></meta-data>
-    </provider>	
-    <application android:label="Listen" android:icon="@mipmap/icon"></application>
+	<uses-permission android:name="android.permission.SEND_SMS" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<provider android:name="android.support.v4.content.FileProvider" android:authorities="fr.edecision.listen.fileprovider" android:exported="false" android:grantUriPermissions="true">
+		<meta-data android:name="android.support.fr.edecision.parisetmoi" android:resource="@xml/file_paths"></meta-data>
+	</provider>
+	<application android:icon="@mipmap/icon" android:label="J'écoute"></application>
 </manifest>

@@ -8,14 +8,14 @@ namespace Listen.VisualElements
     {
         public InternalNavigationPage()
         {
-            BarBackgroundColor = Color.White;
-            BarTextColor = Color.White;
+            //this.BarBackgroundColor = Color.FromHex("#f6fbff");
+            //this.BarTextColor = Color.FromHex("#174163");
         }
 
         public InternalNavigationPage(Page root) : base(root)
         {
-            BarBackgroundColor = Color.White;
-            BarTextColor = Color.White;
+            //this.BarBackgroundColor = Color.FromHex("#f6fbff");
+            //this.BarTextColor = Color.FromHex("#174163");
         }
 
         protected override void OnChildAdded(Element child)
@@ -24,8 +24,8 @@ namespace Listen.VisualElements
 
             if (!(child is HomePage))
             {
-                this.BarBackgroundColor = Color.FromHex("#243366");
-                this.BarTextColor = Color.White;
+                this.BarBackgroundColor = Color.FromHex("#f6fbff");
+                this.BarTextColor = Color.FromHex("#174163");
             }
             else
             {
