@@ -16,7 +16,7 @@
             <Color x:Key="dodgerBlue">#FF4A89F6</Color>
             <Color x:Key="lightNavy">#FF1A5B91</Color>
             <Color x:Key="lightPeach">#FFFCD2BE</Color>
-            <Color x:Key="paleGrey">#FFF6FBFF</Color>
+            <Color x:Key="paleGrey">#eff9ff</Color>
             <Color x:Key="powderBlue">#FFB4DDFF</Color>
             <Color x:Key="slateGrey">#FF50515B</Color>
             <Color x:Key="veryLightPink">#FFFFEAE0</Color>

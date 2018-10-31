@@ -4,7 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   x:Class="Listen.Views.SurveyPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="0,0,0,0"> 
             <flv:FastListView BackgroundColor="{StaticResource paleGrey}"
               ItemsSource="{Binding Surveys}"
               ScrollEnabled="true"

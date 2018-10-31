@@ -3,22 +3,29 @@ using Realms;
 
 namespace Listen.Models.RealmObjects
 {
-    public class Answer : RealmObject
+    public class Reply : RealmObject, ICloneable
     {
-        public string Uuid { get; set; }
+        [PrimaryKey]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
-        public string Content { get; set; }
+        public string SurveyId { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Phone { get; set; }
-        public string Mail { get; set; }
-        public string Q1 { get; set; }
-        public string Q2 { get; set; }
+        public string Answer { get; set; }
 
-        public Answer()
+        public DateTimeOffset Date { get; set; }
+
+        public bool Uploading { get; set; }
+
+        public object Clone()
         {
-
+            return new Reply()
+            {
+                Id = this.Id,
+                SurveyId = this.SurveyId,
+                Answer = this.Answer,
+                Date = this.Date,
+                Uploading = this.Uploading
+            };
         }
     }
 }

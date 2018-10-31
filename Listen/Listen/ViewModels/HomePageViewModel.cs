@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using Listen.Helpers;
 using Listen.Managers;
 using Listen.Models.WebServices;
 using Listen.Views;
@@ -26,14 +27,20 @@ namespace Listen.ViewModels
         {
             _nav = nav;
 
-            InfosCommand = new Command(async () =>
+            InfosCommand = new Command(async (obj) =>
             {
+                var frame = (Frame)obj;
+                ButtonAnimationHelper.Animate(frame);
+
                 //await Task.Delay(2000);
                 await _nav.PushAsync(new InfosPage(new InfosPageViewModel(_nav)));
             });
 
-            QuestionnaireCommand = new Command(async () =>
+            QuestionnaireCommand = new Command(async (obj) =>
             {
+                var frame = (Frame)obj;
+                ButtonAnimationHelper.Animate(frame);
+
                 var hud = DependencyService.Get<IProgressHUD>();
                 //hud.Show("Chargement ...");
                 //var surveys = await SurveyManager.Instance.GetSurveysAsync();

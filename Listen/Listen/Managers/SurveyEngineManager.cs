@@ -4,6 +4,7 @@ using Listen.Models.RealmObjects;
 using Listen.Models.WebServices;
 using Newtonsoft.Json;
 using Xamarin.Forms;
+using Reply = Listen.Models.WebServices.Reply;
 using Survey = Listen.Models.RealmObjects.Survey;
 
 namespace Listen.Managers
@@ -28,6 +29,8 @@ namespace Listen.Managers
 
         public Survey CurrentSurvey { get; set; }
 
+        public Reply CurrentReply { get; set; }
+
         //public Question CurrentQuestion { get; set; }
 
         public IList<Question> Questions { get; set; }
@@ -45,6 +48,18 @@ namespace Listen.Managers
             Questions = JsonConvert.DeserializeObject<List<Question>>(survey.Questions);
 
             Count = Questions.Count;
+
+            CurrentReply = new Reply();
+            CurrentReply.Survey = CurrentSurvey.Uuid;
+            CurrentReply.Answers = new List<Answer>();
+        }
+
+        public void InitCurrentSurvey()
+        {
+            _pos = -1;
+            CurrentReply = new Reply();
+            CurrentReply.Survey = CurrentSurvey.Uuid;
+            CurrentReply.Answers = new List<Answer>();
         }
 
         public Question GetNextQuestion()

@@ -9,6 +9,7 @@ using PopolLib.Extensions;
 using Realms;
 using SurveyRealmObject = Listen.Models.RealmObjects.Survey;
 using Newtonsoft.Json;
+using Reply = Listen.Models.WebServices.Reply;
 
 namespace Listen.Models.RealmAccess
 {
@@ -72,5 +73,51 @@ namespace Listen.Models.RealmAccess
                 }
             }
         }
+
+        public async Task AddReplyAsync(Reply reply)
+        {
+            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+            var realm = Realm.GetInstance(db_name);
+
+            await realm.WriteAsync(r =>
+            {
+                var _r = new RealmObjects.Reply()
+                {
+                    SurveyId = reply.Survey,
+                    Date = DateTimeOffset.Now,
+                    Uploading = false,
+                    Answer = JsonConvert.SerializeObject(reply)
+                };
+                r.Add(_r);
+            });
+        }
+
+        public async Task<IList<RealmObjects.Reply>> GetRepliesAsync()
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+                var realm = Realm.GetInstance(db_name);
+                var list = realm.All<RealmObjects.Reply>().Where(r => r.Uploading == false).ToList();
+                return list.Clone();
+            });
+        }
+
+        public async Task SetUploaded(Models.RealmObjects.Reply reply, bool uploaded)
+        {
+            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+            var realm = Realm.GetInstance(db_name);
+
+            await realm.WriteAsync(r =>
+            {
+                var _r = r.All<Models.RealmObjects.Reply>().Where(i => i.Id == reply.Id).FirstOrDefault();
+                if (_r != null)
+                {
+                    _r.Uploading = uploaded;
+                    r.Add(_r);
+                }
+            });
+        }
+
     }
 }

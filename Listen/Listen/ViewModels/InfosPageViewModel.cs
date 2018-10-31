@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reactive.Linq;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using Listen.Helpers;
 using Listen.Managers;
 using Listen.Models.RealmObjects;
 using ReactiveUI;
@@ -39,7 +41,7 @@ namespace Listen.ViewModels
             }
         }
 
-        public ReactiveCommand LogoutCommand { get; set; }
+        public ICommand LogoutCommand { get; set; }
 
         public InfosPageViewModel(INavigation navigation)
         {
@@ -67,8 +69,11 @@ namespace Listen.ViewModels
                 Debug.WriteLine("Diff : " + (stop - start).TotalMilliseconds.ToString());
             });
 
-            LogoutCommand = ReactiveCommand.CreateFromTask<InfosPageViewModel>(async (s) =>
+            LogoutCommand = new Command(async (obj) =>
             {
+                var frame = (Frame)obj;
+                ButtonAnimationHelper.Animate(frame);
+
                 // -- On delete le user en base
                 await UserManager.Instance.DeleteUserAsync();
                 Device.BeginInvokeOnMainThread(async () =>

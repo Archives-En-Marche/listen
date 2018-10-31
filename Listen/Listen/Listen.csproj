@@ -39,6 +39,8 @@
     <Folder Include="Views\ViewCells\" />
     <Folder Include="ViewModels\ViewCell\" />
     <Folder Include="ViewModels\Tags\" />
+    <Folder Include="Models\Tasks\" />
+    <Folder Include="Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\ViewCells\SurveyViewCell.cs" />

@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Listen.Droid.Renderers;
+using Listen.Helpers;
 using Listen.OAuth;
 using Listen.ViewModels;
 using Listen.Views;
@@ -82,8 +83,11 @@ namespace Listen.Droid.Renderers
                     var _vm = page.BindingContext as LoginPageViewModel;
                     if (_vm != null)
                     {
-                        _vm.ConnectCommand = new Command(() =>
+                        _vm.ConnectCommand = new Command((obj) =>
                         {
+                            var frame = (Frame)obj;
+                            ButtonAnimationHelper.Animate(frame);
+
                             // This is what actually launches the auth web UI.
                             activity.StartActivity(auth.GetUI(activity));
                             done = true;

@@ -13,10 +13,9 @@
                     </OnPlatform>
                 </Image.Source>
             </Image>
-            
             <ContentView VerticalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="130" HorizontalOptions="Center">
                 <StackLayout Spacing="10">
-                    <Frame HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
+                    <Frame x:Name="questionnaireCommand" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
                         <visual:LetterSpacingLabel LetterSpacing="0.25" Text="QUESTIONNAIRES" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
@@ -24,12 +23,12 @@
                                     <On Platform="Android">Roboto-Bold.ttf</On>
                                 </OnPlatform>
                             </Label.FontFamily>
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding QuestionnaireCommand}" CommandParameter="{Binding .}" />
-                            </Label.GestureRecognizers>
                         </visual:LetterSpacingLabel>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding QuestionnaireCommand}" CommandParameter="{Binding Source={x:Reference questionnaireCommand}}" />
+                        </Frame.GestureRecognizers>
                     </Frame>
-                    <Frame HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}" CornerRadius="4">
+                    <Frame x:Name="infosCommand" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}" CornerRadius="4">
                         <visual:LetterSpacingLabel LetterSpacing="0.25" Text="MES INFOS" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
@@ -37,15 +36,13 @@
                                     <On Platform="Android">Roboto-Bold.ttf</On>
                                 </OnPlatform>
                             </Label.FontFamily>
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding InfosCommand}" CommandParameter="{Binding .}" />
-                            </Label.GestureRecognizers>
                         </visual:LetterSpacingLabel>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding InfosCommand}" CommandParameter="{Binding Source={x:Reference infosCommand}}" />
+                        </Frame.GestureRecognizers>
                     </Frame>
-
                 </StackLayout>
             </ContentView>
-            
-         </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

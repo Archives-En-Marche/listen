@@ -19,7 +19,7 @@
                 </Label.FontFamily>
             </Label>
             <ContentView VerticalOptions="Start" Margin="0,35,0,0" WidthRequest="313" HeightRequest="60" HorizontalOptions="Center">
-                <Frame HorizontalOptions="Fill" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
+                <Frame x:Name="logoutCommand" HorizontalOptions="Fill" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
                     <visual:LetterSpacingLabel LetterSpacing="0.25" Text="SE DECONNECTER" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
                         <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">
@@ -28,7 +28,7 @@
                             </OnPlatform>
                         </Label.FontFamily>
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding LogoutCommand}" CommandParameter="{Binding .}" />
+                            <TapGestureRecognizer Command="{Binding LogoutCommand}" CommandParameter="{Binding Source={x:Reference logoutCommand}}" />
                         </Label.GestureRecognizers>
                     </visual:LetterSpacingLabel>
                 </Frame>

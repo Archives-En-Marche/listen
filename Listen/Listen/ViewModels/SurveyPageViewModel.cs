@@ -43,10 +43,26 @@ namespace Listen.ViewModels
             MessagingCenter.Subscribe<SurveyManager, IList<Survey>>(this, "UpdateUI", (sender, arg) =>
             {
                 UpdateUI(arg);
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    MessagingCenter.Unsubscribe<SurveyManager, IList<Survey>>(this, "UpdateUI");
+                }
             });
 
             Surveys = new ObservableCollection<IFastViewCell>();
-            Surveys.Add(new NoSurveyViewCellViewModel());
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var list = new ObservableCollection<IFastViewCell>();
+                    list.Add(new NoSurveyViewCellViewModel());
+                    Surveys = list;
+                });
+            }
+            else
+            {
+                Surveys.Add(new NoSurveyViewCellViewModel());
+            }
             Task.Factory.StartNew(async () =>
             {
                 await SurveyManager.Instance.GetSurveysAsync();

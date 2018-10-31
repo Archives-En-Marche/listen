@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using Listen.Helpers;
+using Listen.Managers;
 using Listen.ViewModels.Tags;
 using Listen.Views;
 using PopolLib.Services;
@@ -16,40 +18,23 @@ namespace Listen.ViewModels
     {
         INavigation _nav;
 
-        TagViewModel _q1SelectedYesNo;
-        public TagViewModel Q1SelectedYesNo
+        TagViewModel _selectedYesNo;
+        public TagViewModel SelectedYesNo
         {
             get
             {
-                return _q1SelectedYesNo;
+                return _selectedYesNo;
             }
             set
             {
-                Set(() => Q1SelectedYesNo, ref _q1SelectedYesNo, value);
+                Set(() => SelectedYesNo, ref _selectedYesNo, value);
             }
         }
 
-        IList<TagViewModel> _q1YesNoItems;
-        public IList<TagViewModel> Q1YesNoItems { get { return _q1YesNoItems; } set { Set(() => Q1YesNoItems, ref _q1YesNoItems, value); } }
+        IList<TagViewModel> _yesNoItems;
+        public IList<TagViewModel> YesNoItems { get { return _yesNoItems; } set { Set(() => YesNoItems, ref _yesNoItems, value); } }
 
-        TagViewModel _q2SelectedYesNo;
-        public TagViewModel Q2SelectedYesNo
-        {
-            get
-            {
-                return _q2SelectedYesNo;
-            }
-            set
-            {
-                Set(() => Q2SelectedYesNo, ref _q2SelectedYesNo, value);
-            }
-        }
-
-        IList<TagViewModel> _q2YesNoItems;
-        public IList<TagViewModel> Q2YesNoItems { get { return _q2YesNoItems; } set { Set(() => Q2YesNoItems, ref _q2YesNoItems, value); } }
-
-        public ICommand Q1YesNoCommand { get; set; }
-        public ICommand Q2YesNoCommand { get; set; }
+        public ICommand YesNoCommand { get; set; }
 
         string _nom;
         public string Nom
@@ -114,7 +99,7 @@ namespace Listen.ViewModels
         {
             _nav = nav;
 
-            Q1YesNoItems = new ObservableCollection<TagViewModel>();
+            YesNoItems = new ObservableCollection<TagViewModel>();
             {
                 var f = new TagViewModel
                 {
@@ -122,7 +107,7 @@ namespace Listen.ViewModels
                     TextColor = Color.FromHex("#174163"),
                     BackgroundColor = Color.White,
                 };
-                Q1YesNoItems.Add(f);
+                YesNoItems.Add(f);
                 //Q1SelectedYesNo = f;
             }
             {
@@ -132,35 +117,16 @@ namespace Listen.ViewModels
                     TextColor = Color.FromHex("#174163"),
                     BackgroundColor = Color.White,
                 };
-                Q1YesNoItems.Add(f);
+                YesNoItems.Add(f);
             }
 
-            Q2YesNoItems = new ObservableCollection<TagViewModel>();
-            {
-                var f = new TagViewModel
-                {
-                    Text = "Oui",
-                    TextColor = Color.FromHex("#174163"),
-                    BackgroundColor = Color.White,
-                };
-                Q2YesNoItems.Add(f);
-                //Q2SelectedYesNo = f;
-            }
-            {
-                var f = new TagViewModel
-                {
-                    Text = "Non",
-                    TextColor = Color.FromHex("#174163"),
-                    BackgroundColor = Color.White,
-                };
-                Q2YesNoItems.Add(f);
-            }
+            YesNoCommand = new Command(YesNoSelected);
 
-            Q1YesNoCommand = new Command(Q1YesNoSelected);
-            Q2YesNoCommand = new Command(Q2YesNoSelected);
-
-            ValiderCommand = new Command(async () =>
+            ValiderCommand = new Command(async (obj) =>
             {
+                var frame = (Frame)obj;
+                ButtonAnimationHelper.Animate(frame);
+
                 var emailRegex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
                 if (string.IsNullOrEmpty(Email))
@@ -169,15 +135,23 @@ namespace Listen.ViewModels
                 }
 
                 var ok = (Regex.IsMatch(Email.Trim(), emailRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
-    
-                if (Q1SelectedYesNo != null && Q2SelectedYesNo != null && ok)
+
+                if (SelectedYesNo != null && ok)
                 {
-                    await _nav.PopToRootAsync();
+                    SurveyEngineManager.Instance.CurrentReply.Firstname = Prenom;
+                    SurveyEngineManager.Instance.CurrentReply.Lastmame = Nom;
+                    SurveyEngineManager.Instance.CurrentReply.Email = Email;
+                    SurveyEngineManager.Instance.CurrentReply.AgreedToStayInContact = (SelectedYesNo.Text == "Oui" ? "1" : "0");
+
+                    await SurveyManager.Instance.AddReplyAsync(SurveyEngineManager.Instance.CurrentReply);
+
+                    //await _nav.PopToRootAsync();
+                    await _nav.PushAsync(new EndPage(new EndPageViewModel(_nav)));
                 }
                 else
                 {
                     var dialog = DependencyService.Get<IDialogService>();
-                    dialog.Show("Erreur", "Merci de :\n - Renseigner un email valide,\n - De répondre aux 2 questions.", "OUI", null);
+                    dialog.Show("Erreur", "Merci de :\n - Renseigner un email valide,\n - De répondre à la questions.", "OUI", null);
                 }
 
 
@@ -225,36 +199,20 @@ namespace Listen.ViewModels
 
         }
 
-        void Q1YesNoSelected(object obj)
+        void YesNoSelected(object obj)
         {
             var tag = (TagViewModel)obj;
 
             tag.TextColor = Color.White;
             tag.BackgroundColor = Color.FromHex("#174163");
-            var list = Q1YesNoItems.Where(d => d.Text != tag.Text).ToList();
+            var list = YesNoItems.Where(d => d.Text != tag.Text).ToList();
             foreach (var elt in list)
             {
                 elt.TextColor = Color.FromHex("#174163");
                 elt.BackgroundColor = Color.White;
             }
 
-            Q1SelectedYesNo = tag;
-        }
-
-        void Q2YesNoSelected(object obj)
-        {
-            var tag = (TagViewModel)obj;
-
-            tag.TextColor = Color.White;
-            tag.BackgroundColor = Color.FromHex("#174163");
-            var list = Q2YesNoItems.Where(d => d.Text != tag.Text).ToList();
-            foreach (var elt in list)
-            {
-                elt.TextColor = Color.FromHex("#174163");
-                elt.BackgroundColor = Color.White;
-            }
-
-            Q2SelectedYesNo = tag;
+            SelectedYesNo = tag;
         }
     }
 }

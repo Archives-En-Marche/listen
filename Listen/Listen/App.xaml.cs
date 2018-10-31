@@ -48,6 +48,8 @@ namespace Listen
         {
             // Handle when your app starts
             //var hud = DependencyService.Get<IProgressHUD>();
+            //LongRunningTaskManager.Instance.StartLongRunningTask();
+
         }
 
         protected override void OnSleep()

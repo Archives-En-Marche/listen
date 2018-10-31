@@ -17,7 +17,7 @@ namespace Listen.Views
         public HomePage(INavigation navigation, ViewModelBase vm)
         {
             _nav = navigation;
-            this.Title = "Accueil";
+            //this.Title = "Accueil";
             NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetBackButtonTitle(this, "");
             BindingContext = vm;
@@ -31,30 +31,30 @@ namespace Listen.Views
             {
                 // -- On charge les questionnaires
                 //hud.Show("Chargement ...");
-
+                Token newtoken;
                 var user = await UserManager.Instance.GetUserAsync();
 
                 ServerManager.Instance.GetSurveysAsync();
 
                 var displayLoginPage = false;
 
-                if (user != null)
+                if (user != null && !string.IsNullOrEmpty(user?.Token) && !string.IsNullOrEmpty(user?.RefreshToken))
                 {
-                    var token = user.Token;
+                    var token = user?.Token;
                     var refresh = user?.RefreshToken;
 
-                    // -- Check if TOKEN not expire
-                    var infos = await TokenWS.Instance.GetInfoAsync(token);
-                    if (infos == null)
-                    {
-                        displayLoginPage = true;
-                    }
-                    else
-                    {
-                        // -- Refresh TOKEN ?
-                        var newtoken = await TokenWS.Instance.RefreshTokenAsync(refresh);
-                        await UserManager.Instance.AddOrUpdateAsync(null, null, null, null, null, null, newtoken?.AccessToken, newtoken?.RefreshToken);
-                    }
+                    //// -- Check if TOKEN not expire
+                    //var infos = await TokenWS.Instance.GetInfoAsync(token);
+                    //if (infos == null)
+                    //{
+                    //    displayLoginPage = true;
+                    //}
+                    //else
+
+                    // -- On REFRESH AUTO Le TOKEN ?
+                    newtoken = await TokenManager.Instance.RefreshTokenAsync(refresh);
+
+                    LongRunningTaskManager.Instance.StartLongRunningTask();
                 }
                 else
                 {
@@ -66,7 +66,6 @@ namespace Listen.Views
                     // -- On présente la page de login
                     await ((NavigationPage)Application.Current.MainPage).Navigation.PushModalAsync(new InternalNavigationPage(new LoginPage(new LoginPageViewModel(_nav))));
                 }
-
             }
             catch (Exception ex)
             {

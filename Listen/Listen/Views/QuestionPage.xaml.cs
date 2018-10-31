@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight;
+using Listen.Contracts;
 using Listen.Managers;
 using Listen.ViewModels;
 using Xamarin.Forms;
@@ -24,6 +25,16 @@ namespace Listen.Views
                 Command = ((QuestionPageViewModel)BindingContext).NextQuestion
             };
             this.ToolbarItems.Add(toolbar_arrow);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var vm = BindingContext as IResetQuestion;
+            if (vm != null)
+            {
+                vm.Reset();
+            }
         }
     }
 }

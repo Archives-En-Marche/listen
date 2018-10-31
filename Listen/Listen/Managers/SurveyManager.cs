@@ -44,9 +44,10 @@ namespace Listen.Managers
             }
         }
 
-        public async Task AddOrUpdateAsync(IList<Models.WebServices.Survey> surveys)
-        {
-            await SurveyRealm.Instance.AddOrUpdateAsync(surveys);
-        }
+        public async Task AddOrUpdateAsync(IList<Models.WebServices.Survey> surveys) => await SurveyRealm.Instance.AddOrUpdateAsync(surveys);
+
+        public async Task AddReplyAsync(Models.WebServices.Reply reply) => await SurveyRealm.Instance.AddReplyAsync(reply);
+
+        public async Task SetUploaded(Reply reply, bool uploaded) => await SurveyRealm.Instance.SetUploaded(reply, uploaded);
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Listen.Helpers;
+using Listen.Managers;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -51,6 +53,47 @@ namespace Listen.Models.WebServices
                 return null;
             }
         }
+
+        public async Task PostRepliesAsync(IList<RealmObjects.Reply> list, string token)
+        {
+            if (!string.IsNullOrEmpty(token))
+            {
+                var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
+                var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
+                var client = new RestClient(base_url);
+
+                Debug.WriteLine("Token : " + token);
+
+                foreach (var s in list)
+                {
+                    var request = new RestRequest("/api/jecoute/survey/reply", Method.POST);
+                    request.AddHeader("Authorization", "Bearer " + token);
+                    request.AddHeader("Accept", "application/json");
+                    request.AddHeader("Content-Type", "application/json");
+                    request.RequestFormat = DataFormat.Json;
+                    var cts = new CancellationTokenSource(timeout);
+                    request.AddParameter("text/plain", s.Answer, ParameterType.RequestBody);
+                    //request.AddJsonBody(s.Answer);
+
+                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+                    if (result.StatusCode == HttpStatusCode.Created)
+                    {
+                        // -- on update la bdd
+                        await SurveyManager.Instance.SetUploaded(s, true);
+                        Debug.WriteLine("Success : " + s.Answer);
+                    }
+                    else
+                    {
+                        Debug.WriteLine("KO : " + s.Answer);
+                    }
+
+                }
+            }
+            else
+            {
+                Debug.WriteLine("KO : Empty Token");
+            }
+        }
     }
 
     public class Choice
@@ -87,5 +130,38 @@ namespace Listen.Models.WebServices
 
         [JsonProperty("name")]
         public string Name { get; set; }
+    }
+
+    public class Reply
+    {
+        [JsonProperty("survey")]
+        public string Survey { get; set; }
+
+        [JsonProperty("lastName")]
+        public string Lastmame { get; set; }
+
+        [JsonProperty("firstName")]
+        public string Firstname { get; set; }
+
+        [JsonProperty("emailAddress")]
+        public string Email { get; set; }
+
+        [JsonProperty("agreedToStayInContact")]
+        public string AgreedToStayInContact { get; set; }
+
+        [JsonProperty("answers")]
+        public IList<Answer> Answers { get; set; }
+    }
+
+    public class Answer
+    {
+        [JsonProperty("surveyQuestion")]
+        public string SurveyQuestion { get; set; }
+
+        [JsonProperty("textField")]
+        public string TextField { get; set; }
+
+        [JsonProperty("selectedChoices")]
+        public IList<string> SelectedChoices { get; set; }
     }
 }

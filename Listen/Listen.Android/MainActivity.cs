@@ -12,6 +12,9 @@ using System.Threading;
 using Android.Graphics.Drawables;
 using Android.Graphics;
 using Android.Content;
+using Xamarin.Forms;
+using Listen.Models.Tasks;
+using Listen.Droid.Tasks;
 
 namespace Listen.Droid
 {
@@ -27,8 +30,27 @@ namespace Listen.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+            MessagingCenter.Subscribe<StartLongRunningTaskMessage>(this, "StartLongRunningTaskMessage", message => {
+                var intent = new Intent(this, typeof(LongRunningTaskService));
+                var parcelable = new UploadLongRunningTaskParcelable();
+                parcelable.Task = new UploadLongRunningTask();
+                intent.PutExtra("task", parcelable);
+                StartService(intent);
+            });
+
+            MessagingCenter.Subscribe<StopLongRunningTaskMessage>(this, "StopLongRunningTaskMessage", message => {
+                var intent = new Intent(this, typeof(LongRunningTaskService));
+                StopService(intent);
+            });
+
             var fr = new CultureInfo("fr-FR");
             Thread.CurrentThread.CurrentCulture = fr;
+
+            // --typeof(LetterSpacingLabelRenderer)
+            var t = typeof(PopolLib.Droid.Renderers.LetterSpacingLabelRenderer);
+
+            PopolLib.Droid.Renderers.FastListView.FastListViewRenderer.Init();
+            PopolLib.Droid.Platforms.Platform.Init(this, savedInstanceState);
 
             this.Window.SetBackgroundDrawable(new ColorDrawable() { Color = Android.Graphics.Color.White });
 

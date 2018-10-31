@@ -4,7 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   x:Class="Listen.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout Padding="0,0,0,20">
+        <StackLayout BackgroundColor="White" Padding="0,0,0,20">
             <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" MinimumHeightRequest="500">
                 <Image.Source>
                     <OnPlatform x:TypeArguments="ImageSource">
@@ -15,7 +15,7 @@
             </Image>
             <ContentView VerticalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="90" HorizontalOptions="Center">
                 <StackLayout Spacing="10">
-                    <Frame HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
+                    <Frame x:Name="connectCommand" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
                         <visual:LetterSpacingLabel LetterSpacing="0.25" Text="CONNEXION" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
                             <Label.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
@@ -24,7 +24,7 @@
                                 </OnPlatform>
                             </Label.FontFamily>
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ConnectCommand}" CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer Command="{Binding ConnectCommand}" CommandParameter="{Binding Source={x:Reference connectCommand}}" />
                             </Label.GestureRecognizers>
                         </visual:LetterSpacingLabel>
                     </Frame>

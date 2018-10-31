@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.EndPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <StackLayout Padding="0,0,0,35" BackgroundColor="{StaticResource paleGrey}">
+                <Image Margin="0,45,0,25" HorizontalOptions="CenterAndExpand" WidthRequest="210" HeightRequest="210">
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="iOS">Images/winner.png</On>
+                            <On Platform="Android">winner.png</On>
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
+                <Label FontSize="24" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" HorizontalTextAlignment="Start" Text="{Binding Fullname}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS">Roboto</On>
+                            <On Platform="Android">Roboto-Bold.ttf</On>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Label FontSize="24" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="Un questionnaire de plus de rempli. Merci de votre engagement à nos côtés !" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS">Roboto</On>
+                            <On Platform="Android">Roboto-Regular.ttf</On>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+            </StackLayout>
+            <ContentView VerticalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="130" HorizontalOptions="Center">
+                <StackLayout Spacing="10">
+                    <Frame x:Name="newCommand" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
+                        <visual:LetterSpacingLabel x:Name="newCommandLabel" LetterSpacing="0.25" Text="NOUVEAU QUESTIONNAIRE" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Bold.ttf</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </visual:LetterSpacingLabel>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NewCommand}" CommandParameter="{Binding Source={x:Reference newCommand}}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame x:Name="allCommand" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}" CornerRadius="4">
+                        <visual:LetterSpacingLabel LetterSpacing="0.25" Text="TOUS LES QUESTIONNAIRES" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Bold.ttf</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </visual:LetterSpacingLabel>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AllCommand}" CommandParameter="{Binding Source={x:Reference allCommand}}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+            </ContentView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

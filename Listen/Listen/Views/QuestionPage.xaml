@@ -49,7 +49,7 @@
                     </OnPlatform>
                 </Editor.FontFamily>
             </Editor>
-            <Frame HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{Binding NextButtonColor}" CornerRadius="4" Grid.Row="2" VerticalOptions="EndAndExpand">
+            <Frame x:Name="nextQuestion" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{Binding NextButtonColor}" CornerRadius="4" Grid.Row="2" VerticalOptions="EndAndExpand">
                 <visual:LetterSpacingLabel LetterSpacing="0.25" Text="CONTINUER" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
@@ -58,7 +58,7 @@
                         </OnPlatform>
                     </Label.FontFamily>
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NextQuestion}" CommandParameter="{Binding .}" />
+                        <TapGestureRecognizer Command="{Binding NextQuestion}" CommandParameter="{Binding Source={x:Reference nextQuestion}}" />
                     </Label.GestureRecognizers>
                 </visual:LetterSpacingLabel>
             </Frame>

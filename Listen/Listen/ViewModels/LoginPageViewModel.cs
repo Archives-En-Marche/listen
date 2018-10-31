@@ -42,6 +42,7 @@ namespace Listen.ViewModels
         public async Task AddOrUpdateTokenAsync(string token, string refreshtoken)
         {
             await UserManager.Instance.AddOrUpdateAsync(null, null, null, null, null, null, token, refreshtoken);
+            //LongRunningTaskManager.Instance.StartLongRunningTask();
             await _nav.PopModalAsync();
         }
     }

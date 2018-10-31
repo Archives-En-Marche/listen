@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Listen.Helpers;
 using Listen.iOS.Renderers;
 using Listen.OAuth;
 using Listen.ViewModels;
@@ -83,8 +84,11 @@ namespace Listen.iOS.Renderers
                     var _vm = page.BindingContext as LoginPageViewModel;
                     if (_vm != null)
                     {
-                        _vm.ConnectCommand = new Command(() =>
+                        _vm.ConnectCommand = new Command((obj) =>
                         {
+                            var frame = (Frame)obj;
+                            ButtonAnimationHelper.Animate(frame);
+
                             // This is what actually launches the auth web UI.
                             PresentViewController(auth.GetUI(), true, null);
                          });

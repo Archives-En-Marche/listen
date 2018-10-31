@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Listen.Models.RealmAccess;
 using Listen.Models.WebServices;
 using Listen.ViewModels;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace Listen.Managers
@@ -38,7 +39,7 @@ namespace Listen.Managers
             }
             var list = await SurveyWS.Instance.GetSurveysAsync(token);
             await SurveyManager.Instance.AddOrUpdateAsync(list);
-            MessagingCenter.Send<ServerManager>(this, "UpdateUI");
+            MessagingCenter.Send<ServerManager, IList<Survey>>(this, "UpdateUI", list);
             return list;
         }
 
@@ -47,6 +48,16 @@ namespace Listen.Managers
             var infos = await UserWS.Instance.GetUserInfosAsync(token);
             await UserRealm.Instance.AddOrUpdateAsync(infos.LastName, infos.FirstName, infos.EmailAddress, infos.Country, infos.ZipCode, infos.Uuid, null, null);
             return infos;
+        }
+
+        public async Task UploadRepliesAsync()
+        {
+            var list = await SurveyRealm.Instance.GetRepliesAsync();
+            var user = await UserRealm.Instance.GetUser();
+            var infos = await TokenWS.Instance.GetInfoAsync(user?.Token);
+
+            var newToken = await TokenManager.Instance.RefreshTokenAsync(user?.RefreshToken);
+            await SurveyWS.Instance.PostRepliesAsync(list, newToken?.AccessToken);
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using Listen.Contracts;
+using Listen.Helpers;
 using Listen.Managers;
 using Listen.Models.WebServices;
 using Listen.ViewModels.Tags;
@@ -13,7 +15,7 @@ using Xamarin.Forms;
 
 namespace Listen.ViewModels
 {
-    public class QuestionPageViewModel : ViewModelBase
+    public class QuestionPageViewModel : ViewModelBase, IResetQuestion
     {
         INavigation _nav;
 
@@ -86,15 +88,15 @@ namespace Listen.ViewModels
 
         public ICommand TagCommand { get; set; }
 
-        public IList<string> SelectedTags { get; set; }
+        public IList<TagViewModel> SelectedTags { get; set; }
 
-
+        Question question;
 
         public QuestionPageViewModel(INavigation nav)
         {
             _nav = nav;
 
-            var question = SurveyEngineManager.Instance.GetNextQuestion();
+            question = SurveyEngineManager.Instance.GetNextQuestion();
 
             var questions = SurveyEngineManager.Instance.Questions;
             var current = SurveyEngineManager.Instance.QuestionNumber;
@@ -131,7 +133,7 @@ namespace Listen.ViewModels
                             TagList.Add(tag);
                         }
 
-                        SelectedTags = new List<string>();
+                        SelectedTags = new List<TagViewModel>();
                     }
                 }
                 else
@@ -144,6 +146,9 @@ namespace Listen.ViewModels
 
             NextQuestion = new Command(async (obj) =>
             {
+                var frame = (Frame)obj;
+                ButtonAnimationHelper.Animate(frame);
+
                 bool validated = true;
                 // -- On checke
                 if (!string.IsNullOrEmpty(question.Type))
@@ -153,20 +158,17 @@ namespace Listen.ViewModels
                         // -- Question Libre
                         IsReponseLibreVisible = true;
 
+                        SurveyEngineManager.Instance.CurrentReply.Answers.Add(new Answer()
+                        {
+                            SurveyQuestion = question.Id,
+                            TextField = ReponseLibre,
+                            SelectedChoices = null
+                        });
+
                         if (string.IsNullOrEmpty(ReponseLibre))
                         {
                             ReponseLibre = "";
                         }
-
-
-                        //if (string.IsNullOrEmpty(reponse.Values))
-                        //{
-                        //    reponse.Values = "\"" + ReponseLibre + "\"";
-                        //}
-                        //else
-                        //{
-                        //    reponse.Values += ";\"" + ReponseLibre + "\"";
-                        //}
                     }
                     else
                     {
@@ -175,76 +177,27 @@ namespace Listen.ViewModels
                         if (SelectedTags?.Count == 0)
                         {
                             validated = false;
-                            //if (question.Type.Trim().ToLower() == "multiple_choice")
-                            //{
-                            //    var dialog = DependencyService.Get<IDialogService>();
-                            //    dialog.Show("Erreur", "Veuillez valider au moins un choix.", "Oui", (_obj) => { });
-
-                            //}
-                            //else 
-                            //{
-                            //    var dialog = DependencyService.Get<IDialogService>();
-                            //    dialog.Show("Erreur", "Veuillez valider un choix.", "Oui", (_obj) => { });
-                            //}
                         }
 
-                        //if (string.IsNullOrEmpty(reponse.Values))
-                        //{
-                        //    reponse.Values = "\"" + string.Join(",", SelectedTags) + "\"";
-                        //}
-                        //else
-                        //{
-                        //    reponse.Values += ";\"" + string.Join(",", SelectedTags) + "\"";
-                        //}
+                        var list = new List<string>();
+
+                        SurveyEngineManager.Instance.CurrentReply.Answers.Add(new Answer()
+                        {
+                            SurveyQuestion = question.Id,
+                            TextField = null,
+                            SelectedChoices = SelectedTags.Select(_t => _t.Id).ToList()
+                        });
                     }
                 }
 
-                //NotifyTask .Builder
-                //var hud = DependencyService.Get<IProgressHUD>();
-                //hud.Show("Sauvegarde ...");
-                //var question = questions[current];
-
-                //if (!string.IsNullOrEmpty(question.Type))
-                //{
-                //    if (question.Type.Trim().ToLower() == "simple_field")
-                //    {
-                //        // -- Question Libre
-                //        IsReponseLibreVisible = true;
-                //        if (string.IsNullOrEmpty(reponse.Values))
-                //        {
-                //            reponse.Values = "\"" + ReponseLibre + "\"";
-                //        }
-                //        else
-                //        {
-                //            reponse.Values += ";\"" + ReponseLibre + "\"";
-                //        }
-                //    }
-                //    else
-                //    {
-                //        IsReponseLibreVisible = false;
-                //        // -- Choix
-                //        if (string.IsNullOrEmpty(reponse.Values))
-                //        {
-                //            reponse.Values = "\"" + string.Join(",", SelectedTags) + "\"";
-                //        }
-                //        else
-                //        {
-                //            reponse.Values += ";\"" + string.Join(",", SelectedTags) + "\"";
-                //        }
-                //    }
-                //}
-
-                //hud.Dismiss();
                 if (validated)
                 {
                     if (current == questions.Count)
                     {
-                        //await _nav.PushAsync(new RgpdPage(new RgpdPageViewModel(_nav, reponse)));
                         await _nav.PushAsync(new RgpdPage(new RgpdPageViewModel(_nav)));
                     }
                     else
                     {
-                        //QuestionnaireManager.Instance.CurrentQuestion++;
                         await _nav.PushAsync(new QuestionPage(new QuestionPageViewModel(_nav)));
                     }
                 }
@@ -254,9 +207,9 @@ namespace Listen.ViewModels
         private void TagSelected(object obj)
         {
             var tag = (TagViewModel)obj;
-            var question = tag.Parameters as Question;
+            var _question = tag.Parameters as Question;
             // -- Question choix simple ou multiple
-            if (question.Type.Trim().ToLower() == "multiple_choice")
+            if (_question.Type.Trim().ToLower() == "multiple_choice")
             {
                 // -- Multiple
                 if (tag.BackgroundColor == Color.FromHex("#174163"))
@@ -265,7 +218,7 @@ namespace Listen.ViewModels
                     tag.TextColor = Color.FromHex("#174163");
                     tag.BackgroundColor = Color.White;
                     // -- On remove le tag
-                    SelectedTags.Remove(tag.Text);
+                    SelectedTags.Remove(tag);
                 }
                 else
                 {
@@ -273,7 +226,7 @@ namespace Listen.ViewModels
                     tag.TextColor = Color.White;
                     tag.BackgroundColor = Color.FromHex("#174163");
                     // -- On ajoute le tag
-                    SelectedTags.Add(tag.Text);
+                    SelectedTags.Add(tag);
                 }
 
                 if (SelectedTags.Count > 0)
@@ -293,7 +246,7 @@ namespace Listen.ViewModels
                 var list = TagList.Where(d => d.Text != tag.Text).ToList();
 
                 SelectedTags.Clear();
-                SelectedTags.Add(tag.Text);
+                SelectedTags.Add(tag);
 
                 foreach (var elt in list)
                 {
@@ -308,6 +261,55 @@ namespace Listen.ViewModels
                 else
                 {
                     NextButtonColor = Color.FromHex("#ffeae0");
+                }
+            }
+        }
+
+        public void Reset()
+        {
+            NextButtonColor = Color.FromHex("#ffeae0");
+            ReponseLibre = "";
+            var questions = SurveyEngineManager.Instance.Questions;
+            var current = SurveyEngineManager.Instance.QuestionNumber;
+
+            NextButtonColor = Color.FromHex("#ffeae0");
+
+            if (current <= questions.Count)
+            {
+                QuestionLabel = question.Content;
+                if (!string.IsNullOrEmpty(question.Type))
+                {
+                    if (question.Type.Trim().ToLower() == "simple_field")
+                    {
+                        // -- Question Libre
+                        IsReponseLibreVisible = true;
+                        NextButtonColor = Color.FromHex("#fcd2be");
+                    }
+                    else
+                    {
+                        IsReponseLibreVisible = false;
+                        // -- Choix
+                        TagList = new ObservableCollection<TagViewModel>();
+                        var choix = question.Choices;
+                        foreach (var c in choix)
+                        {
+                            var tag = new TagViewModel()
+                            {
+                                Id = c.Id,
+                                Text = c.Content,
+                                Parameters = question,
+                                TextColor = Color.FromHex("#174163"),
+                                BackgroundColor = Color.White,
+                            };
+                            TagList.Add(tag);
+                        }
+
+                        SelectedTags = new List<TagViewModel>();
+                    }
+                }
+                else
+                {
+                    // -- Alert ! Probleme sur le questionnaire
                 }
             }
         }

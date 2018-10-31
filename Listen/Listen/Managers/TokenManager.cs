@@ -23,7 +23,14 @@ namespace Listen.Managers
 
         public async Task<Token> RefreshTokenAsync(string refresh_token)
         {
-            var newtoken = await TokenWS.Instance.RefreshTokenAsync(refresh_token);
+            var rt = refresh_token;
+            if (string.IsNullOrEmpty(rt))
+            {
+                var user = await UserManager.Instance.GetUserAsync();
+                rt = user.RefreshToken;
+            }
+
+            var newtoken = await TokenWS.Instance.RefreshTokenAsync(rt);
 
             // -- Update User in DB
             await UserRealm.Instance.UpdateTokenAsync(newtoken);
