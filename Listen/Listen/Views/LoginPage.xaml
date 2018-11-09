@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-  xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  x:Class="Listen.Views.LoginPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.LoginPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="White" Padding="0,0,0,20">
             <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" MinimumHeightRequest="500">
@@ -15,19 +12,15 @@
             </Image>
             <ContentView VerticalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="90" HorizontalOptions="Center">
                 <StackLayout Spacing="10">
-                    <Frame x:Name="connectCommand" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
-                        <visual:LetterSpacingLabel LetterSpacing="0.25" Text="CONNEXION" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
-                            <Label.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Bold.ttf</On>
-                                </OnPlatform>
-                            </Label.FontFamily>
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ConnectCommand}" CommandParameter="{Binding Source={x:Reference connectCommand}}" />
-                            </Label.GestureRecognizers>
-                        </visual:LetterSpacingLabel>
-                    </Frame>
+                    <visual:ExtendedButton LetterSpacing="0.25" Text="À CONNEXION" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
+                        SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding ConnectCommand}">
+                        <visual:LetterSpacingButton.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS">Roboto</On>
+                                <On Platform="Android">Roboto-Bold.ttf</On>
+                            </OnPlatform>
+                        </visual:LetterSpacingButton.FontFamily>
+                    </visual:ExtendedButton>
                     <Label Text="Connectez-vous avec votre compte adhérent." FontSize="14" TextColor="{StaticResource brownGrey}" HorizontalOptions="Center" HorizontalTextAlignment="Center">
                         <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">

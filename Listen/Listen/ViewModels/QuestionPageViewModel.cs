@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -101,9 +102,11 @@ namespace Listen.ViewModels
             var questions = SurveyEngineManager.Instance.Questions;
             var current = SurveyEngineManager.Instance.QuestionNumber;
 
+            Debug.WriteLine("Question ({0})", current);
+
             NextButtonColor = Color.FromHex("#ffeae0");
 
-            if (current <= questions.Count)
+            if (current < questions.Count)
             {
                 QuestionLabel = question.Content;
                 if (!string.IsNullOrEmpty(question.Type))
@@ -146,9 +149,6 @@ namespace Listen.ViewModels
 
             NextQuestion = new Command(async (obj) =>
             {
-                var frame = (Frame)obj;
-                ButtonAnimationHelper.Animate(frame);
-
                 bool validated = true;
                 // -- On checke
                 if (!string.IsNullOrEmpty(question.Type))
@@ -192,7 +192,7 @@ namespace Listen.ViewModels
 
                 if (validated)
                 {
-                    if (current == questions.Count)
+                    if (current == questions.Count - 1)
                     {
                         await _nav.PushAsync(new RgpdPage(new RgpdPageViewModel(_nav)));
                     }

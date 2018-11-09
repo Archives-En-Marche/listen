@@ -21,6 +21,7 @@ namespace Listen.ViewModels
         public ICommand QuestionnaireCommand { get; set; }
 
         public ICommand InfosCommand { get; set; }
+        public ICommand AboutCommand { get; set; }
 
 
         public HomePageViewModel(INavigation nav)
@@ -29,19 +30,24 @@ namespace Listen.ViewModels
 
             InfosCommand = new Command(async (obj) =>
             {
-                var frame = (Frame)obj;
-                ButtonAnimationHelper.Animate(frame);
-
+                //var frame = (Frame)obj;
+                //ButtonAnimationHelper.Animate(frame);
+ 
                 //await Task.Delay(2000);
                 await _nav.PushAsync(new InfosPage(new InfosPageViewModel(_nav)));
+             }); 
+
+            AboutCommand = new Command(async (obj) =>
+            {
+                //var btn = (Button)obj;
+                //ButtonAnimationHelper.Animate(btn);
+
+                await _nav.PushAsync(new AboutPage());
             });
 
             QuestionnaireCommand = new Command(async (obj) =>
             {
-                var frame = (Frame)obj;
-                ButtonAnimationHelper.Animate(frame);
-
-                var hud = DependencyService.Get<IProgressHUD>();
+                //var hud = DependencyService.Get<IProgressHUD>();
                 //hud.Show("Chargement ...");
                 //var surveys = await SurveyManager.Instance.GetSurveysAsync();
 

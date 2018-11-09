@@ -62,8 +62,8 @@ namespace Listen.ViewModels
             {
                 var start = DateTime.Now;
 
-                Fullname = "Bonjour " + user.FirstName + " !";
-                Departement = "Vous habitez dans le département " + user.ZipCode.Substring(0, 2) + ".";
+                Fullname = "Bonjour " + user?.FirstName + " !";
+                Departement = "Vous habitez dans le département " + user?.ZipCode?.Substring(0, 2) + ".";
 
                 var stop = DateTime.Now;
                 Debug.WriteLine("Diff : " + (stop - start).TotalMilliseconds.ToString());

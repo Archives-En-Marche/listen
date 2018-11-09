@@ -85,9 +85,6 @@ namespace Listen.Droid.Renderers
                     {
                         _vm.ConnectCommand = new Command((obj) =>
                         {
-                            var frame = (Frame)obj;
-                            ButtonAnimationHelper.Animate(frame);
-
                             // This is what actually launches the auth web UI.
                             activity.StartActivity(auth.GetUI(activity));
                             done = true;

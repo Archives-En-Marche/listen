@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:Listen.VisualElements;assembly=Listen" xmlns:visual2="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:tev="clr-namespace:PopolLib.VisualElements.TagEntryView;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.RgpdPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:Listen.VisualElements;assembly=Listen" xmlns:visual2="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:tev="clr-namespace:PopolLib.VisualElements.TagEntryView;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.MoreInfosPage">
     <ContentPage.Content>
         <ScrollView BackgroundColor="White">
             <StackLayout WidthRequest="313" Spacing="0">
-                <Label Margin="0,30,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Les données personnelles recueillies par les bénévoles du mouvement sont traitées exclusivement par LaREM dans le cadre du questionnaire qui vient de vous être soumis." TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
+                <Label Margin="0,30,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Nous aimerions vous poser 3 questions supplémentaires qui nous permettront de mieux analyser les réponses à cette consultation." TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
@@ -11,15 +11,7 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <Label Margin="0,3,0,0" FontSize="14" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Nous vous informons que vous pouvez retirer votre consentement à tout moment et disposez d’un droit d’accès, de rectification et d’effacement de vos données conformément à la législation en vigueur. Nous vous informons que vous pouvez exercer vos droits via la politique de protection des données personnelles publiée sur le site de LaREM. " TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS">Roboto</On>
-                            <On Platform="Android">Roboto-Regular.ttf</On>
-                        </OnPlatform>
-                    </Label.FontFamily>
-                </Label>
-                <Label Margin="0,16,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Acceptez-vous que vos données personnelles soient traitées par LaREM dans le cadre de cette consultation, et êtes-vous informé(e) des droits dont vous disposez sur vos données ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
+                <Label Margin="0,56,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Quel est votre code postal ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
@@ -27,7 +19,40 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <tev:TagEntryView WidthRequest="313" Margin="0,36,0,0" Spacing="27" TagItems="{Binding Q1Items}" TagTappedCommand="{Binding YesNoCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                <visual:MaterialEntry Text="{Binding PostalCode}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Entrez le code postal" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
+                <Label Margin="0,54,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Quelle est votre profession ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS">Roboto</On>
+                            <On Platform="Android">Roboto-Bold.ttf</On>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <tev:TagEntryView WidthRequest="313" Margin="0,36,0,0" Spacing="27" TagItems="{Binding JobItems}" TagTappedCommand="{Binding SelectCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                    <tev:TagEntryView.TagItemTemplate>
+                        <DataTemplate>
+                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
+                                <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="iOS">Roboto</On>
+                                            <On Platform="Android">Roboto-Regular.ttf</On>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </visual2:RoundedStackLayout>
+                        </DataTemplate>
+                    </tev:TagEntryView.TagItemTemplate>
+                </tev:TagEntryView>
+                <Label Margin="0,48,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Quel est votre âge ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS">Roboto</On>
+                            <On Platform="Android">Roboto-Bold.ttf</On>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <tev:TagEntryView WidthRequest="313" Margin="0,36,0,0" Spacing="27" TagItems="{Binding AgeItems}" TagTappedCommand="{Binding SelectCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
                             <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
@@ -43,7 +68,7 @@
                         </DataTemplate>
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
-                <Label Margin="0,56,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Pourrions-nous vous tenir au courant de cette consultation via e-mail ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
+                <Label Margin="0,48,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Quel est votre genre ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
@@ -51,7 +76,7 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <tev:TagEntryView WidthRequest="313" Margin="0,31,0,0" Spacing="27" TagItems="{Binding Q2Items}" TagTappedCommand="{Binding YesNoCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                <tev:TagEntryView WidthRequest="313" Margin="0,36,0,0" Spacing="27" TagItems="{Binding GenderItems}" TagTappedCommand="{Binding SelectCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
                             <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
@@ -67,35 +92,9 @@
                         </DataTemplate>
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
-                <visual:MaterialEntry Text="{Binding Prenom}" Margin="0,40,0,0" WidthRequest="313" Placeholder="Prénom" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
-                <visual:MaterialEntry Text="{Binding Nom}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Nom" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
-                <visual:MaterialEntry Text="{Binding Email}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Email" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Email" />
-                <Label FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Pourrions-nous vous contacter via e-mail afin de vous proposer de devenir adhérent de La République En Marche ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start" Margin="0,51,0,0">
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS">Roboto</On>
-                            <On Platform="Android">Roboto-Regular.ttf</On>
-                        </OnPlatform>
-                    </Label.FontFamily>
-                </Label>
-                <tev:TagEntryView WidthRequest="313" Margin="0,35,0,0" Spacing="27" TagItems="{Binding Q3Items}" TagTappedCommand="{Binding YesNoCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
-                    <tev:TagEntryView.TagItemTemplate>
-                        <DataTemplate>
-                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
-                                <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand">
-                                    <Label.FontFamily>
-                                        <OnPlatform x:TypeArguments="x:String">
-                                            <On Platform="iOS">Roboto</On>
-                                            <On Platform="Android">Roboto-Regular.ttf</On>
-                                        </OnPlatform>
-                                    </Label.FontFamily>
-                                </Label>
-                            </visual2:RoundedStackLayout>
-                        </DataTemplate>
-                    </tev:TagEntryView.TagItemTemplate>
-                </tev:TagEntryView>
-                <visual2:ExtendedButton Margin="0,60,0,0" LetterSpacing="0.25" Text="CONTINUER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
-                    SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding ValiderCommand}">
+                <visual:MaterialEntry IsVisible="{Binding GenderIsVisible}" Text="{Binding Gender}" Margin="0,23,0,0" WidthRequest="313" Placeholder="Personalisez votre genre" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
+                <visual2:ExtendedButton Margin="0,60,0,0" LetterSpacing="0.25" Text="SOUMETTRE" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
+                    SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding SoumettreCommand}">
                     <visual2:LetterSpacingButton.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>

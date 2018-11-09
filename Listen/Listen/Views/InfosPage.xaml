@@ -18,59 +18,15 @@
                     </OnPlatform>
                 </Label.FontFamily>
             </Label>
-            <ContentView VerticalOptions="Start" Margin="0,35,0,0" WidthRequest="313" HeightRequest="60" HorizontalOptions="Center">
-                <Frame x:Name="logoutCommand" HorizontalOptions="Fill" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4">
-                    <visual:LetterSpacingLabel LetterSpacing="0.25" Text="SE DECONNECTER" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
-                        <Label.FontFamily>
-                            <OnPlatform x:TypeArguments="x:String">
-                                <On Platform="iOS">Roboto</On>
-                                <On Platform="Android">Roboto-Bold.ttf</On>
-                            </OnPlatform>
-                        </Label.FontFamily>
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding LogoutCommand}" CommandParameter="{Binding Source={x:Reference logoutCommand}}" />
-                        </Label.GestureRecognizers>
-                    </visual:LetterSpacingLabel>
-                </Frame>
-            </ContentView>
-            <StackLayout VerticalOptions="EndAndExpand" WidthRequest="313" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource whiteTwo}">
-            <Label FontSize="14" HorizontalTextAlignment="Start" Text="Crédits des icônes et images utilisées :" TextColor="Black" WidthRequest="313">
-                <Label.FontFamily>
+            <visual:ExtendedButton Margin="0,46,0,0" LetterSpacing="0.25" Text="SE DECONNECTER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
+                SelectedTextColor="White" CornerRadius="4" Command="{Binding LogoutCommand}">
+                <visual:LetterSpacingButton.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="iOS">Roboto</On>
-                        <On Platform="Android">Roboto-Regular.ttf</On>
+                        <On Platform="Android">Roboto-Bold.ttf</On>
                     </OnPlatform>
-                </Label.FontFamily>
-            </Label>
-            <Label FontSize="14" HorizontalTextAlignment="Start" Text="“Conversation” par Freepik sur flaticon.com" TextColor="{StaticResource brownGrey}" WidthRequest="313">
-                <Label.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="iOS">Roboto</On>
-                        <On Platform="Android">Roboto-Regular.ttf</On>
-                    </OnPlatform>
-                </Label.FontFamily>
-            </Label>
-            <Label FontSize="14" HorizontalTextAlignment="Start" Text="“Mic” par Jemis Mali sur thenounproject.com" TextColor="{StaticResource brownGrey}" WidthRequest="313">
-                <Label.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="iOS">Roboto</On>
-                        <On Platform="Android">Roboto-Regular.ttf</On>
-                    </OnPlatform>
-                </Label.FontFamily>
-            </Label>
-            <Label FontSize="14" HorizontalTextAlignment="Start" Text="“Trolley” par Vectors Market sur flaticon.com" TextColor="{StaticResource brownGrey}" WidthRequest="313">
-                <Label.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="iOS">Roboto</On>
-                        <On Platform="Android">Roboto-Regular.ttf</On>
-                    </OnPlatform>
-                </Label.FontFamily>
-            </Label>
-                 
-                
-                
-            </StackLayout>
-            
-        </StackLayout>
+                </visual:LetterSpacingButton.FontFamily>
+            </visual:ExtendedButton>
+         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

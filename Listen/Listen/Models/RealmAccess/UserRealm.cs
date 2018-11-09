@@ -135,7 +135,7 @@ namespace Listen.Models.RealmAccess
             }
         }
 
-        public async Task<User> GetUser()
+        public async Task<User> GetUserAsync()
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -147,6 +147,17 @@ namespace Listen.Models.RealmAccess
                     return user?.Clone();
                 }
             });
+        }
+
+        public User GetUser()
+        {
+            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+            using (var realm = Realm.GetInstance(db_name))
+            {
+                var users = realm.All<User>();
+                var user = users.FirstOrDefault();
+                return user?.Clone();
+            }
         }
 
         public async Task DeleteUserAsync()

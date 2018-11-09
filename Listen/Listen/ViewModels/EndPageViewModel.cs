@@ -66,30 +66,16 @@ namespace Listen.ViewModels
                 for (int i = _nav.NavigationStack.Count - 2; i >= 0; i--)
                 {
                     var p = _nav.NavigationStack[i];
-                    if (p is RgpdPage)
+                    if (!(p is SurveyPage) && !(p is HomePage) && !(p is IntroPage))
                     {
                         _nav.RemovePage(p);
                     }
-                    if ((i - 1) > 0)
-                    {
-                        var b = _nav.NavigationStack[i - 1] as SurveyPage;
-                        if (p is QuestionPage && b == null)
-                        {
-                            _nav.RemovePage(p);
-                            // -- On reinitialise la réponse
-                            //((InterviewedStep2Page)p).ReInitInterview(new Reponse() { InterviewArrondissement = _interviewArrondissement, InterviewStationMetro = _interviewStationMetro });
-                        }
-                        else if (b != null)
-                        {
-                            // -- On reinitialise les survey engine
-                            SurveyEngineManager.Instance.InitCurrentSurvey();
-                        }
-                    }
                 }
+                SurveyEngineManager.Instance.InitCurrentSurvey();
                 await _nav.PopAsync();
             });
 
-            AllCommand = new Command(async (obj) => 
+            AllCommand = new Command(async (obj) =>
             {
                 var frame = (Frame)obj;
                 ButtonAnimationHelper.Animate(frame);
@@ -97,14 +83,9 @@ namespace Listen.ViewModels
                 for (int i = _nav.NavigationStack.Count - 2; i >= 0; i--)
                 {
                     var p = _nav.NavigationStack[i];
-                    if (p is QuestionPage || p is RgpdPage)
+                    if (!(p is SurveyPage) && !(p is HomePage))
                     {
                         _nav.RemovePage(p);
-                    }
-                    if (p is SurveyPage)
-                    {
-                        // -- On reinitialise la réponse
-                        //((InterviewedStep2Page)p).ReInitInterview(new Reponse() { InterviewArrondissement = _interviewArrondissement, InterviewStationMetro = _interviewStationMetro });
                     }
                 }
                 await _nav.PopAsync();

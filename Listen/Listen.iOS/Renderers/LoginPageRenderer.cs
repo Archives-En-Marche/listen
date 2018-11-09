@@ -86,15 +86,12 @@ namespace Listen.iOS.Renderers
                     {
                         _vm.ConnectCommand = new Command((obj) =>
                         {
-                            var frame = (Frame)obj;
-                            ButtonAnimationHelper.Animate(frame);
-
                             // This is what actually launches the auth web UI.
                             PresentViewController(auth.GetUI(), true, null);
-                         });
+                        });
                     }
                 }
- 
+
             }
 
         }

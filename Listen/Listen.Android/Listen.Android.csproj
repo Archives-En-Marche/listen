@@ -129,6 +129,8 @@
     <AndroidResource Include="Resources\drawable-xhdpi\winner.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\winner.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\winner.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\home.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\home.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

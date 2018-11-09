@@ -147,7 +147,28 @@ namespace Listen.Models.WebServices
         public string Email { get; set; }
 
         [JsonProperty("agreedToStayInContact")]
-        public string AgreedToStayInContact { get; set; }
+        public bool AgreedToStayInContact { get; set; }
+
+        [JsonProperty("agreedToContactForJoin")]
+        public bool AgreedToContactForJoin { get; set; }
+
+        [JsonProperty("agreedToTreatPersonalData")]
+        public bool AgreedToTreatPersonalData { get; set; }
+
+        [JsonProperty("postalCode")]
+        public string PostalCode { get; set; }
+
+        [JsonProperty("ageRange")]
+        public string AgeRange { get; set; }
+
+        [JsonProperty("profession")]
+        public string Profession { get; set; }
+
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
+
+        [JsonProperty("genderOther")]
+        public string GenderOther { get; set; }
 
         [JsonProperty("answers")]
         public IList<Answer> Answers { get; set; }

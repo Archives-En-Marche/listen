@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Listen.ViewModels.ViewCell;
 using PopolLib.VisualElements.FastListView;
 using Xamarin.Forms;
 
 namespace Listen.Views.ViewCells
 {
-    public partial class NoSurveyViewCell : FastViewCell
+    public partial class UpdateSurveyViewCell : FastViewCell
     {
-        public NoSurveyViewCell()
+        public UpdateSurveyViewCell()
         {
-            BindingContext = new NoSurveyViewCellViewModel();
             InitializeComponent();
         }
     }

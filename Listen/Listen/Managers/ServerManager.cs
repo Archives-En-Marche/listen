@@ -46,14 +46,14 @@ namespace Listen.Managers
         public async Task<UserInfos> GetUserInfosAsync(string token)
         {
             var infos = await UserWS.Instance.GetUserInfosAsync(token);
-            await UserRealm.Instance.AddOrUpdateAsync(infos.LastName, infos.FirstName, infos.EmailAddress, infos.Country, infos.ZipCode, infos.Uuid, null, null);
+            await UserRealm.Instance.AddOrUpdateAsync(infos?.LastName, infos?.FirstName, infos?.EmailAddress, infos?.Country, infos?.ZipCode, infos?.Uuid, null, null);
             return infos;
         }
 
         public async Task UploadRepliesAsync()
         {
             var list = await SurveyRealm.Instance.GetRepliesAsync();
-            var user = await UserRealm.Instance.GetUser();
+            var user = await UserRealm.Instance.GetUserAsync();
             var infos = await TokenWS.Instance.GetInfoAsync(user?.Token);
 
             var newToken = await TokenManager.Instance.RefreshTokenAsync(user?.RefreshToken);

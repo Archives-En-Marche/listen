@@ -37,7 +37,7 @@ namespace Listen.Managers
 
         public int Count { get; set; }
 
-        public int QuestionNumber { get { return _pos + 1; } }
+        public int QuestionNumber { get { return _pos; } }
 
         public void Init(Survey survey)
         {
@@ -74,6 +74,8 @@ namespace Listen.Managers
                 return null;
             }
         }
+
+        public void Rewind() { _pos--; }
 
         public bool IsLastQuestion { get => _pos == Count - 1; }
     }

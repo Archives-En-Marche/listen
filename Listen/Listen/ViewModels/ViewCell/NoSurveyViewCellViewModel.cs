@@ -7,6 +7,8 @@ namespace Listen.ViewModels.ViewCell
 {
     public class NoSurveyViewCellViewModel : IFastViewCell
     {
+        public string Name { get; set; }
+
         public DataTemplate ItemTemplate { get => new DataTemplate(typeof(NoSurveyViewCell)); set => throw new NotImplementedException(); }
     }
 }

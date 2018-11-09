@@ -49,20 +49,25 @@ namespace Listen.ViewModels
                 }
             });
 
+            var user = UserManager.Instance.GetUser();
+
             Surveys = new ObservableCollection<IFastViewCell>();
             if (Device.RuntimePlatform == Device.Android)
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     var list = new ObservableCollection<IFastViewCell>();
-                    list.Add(new NoSurveyViewCellViewModel());
+                    list.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
+                    list.Add(new UpdateSurveyViewCellViewModel() { ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync()) });
                     Surveys = list;
                 });
             }
             else
             {
-                Surveys.Add(new NoSurveyViewCellViewModel());
+                Surveys.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
+                Surveys.Add(new UpdateSurveyViewCellViewModel() { ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync()) });
             }
+
             Task.Factory.StartNew(async () =>
             {
                 await SurveyManager.Instance.GetSurveysAsync();
@@ -106,18 +111,30 @@ namespace Listen.ViewModels
 
             SelectedCommand = ReactiveCommand.CreateFromTask<IFastViewCell>(async (s) =>
             {
-                var vm = s as SurveyViewCellViewModel;
-                if (vm != null)
                 {
-                    SurveyEngineManager.Instance.Init(vm.Survey);
-                    //QuestionnaireManager.Instance.InitInterview(questionnaire.Questionnaire);
-                    //_nav.PushAsync(new AdressePage(new AdressePageViewModel(_nav)));
-                    //_nav.PushAsync(new InterviewStep1Page(new InterviewStep1PageViewModel(_nav)));
-                    Device.BeginInvokeOnMainThread(async () =>
+                    var vm = s as SurveyViewCellViewModel;
+                    if (vm != null)
                     {
-                        await _nav.PushAsync(new QuestionPage(new QuestionPageViewModel(_nav)));
-                    });
+                        SurveyEngineManager.Instance.Init(vm.Survey);
+                        //QuestionnaireManager.Instance.InitInterview(questionnaire.Questionnaire);
+                        //_nav.PushAsync(new AdressePage(new AdressePageViewModel(_nav)));
+                        //_nav.PushAsync(new InterviewStep1Page(new InterviewStep1PageViewModel(_nav)));
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            //await _nav.PushAsync(new QuestionPage(new QuestionPageViewModel(_nav))); 
+                            await _nav.PushAsync(new IntroPage(new IntroPageViewModel(_nav)));
+
+                        });
+                    }
                 }
+                {
+                    var vm = s as UpdateSurveyViewCellViewModel;
+                    if (vm != null)
+                    {
+                        await SurveyManager.Instance.GetSurveysAsync();
+                    }
+                }
+
             });
             //    new Command((q) =>
             //    {

@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
-using Listen.ViewModels;
-using PopolLib.Extensions;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class EndPage : ContentPage
+    public partial class IntroPage : ContentPage
     {
-        public EndPage(ViewModelBase vm)
+        public IntroPage(ViewModelBase vm)
         {
-            NavigationPage.SetHasNavigationBar(this, false);
+            Title = "";
             NavigationPage.SetBackButtonTitle(this, "");
             BindingContext = vm;
             InitializeComponent();

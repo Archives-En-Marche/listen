@@ -97,7 +97,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\LoginPageRenderer.cs" />
     <None Include="FodyWeavers.xml" />
-    <Compile Include="Renderers\CustomPageRenderer.cs" />
+    <Compile Include="Renderers\ExtendedPageRenderer.cs" />
     <Compile Include="Renderers\LabelRender\AlignmentExtensions.cs" />
     <Compile Include="Renderers\LabelRender\ColorExtensions.cs" />
     <Compile Include="Renderers\LabelRender\FontExtensions.cs" />
@@ -107,6 +107,7 @@
     <Compile Include="Renderers\LabelRender\LabelRenderer.cs" />
     <Compile Include="Renderers\LabelRender\Region.cs" />
     <Compile Include="Tasks\LongRunningTask.cs" />
+    <Compile Include="Renderers\ListenPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -210,11 +211,23 @@
     <BundleResource Include="Resources\Images\trolley%402x.png" />
     <BundleResource Include="Resources\Images\winner%403x.png" />
     <BundleResource Include="Resources\Images\winner%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ITunesArtwork Include="iTunesArtwork%402x" />
+    <BundleResource Include="Resources\iPhone_320x480.png" />
+    <BundleResource Include="Resources\iPhone_640x960-1.png" />
+    <BundleResource Include="Resources\iPhone_640x960.png" />
+    <BundleResource Include="Resources\iPhone_640x1136-1.png" />
+    <BundleResource Include="Resources\iPhone_640x1136.png" />
+    <BundleResource Include="Resources\iPhone_750x1334.png" />
+    <BundleResource Include="Resources\iPhone_828x1792.png" />
+    <BundleResource Include="Resources\iPhone_1242x2208.png" />
+    <BundleResource Include="Resources\iPhone_1242x2688.png" />
+    <BundleResource Include="Resources\Images\home.png" />
+    <BundleResource Include="Resources\Images\home%402x.png" />
+    <BundleResource Include="Resources\Images\home%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
 </Project>

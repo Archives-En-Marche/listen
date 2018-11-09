@@ -13,7 +13,8 @@ namespace Listen.Views
         public QuestionPage(ViewModelBase vm)
         {
             BindingContext = vm;
-            this.Title = "Question " + SurveyEngineManager.Instance.QuestionNumber;
+            var nb = SurveyEngineManager.Instance.QuestionNumber + 1;
+            this.Title = "Question " + nb;
             NavigationPage.SetBackButtonTitle(this, "");
             NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
