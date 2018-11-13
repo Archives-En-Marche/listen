@@ -6,6 +6,7 @@ using Listen.Managers;
 using Listen.Models.WebServices;
 using Listen.ViewModels;
 using Listen.VisualElements;
+using PopolLib.Services;
 using Xamarin.Forms;
 
 namespace Listen.Views
@@ -34,7 +35,7 @@ namespace Listen.Views
                 Token newtoken;
                 var user = await UserManager.Instance.GetUserAsync();
 
-                ServerManager.Instance.GetSurveysAsync();
+                await ServerManager.Instance.GetSurveysAsync();
 
                 var displayLoginPage = false;
 
@@ -54,7 +55,15 @@ namespace Listen.Views
                     // -- On REFRESH AUTO Le TOKEN ?
                     newtoken = await TokenManager.Instance.RefreshTokenAsync(refresh);
 
-                    LongRunningTaskManager.Instance.StartLongRunningTask();
+                    var infos = await TokenWS.Instance.GetInfoAsync(newtoken?.AccessToken);
+                    if (infos == null)
+                    {
+                        displayLoginPage = true;
+                    }
+                    else 
+                    {
+                        LongRunningTaskManager.Instance.StartLongRunningTask();
+                    }
                 }
                 else
                 {
@@ -66,27 +75,41 @@ namespace Listen.Views
                     // -- On présente la page de login
                     await ((NavigationPage)Application.Current.MainPage).Navigation.PushModalAsync(new InternalNavigationPage(new LoginPage(new LoginPageViewModel(_nav))));
                 }
+
+                // -- Check App Version
+                var remoteAppVersion = await AppVersionManager.Instance.GetAppVersionAsync();
+                var need = await AppVersionManager.Instance.IsUpdateAppNeededAsync();
+                //Debug.WriteLine(remoteAppVersion.ToString());
+                if (need)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        var dialog = DependencyService.Get<IDialogService>();
+                        dialog.Show("Mise à Jour", "Une mise à jour de l'application est nécessaire. En cliquant sur OK, vous allez être redirigé sur la page de mise à jour de l'application.", "OK", (res) =>
+                        {
+                            if (res)
+                            {
+                                if (Device.RuntimePlatform == Device.iOS)
+                                {
+                                    var ass = DependencyService.Get<IAppStoreService>();
+                                    ass.OpenAppInStore("id1438099575");
+                                }
+                                else
+                                {
+                                    var ass = DependencyService.Get<IAppStoreService>();
+                                    ass.OpenAppInStore("fr.en-marche.listen");
+                                }
+                            }
+                        });
+                    });
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                //hud.Dismiss();
             }
             finally
             {
-                //hud.Dismiss();
-                //if (Application.Current.Properties.ContainsKey("FirstUse"))
-                //{
-                //    //Do things when it's NOT the first use...
-                //}
-                //else
-                //{
-                //    //Do things when it IS the first use...
-                //    await ((NavigationPage)MainPage).Navigation.PushModalAsync(new InternalNavigationPage(new ParametresPage(new ParametresPageViewModel(this))));
-                //}
-
-                //var permissions = DependencyService.Get<IPermissions>();
-                //await permissions.RequestPermissionsAsync();
             }
 
         }

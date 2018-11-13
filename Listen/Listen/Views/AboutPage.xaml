@@ -90,6 +90,14 @@
                             </OnPlatform>
                         </Label.FontFamily>
                     </Label>
+                    <Label FontSize="14" HorizontalTextAlignment="Start" Text="- “Winner” par Freepik sur flaticon.com" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS">Roboto</On>
+                                <On Platform="Android">Roboto-Regular.ttf</On>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

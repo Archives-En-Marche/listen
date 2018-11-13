@@ -34,7 +34,7 @@
                     </DataTemplate>
                 </tev:TagEntryView.TagItemTemplate>
             </tev:TagEntryView>
-            <Editor IsVisible="{Binding IsReponseLibreVisible}" Grid.Row="1" BackgroundColor="{StaticResource LightGreyColor}" FontSize="17" HorizontalOptions="FillAndExpand" Text="{Binding ReponseLibre}" TextColor="Black" VerticalOptions="FillAndExpand" WidthRequest="313" Margin="0,35,0,35">
+            <Editor IsVisible="{Binding IsReponseLibreVisible}" Grid.Row="1" BackgroundColor="{StaticResource LightGreyColor}" FontSize="17" HorizontalOptions="FillAndExpand" Text="{Binding ReponseLibre}" TextColor="Black" VerticalOptions="FillAndExpand" WidthRequest="313" Margin="0,35,0,35" Placeholder=" Écrivez la réponse ici">
                 <Editor.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <OnPlatform.iOS>Roboto</OnPlatform.iOS>

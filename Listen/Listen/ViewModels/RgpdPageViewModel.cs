@@ -184,12 +184,12 @@ namespace Listen.ViewModels
                     ok  = (Regex.IsMatch(Email.Trim(), emailRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
                 }
 
-                if (_selectedQ2.Text == "Oui" && string.IsNullOrEmpty(Email))
+                if (_selectedQ2?.Text == "Oui" && string.IsNullOrEmpty(Email))
                 {
                     ok = false;
                 }
 
-                if (_selectedQ3.Text == "Oui" && string.IsNullOrEmpty(Email))
+                if (_selectedQ3?.Text == "Oui" && string.IsNullOrEmpty(Email))
                 {
                     ok = false;
                 }
@@ -199,9 +199,9 @@ namespace Listen.ViewModels
                     SurveyEngineManager.Instance.CurrentReply.Firstname = Prenom;
                     SurveyEngineManager.Instance.CurrentReply.Lastmame = Nom;
                     SurveyEngineManager.Instance.CurrentReply.Email = Email;
-                    SurveyEngineManager.Instance.CurrentReply.AgreedToStayInContact = (_selectedQ2.Text == "Oui" ? true : false);
-                    SurveyEngineManager.Instance.CurrentReply.AgreedToContactForJoin = (_selectedQ3.Text == "Oui" ? true : false);
-                    SurveyEngineManager.Instance.CurrentReply.AgreedToTreatPersonalData = (_selectedQ1.Text == "Oui" ? true : false);
+                    SurveyEngineManager.Instance.CurrentReply.AgreedToStayInContact = (_selectedQ2?.Text == "Oui" ? true : false);
+                    SurveyEngineManager.Instance.CurrentReply.AgreedToContactForJoin = (_selectedQ3?.Text == "Oui" ? true : false);
+                    SurveyEngineManager.Instance.CurrentReply.AgreedToTreatPersonalData = (_selectedQ1?.Text == "Oui" ? true : false);
 
                     await _nav.PushAsync(new MoreInfosPage(new MoreInfosPageViewModel(_nav)));
                     //await _nav.PushAsync(new EndPage(new EndPageViewModel(_nav)));
@@ -209,7 +209,7 @@ namespace Listen.ViewModels
                 else
                 {
                     var dialog = DependencyService.Get<IDialogService>();
-                    dialog.Show("Erreur", "Merci de :\n - Renseigner un email valide,\n - De répondre aux questions.\n - Si vous acceptez que l'on vous contacte, l'adresse email est obligatoire.", "OUI", null);
+                    dialog.Show("Oups !", "Merci de renseigner toutes les informations sur cet écran.", "OK", null);
                 }
 
             });

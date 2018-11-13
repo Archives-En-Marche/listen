@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
+using Listen.Managers;
 using Listen.ViewModels;
 using PopolLib.Extensions;
 using Xamarin.Forms;
@@ -17,6 +18,12 @@ namespace Listen.Views
             NavigationPage.SetBackButtonTitle(this, "");
             BindingContext = vm;
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LongRunningTaskManager.Instance.StartLongRunningTask();
         }
     }
 }

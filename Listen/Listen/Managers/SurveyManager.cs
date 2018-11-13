@@ -35,7 +35,9 @@ namespace Listen.Managers
             {
                 // -- On chage les surveys
                 await ServerManager.Instance.GetSurveysAsync();
-                return await SurveyRealm.Instance.GetSurveysAsync();
+                var _list = await SurveyRealm.Instance.GetSurveysAsync();
+                MessagingCenter.Send<SurveyManager, IList<Survey>>(this, "UpdateUI", _list);
+                return _list;
             }
             else
             {

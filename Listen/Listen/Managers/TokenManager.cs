@@ -27,7 +27,7 @@ namespace Listen.Managers
             if (string.IsNullOrEmpty(rt))
             {
                 var user = await UserManager.Instance.GetUserAsync();
-                rt = user.RefreshToken;
+                rt = user?.RefreshToken;
             }
 
             var newtoken = await TokenWS.Instance.RefreshTokenAsync(rt);

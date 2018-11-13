@@ -58,14 +58,20 @@ namespace Listen.ViewModels
                 {
                     var list = new ObservableCollection<IFastViewCell>();
                     list.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
-                    list.Add(new UpdateSurveyViewCellViewModel() { ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync()) });
+                    list.Add(new UpdateSurveyViewCellViewModel() 
+                    { 
+                        ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync()) 
+                    });
                     Surveys = list;
                 });
             }
             else
             {
                 Surveys.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
-                Surveys.Add(new UpdateSurveyViewCellViewModel() { ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync()) });
+                Surveys.Add(new UpdateSurveyViewCellViewModel() 
+                { 
+                    ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync()) 
+                });
             }
 
             Task.Factory.StartNew(async () =>
@@ -73,80 +79,28 @@ namespace Listen.ViewModels
                 await SurveyManager.Instance.GetSurveysAsync();
             });
 
-
-            //MessagingCenter.Subscribe<ServerManager>(this, "UpdateUI", UpdateUI);
-
-            //Observable.FromAsync<ObservableCollection<IFastViewCell>>(async () =>
-            //{
-            //    return await Task.Factory.StartNew(() =>
-            //    {
-            //        var list = new ObservableCollection<IFastViewCell>();
-            //        //list.Add(new UserWelcomeViewCellViewModel("Paulin", "75"));
-            //        //if (surveys?.Count > 0)
-            //        //{
-            //        //    list.Add(new UserWelcomeViewCellViewModel("Paulin", "75"));
-            //        //    foreach (var s in surveys)
-            //        //    {
-            //        //        list.Add(new SurveyViewCellViewModel(s));
-            //        //    }
-            //        //}
-            //        //else 
-            //        {
-            //            list.Add(new NoSurveyViewCellViewModel());
-
-            //        }
-            //        return list;
-            //    });
-            //})
-            //.ObserveOn(RxApp.MainThreadScheduler)
-            //.Subscribe(list =>
-            //{
-            //    var start = DateTime.Now;
-
-            //    Surveys = list;
-
-            //    var stop = DateTime.Now;
-            //    Debug.WriteLine("Diff : " + (stop - start).TotalMilliseconds.ToString());
-            //});
-
             SelectedCommand = ReactiveCommand.CreateFromTask<IFastViewCell>(async (s) =>
             {
                 {
-                    var vm = s as SurveyViewCellViewModel;
-                    if (vm != null)
+                    if (s is SurveyViewCellViewModel vm)
                     {
                         SurveyEngineManager.Instance.Init(vm.Survey);
-                        //QuestionnaireManager.Instance.InitInterview(questionnaire.Questionnaire);
-                        //_nav.PushAsync(new AdressePage(new AdressePageViewModel(_nav)));
-                        //_nav.PushAsync(new InterviewStep1Page(new InterviewStep1PageViewModel(_nav)));
                         Device.BeginInvokeOnMainThread(async () =>
                         {
-                            //await _nav.PushAsync(new QuestionPage(new QuestionPageViewModel(_nav))); 
                             await _nav.PushAsync(new IntroPage(new IntroPageViewModel(_nav)));
-
                         });
                     }
                 }
                 {
-                    var vm = s as UpdateSurveyViewCellViewModel;
-                    if (vm != null)
+                    //vm.ActualiserCommand.Execute(null);
+                    if (s is UpdateSurveyViewCellViewModel vm)
                     {
                         await SurveyManager.Instance.GetSurveysAsync();
                     }
                 }
 
             });
-            //    new Command((q) =>
-            //    {
-            //        var questionnaire = q as SurveyViewCellViewModel;
-            //        if (questionnaire != null)
-            //        {
-            //            //QuestionnaireManager.Instance.InitInterview(questionnaire.Questionnaire);
-            //            //_nav.PushAsync(new AdressePage(new AdressePageViewModel(_nav)));
-            //            //_nav.PushAsync(new InterviewStep1Page(new InterviewStep1PageViewModel(_nav)));
-            //        }
-            //    });
-        }
+         }
 
         private void UpdateUI(object obj)
         {

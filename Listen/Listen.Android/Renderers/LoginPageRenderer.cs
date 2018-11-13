@@ -35,6 +35,7 @@ namespace Listen.Droid.Renderers
                 // this is a ViewGroup - so should be able to load an AXML file and FindView<>
                 var activity = ctxt as Activity;
 
+#if DEBUG
                 var auth = new OAuth2Authenticator(
                     clientId: "2b494496-4eae-4946-9ae1-efa3f593595c",
                     clientSecret: "vcyrJys1sdvaTCXN0BFfOuw2A8KxdA9QkYDMErViM68=",
@@ -47,6 +48,20 @@ namespace Listen.Droid.Renderers
                     AllowCancel = false,
                     Title = ""
                 };
+#else
+                var auth = new OAuth2Authenticator(
+                    "33f63935-0793-41b9-89a8-1d9bb74e5fe5",
+                    "X5lVzYtkoVBotQM1pmty/8el3UGrRgIpfzqXeUL0jbY=",
+                    "jecoute_surveys",
+                    new Uri("https://www.en-marche.fr/oauth/v2/auth"),
+                    new Uri("https://en-marche.fr"),
+                    new Uri("https://www.en-marche.fr/oauth/v2/token"))
+                {
+                    ShowErrors = false,
+                    AllowCancel = false,
+                    Title = ""
+                };
+#endif
 
                 auth.Completed += async (sender, eventArgs) =>
                 {

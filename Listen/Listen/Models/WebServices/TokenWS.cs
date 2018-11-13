@@ -58,10 +58,14 @@ namespace Listen.Models.WebServices
             {
                 var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
                 var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
+                var client_id = Settings.AppSettings.GetValueOrDefault("client_id", "");
+                var client_secret = Settings.AppSettings.GetValueOrDefault("client_secret", "");
+
                 var client = new RestClient(base_url);
                 var request = new RestRequest("/oauth/v2/token", Method.POST);
-                request.AddParameter("client_id", "2b494496-4eae-4946-9ae1-efa3f593595c");
-                request.AddParameter("client_secret", "vcyrJys1sdvaTCXN0BFfOuw2A8KxdA9QkYDMErViM68=");
+
+                request.AddParameter("client_id", client_id);
+                request.AddParameter("client_secret", client_secret);
                 request.AddParameter("grant_type", "refresh_token");
                 request.AddParameter("refresh_token", refresh_token);
                 var cts = new CancellationTokenSource(timeout);

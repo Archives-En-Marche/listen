@@ -11,7 +11,7 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <Label Margin="0,3,0,0" FontSize="14" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Nous vous informons que vous pouvez retirer votre consentement à tout moment et disposez d’un droit d’accès, de rectification et d’effacement de vos données conformément à la législation en vigueur. Nous vous informons que vous pouvez exercer vos droits via la politique de protection des données personnelles publiée sur le site de LaREM. " TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
+                <Label Margin="0,16,0,0" FontSize="14" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Nous vous informons que vous pouvez retirer votre consentement à tout moment et disposez d’un droit d’accès, de rectification et d’effacement de vos données conformément à la législation en vigueur. Nous vous informons que vous pouvez exercer vos droits via la politique de protection des données personnelles publiée sur le site de LaREM. " TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
@@ -94,7 +94,7 @@
                         </DataTemplate>
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
-                <visual2:ExtendedButton Margin="0,60,0,0" LetterSpacing="0.25" Text="CONTINUER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
+                <visual2:ExtendedButton Margin="0,60,0,20" LetterSpacing="0.25" Text="CONTINUER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
                     SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding ValiderCommand}">
                     <visual2:LetterSpacingButton.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">

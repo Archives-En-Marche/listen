@@ -50,9 +50,9 @@ namespace Listen.ViewModels
             Observable.FromAsync<User>(async () =>
             {
                 var user = await UserManager.Instance.GetUserAsync();
-                if (user != null && string.IsNullOrEmpty(user?.FirstName) || string.IsNullOrEmpty(user?.ZipCode))
+                if (user != null && string.IsNullOrEmpty(user?.Token) && string.IsNullOrEmpty(user?.FirstName) || string.IsNullOrEmpty(user?.ZipCode))
                 {
-                    await ServerManager.Instance.GetUserInfosAsync(user.Token);
+                    await ServerManager.Instance.GetUserInfosAsync(user?.Token);
                     user = await UserManager.Instance.GetUserAsync();
                 }
                 return user;

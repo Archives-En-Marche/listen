@@ -33,7 +33,11 @@ namespace Listen.iOS
 
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
+            //Xamarin.Calabash.Start();
+#if ENABLE_TEST_CLOUD
+            // requires Xamarin Test Cloud Agent
             Xamarin.Calabash.Start();
+#endif
 
             var normalTextAttributes = new UITextAttributes();
        

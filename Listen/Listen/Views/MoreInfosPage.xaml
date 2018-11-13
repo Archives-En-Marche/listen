@@ -93,7 +93,7 @@
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
                 <visual:MaterialEntry IsVisible="{Binding GenderIsVisible}" Text="{Binding Gender}" Margin="0,23,0,0" WidthRequest="313" Placeholder="Personalisez votre genre" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
-                <visual2:ExtendedButton Margin="0,60,0,0" LetterSpacing="0.25" Text="SOUMETTRE" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
+                <visual2:ExtendedButton Margin="0,60,0,20" LetterSpacing="0.25" Text="SOUMETTRE" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
                     SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding SoumettreCommand}">
                     <visual2:LetterSpacingButton.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">

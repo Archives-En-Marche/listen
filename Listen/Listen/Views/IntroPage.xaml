@@ -29,7 +29,7 @@
                                 </OnPlatform>
                             </Span.FontFamily>
                         </Span>
-                        <Span Text="La République En Marche. " FontAttributes="Bold,Italic" FontSize="20">
+                        <Span Text="La République En Marche " FontAttributes="Bold,Italic" FontSize="20">
                             <Span.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                     <On Platform="iOS">Roboto</On>

@@ -31,15 +31,18 @@ namespace Listen
 
 #if DEBUG
             Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://staging.en-marche.fr");
-            Settings.AppSettings.AddOrUpdateValue("GS_STORAGE_URI", "paris-et-moi.appspot.com");
+            Settings.AppSettings.AddOrUpdateValue("client_id", "2b494496-4eae-4946-9ae1-efa3f593595c");
+            Settings.AppSettings.AddOrUpdateValue("client_secret", "vcyrJys1sdvaTCXN0BFfOuw2A8KxdA9QkYDMErViM68=");
 #else
+            Settings.AppSettings.AddOrUpdateValue("client_id", "33f63935-0793-41b9-89a8-1d9bb74e5fe5");
+            Settings.AppSettings.AddOrUpdateValue("client_secret", "X5lVzYtkoVBotQM1pmty/8el3UGrRgIpfzqXeUL0jbY=");
             Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://www.en-marche.fr");
-            Settings.AppSettings.AddOrUpdateValue("GS_STORAGE_URI", "paris-et-moi.appspot.com");
 #endif
             Settings.AppSettings.AddOrUpdateValue("WS_TIME_OUT", 30000);
             Settings.AppSettings.AddOrUpdateValue("DB_NAME", "listen.realm");
-            Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://staging.en-marche.fr");
-            Settings.AppSettings.AddOrUpdateValue("GS_STORAGE_URI", "paris-et-moi.appspot.com");
+            Settings.AppSettings.AddOrUpdateValue("APP_VERSION_SCOPE", "jecoute_surveys");
+            //Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://staging.en-marche.fr");
+            
 
             MainPage = new InternalNavigationPage(new HomePage(this, new HomePageViewModel(this)));
         }

@@ -12,7 +12,7 @@
             </Image>
             <ContentView VerticalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="90" HorizontalOptions="Center">
                 <StackLayout Spacing="10">
-                    <visual:ExtendedButton LetterSpacing="0.25" Text="À CONNEXION" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
+                    <visual:ExtendedButton LetterSpacing="0.25" Text="CONNEXION" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
                         SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding ConnectCommand}">
                         <visual:LetterSpacingButton.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">

@@ -13,7 +13,7 @@
               BackgroundColor="{StaticResource lightPeach}"
               SelectedBackgroundColor="{StaticResource battleshipGrey}"
               SelectedTextColor="White"
-                                   Command="{Binding ActualiserCommand}"
+              Command="{Binding ActualiserCommand}"
               CornerRadius="4">
                 <visual:LetterSpacingButton.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
@@ -22,17 +22,6 @@
                     </OnPlatform>
                 </visual:LetterSpacingButton.FontFamily>
             </visual:ExtendedButton>
-            <!--          <Frame x:Name="validerCommand" HasShadow="false" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" CornerRadius="4" VerticalOptions="Start">
-                <visual:LetterSpacingLabel LetterSpacing="0.25" Text="ACTUALISER" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource battleshipGrey}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" WidthRequest="313" HeightRequest="60">
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS">Roboto</On>
-                            <On Platform="Android">Roboto-Bold.ttf</On>
-                        </OnPlatform>
-                    </Label.FontFamily>
-                </visual:LetterSpacingLabel>
-            </Frame>
- -->
         </ContentView>
     </StackLayout>
 </flv:FastViewCell>

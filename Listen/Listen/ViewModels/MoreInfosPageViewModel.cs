@@ -29,21 +29,21 @@ namespace Listen.ViewModels
         public ICommand SelectCommand { get; set; }
         public ICommand SoumettreCommand { get; set; }
 
-        string[] ages = new string[] { "-20 ANS", "20-24 ANS", "25-39 ANS", "40-54 ANS", "55-64 ANS", "65-80 ANS", "80+ ANS" };
+        string[] ages = new string[] { "-20 ans", "20-24 ans", "25-39 ans", "40-54 ans", "55-64 ans", "65-80 ans", "80+ ans" };
         string[] jobs = new string[] { "Agriculteurs exploitants", "Artisans, commerçants et chefs d’entreprise",
             "Cadres et professions intellectuelles", "Professions Intermédiaires", "Employés", "Ouvriers", "Retraités",
-        "Auto-Entrepreneur", "Etudiant", "Parent au foyer", "Demandeur d’emploi"};
-        string[] genders = new string[] { "FÉMININ", "MASCULIN", "AUTRE" };
+        "Auto-Entrepreneurs", "Étudiants", "Parents au foyer", "Demandeurs d’emploi"};
+        string[] genders = new string[] { "Féminin", "Masculin", "Autre" };
 
-        Dictionary<string, string> _resultAges = new Dictionary<string, string>() { { "-20 ANS", "less_than_20" }, { "20-24 ANS", "between_20_24" },
-            { "25-39 ANS", "between_25_39" }, { "40-54 ANS", "between_40_54" }, { "55-64 ANS", "between_55_64" },
-            { "65-80 ANS", "between_65_80" }, { "80+ ANS", "greater_than_80" } };
+        Dictionary<string, string> _resultAges = new Dictionary<string, string>() { { "-20 ans", "less_than_20" }, { "20-24 ans", "between_20_24" },
+            { "25-39 ans", "between_25_39" }, { "40-54 ans", "between_40_54" }, { "55-64 ans", "between_55_64" },
+            { "65-80 ans", "between_65_80" }, { "80+ ans", "greater_than_80" } };
 
         Dictionary<string, string> _resultJobs = new Dictionary<string, string>() { { "Agriculteurs exploitants", "farmers" },
             { "Artisans, commerçants et chefs d’entreprise", "craftsmen" }, { "Cadres et professions intellectuelles", "managerial staff" },
             { "Professions Intermédiaires", "intermediate_professions" }, { "Employés", "employees" }, { "Ouvriers", "workers" },
-            { "Retraités", "retirees" }, { "Auto-Entrepreneur", "self_contractor" }, { "Etudiant", "student" },
-            { "Parent au foyer", "home_parent" },  { "Demandeur d’emploi", "jobseeker" } };
+            { "Retraités", "retirees" }, { "Auto-Entrepreneurs", "self_contractor" }, { "Étudiants", "student" },
+            { "Parents au foyer", "home_parent" },  { "Demandeurs d’emploi", "jobseeker" } };
 
         string _postalCode;
         public string PostalCode
@@ -133,29 +133,29 @@ namespace Listen.ViewModels
             SoumettreCommand = new Command(async (obj) =>
             {
                 // -- Check
-                if (_selectedJob != null && _selectedAge != null && _selectedGender != null)
-                {
+                //if (_selectedJob != null && _selectedAge != null && _selectedGender != null)
+                //{
                     SurveyEngineManager.Instance.CurrentReply.PostalCode = PostalCode;
 
-                    var labelAge = _resultAges.FirstOrDefault(a => a.Key == _selectedAge.Text);
+                    var labelAge = _resultAges.FirstOrDefault(a => a.Key == _selectedAge?.Text);
                     SurveyEngineManager.Instance.CurrentReply.AgeRange = labelAge.Value;
 
-                    var labelJob = _resultJobs.FirstOrDefault(a => a.Key == _selectedJob.Text);
+                    var labelJob = _resultJobs.FirstOrDefault(a => a.Key == _selectedJob?.Text);
                     SurveyEngineManager.Instance.CurrentReply.Profession = labelJob.Value;
 
                     // -- gender
-                    var gender = _selectedGender.Text;
-                    if (gender == "FÉMININ")
+                    var gender = _selectedGender?.Text;
+                    if (gender == "Féminin")
                     {
                         SurveyEngineManager.Instance.CurrentReply.Gender = "female";
                         SurveyEngineManager.Instance.CurrentReply.GenderOther = null;
                     }
-                    if (gender == "MASCULIN")
+                    if (gender == "Masculin")
                     {
                         SurveyEngineManager.Instance.CurrentReply.Gender = "male";
                         SurveyEngineManager.Instance.CurrentReply.GenderOther = null;
                     }
-                    if (gender == "AUTRE")
+                    if (gender == "Autre")
                     {
                         SurveyEngineManager.Instance.CurrentReply.Gender = "other";
                         SurveyEngineManager.Instance.CurrentReply.GenderOther = Gender;
@@ -164,7 +164,7 @@ namespace Listen.ViewModels
                     await SurveyManager.Instance.AddReplyAsync(SurveyEngineManager.Instance.CurrentReply);
                     // -- Navigate
                     await _nav.PushAsync(new EndPage(new EndPageViewModel(_nav)));
-                }
+                //}
             });
 
         }
