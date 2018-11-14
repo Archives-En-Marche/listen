@@ -43,15 +43,16 @@ namespace Listen.iOS.Renderers
                     "33f63935-0793-41b9-89a8-1d9bb74e5fe5",
                     "X5lVzYtkoVBotQM1pmty/8el3UGrRgIpfzqXeUL0jbY=",
                     "jecoute_surveys",
-                    new Uri("https://www.en-marche.fr/oauth/v2/auth"),
+                    new Uri("https://en-marche.fr/oauth/v2/auth"),
                     new Uri("https://en-marche.fr"),
-                    new Uri("https://www.en-marche.fr/oauth/v2/token"))
+                    new Uri("https://en-marche.fr/oauth/v2/token"))
                 {
                     ShowErrors = false,
                     AllowCancel = false,
                     Title = ""
                 };
 #endif
+
                 auth.Completed += async (sender, eventArgs) =>
                 {
                     if (eventArgs.IsAuthenticated)

@@ -36,7 +36,7 @@ namespace Listen
 #else
             Settings.AppSettings.AddOrUpdateValue("client_id", "33f63935-0793-41b9-89a8-1d9bb74e5fe5");
             Settings.AppSettings.AddOrUpdateValue("client_secret", "X5lVzYtkoVBotQM1pmty/8el3UGrRgIpfzqXeUL0jbY=");
-            Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://www.en-marche.fr");
+            Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://en-marche.fr");
 #endif
             Settings.AppSettings.AddOrUpdateValue("WS_TIME_OUT", 30000);
             Settings.AppSettings.AddOrUpdateValue("DB_NAME", "listen.realm");

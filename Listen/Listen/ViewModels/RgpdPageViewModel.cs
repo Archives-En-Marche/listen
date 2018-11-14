@@ -175,13 +175,11 @@ namespace Listen.ViewModels
                     Email = null;
                 }
 
-
-
                 bool ok = true;
 
                 if (!string.IsNullOrEmpty(Email))
                 {
-                    ok  = (Regex.IsMatch(Email.Trim(), emailRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
+                    ok = (Regex.IsMatch(Email.Trim(), emailRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
                 }
 
                 if (_selectedQ2?.Text == "Oui" && string.IsNullOrEmpty(Email))
@@ -196,14 +194,24 @@ namespace Listen.ViewModels
 
                 if (_selectedQ1 != null && _selectedQ2 != null && _selectedQ3 != null && ok)
                 {
-                    SurveyEngineManager.Instance.CurrentReply.Firstname = Prenom;
-                    SurveyEngineManager.Instance.CurrentReply.Lastmame = Nom;
-                    SurveyEngineManager.Instance.CurrentReply.Email = Email;
-                    SurveyEngineManager.Instance.CurrentReply.AgreedToStayInContact = (_selectedQ2?.Text == "Oui" ? true : false);
-                    SurveyEngineManager.Instance.CurrentReply.AgreedToContactForJoin = (_selectedQ3?.Text == "Oui" ? true : false);
-                    SurveyEngineManager.Instance.CurrentReply.AgreedToTreatPersonalData = (_selectedQ1?.Text == "Oui" ? true : false);
 
-                    await _nav.PushAsync(new MoreInfosPage(new MoreInfosPageViewModel(_nav)));
+                    if (_selectedQ3?.Text == "Oui" && _selectedQ2?.Text != "Oui")
+                    {
+                        var dialog = DependencyService.Get<IDialogService>();
+                        dialog.Show("Oups !", "Si vous acceptez d'adhérer, vous devez accepter que l'on vous contacte.", "OK", null);
+                    }
+                    else
+                    {
+                        SurveyEngineManager.Instance.CurrentReply.Firstname = Prenom;
+                        SurveyEngineManager.Instance.CurrentReply.Lastmame = Nom;
+                        SurveyEngineManager.Instance.CurrentReply.Email = Email;
+                        SurveyEngineManager.Instance.CurrentReply.AgreedToStayInContact = (_selectedQ2?.Text == "Oui" ? true : false);
+                        SurveyEngineManager.Instance.CurrentReply.AgreedToContactForJoin = (_selectedQ3?.Text == "Oui" ? true : false);
+                        SurveyEngineManager.Instance.CurrentReply.AgreedToTreatPersonalData = (_selectedQ1?.Text == "Oui" ? true : false);
+
+                        await _nav.PushAsync(new MoreInfosPage(new MoreInfosPageViewModel(_nav)));
+                    }
+
                     //await _nav.PushAsync(new EndPage(new EndPageViewModel(_nav)));
                 }
                 else
@@ -211,7 +219,6 @@ namespace Listen.ViewModels
                     var dialog = DependencyService.Get<IDialogService>();
                     dialog.Show("Oups !", "Merci de renseigner toutes les informations sur cet écran.", "OK", null);
                 }
-
             });
 
         }

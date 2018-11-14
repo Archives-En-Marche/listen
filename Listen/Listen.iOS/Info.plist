@@ -24,7 +24,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>fr.en-marche.jecoute</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.2</string>
+	<string>1.0.3</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIAppFonts</key>

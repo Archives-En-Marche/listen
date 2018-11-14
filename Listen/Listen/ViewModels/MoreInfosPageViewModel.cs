@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight;
 using Listen.Managers;
 using Listen.ViewModels.Tags;
 using Listen.Views;
+using PopolLib.Services;
 using Xamarin.Forms;
 
 namespace Listen.ViewModels
@@ -132,9 +133,15 @@ namespace Listen.ViewModels
             SelectCommand = new Command(SelectAction);
             SoumettreCommand = new Command(async (obj) =>
             {
+                var gender = _selectedGender?.Text;
                 // -- Check
-                //if (_selectedJob != null && _selectedAge != null && _selectedGender != null)
-                //{
+                if (gender != null && gender.Equals("Autre") && string.IsNullOrEmpty(Gender))
+                {
+                    var dialog = DependencyService.Get<IDialogService>();
+                    dialog.Show("Oups !", "Vous devez sélectionner le choix Autre ou ne pas saisir d'autre genre.", "OK", null);
+                }
+                else
+                {
                     SurveyEngineManager.Instance.CurrentReply.PostalCode = PostalCode;
 
                     var labelAge = _resultAges.FirstOrDefault(a => a.Key == _selectedAge?.Text);
@@ -143,19 +150,24 @@ namespace Listen.ViewModels
                     var labelJob = _resultJobs.FirstOrDefault(a => a.Key == _selectedJob?.Text);
                     SurveyEngineManager.Instance.CurrentReply.Profession = labelJob.Value;
 
+                    if (gender == null)
+                    {
+                        SurveyEngineManager.Instance.CurrentReply.Gender = null;
+                        SurveyEngineManager.Instance.CurrentReply.GenderOther = null;
+                    }
+
                     // -- gender
-                    var gender = _selectedGender?.Text;
-                    if (gender == "Féminin")
+                    if (gender != null && gender.Equals("Féminin"))
                     {
                         SurveyEngineManager.Instance.CurrentReply.Gender = "female";
                         SurveyEngineManager.Instance.CurrentReply.GenderOther = null;
                     }
-                    if (gender == "Masculin")
+                    if (gender != null && gender.Equals("Masculin"))
                     {
                         SurveyEngineManager.Instance.CurrentReply.Gender = "male";
                         SurveyEngineManager.Instance.CurrentReply.GenderOther = null;
                     }
-                    if (gender == "Autre")
+                    if (gender != null && gender.Equals("Autre"))
                     {
                         SurveyEngineManager.Instance.CurrentReply.Gender = "other";
                         SurveyEngineManager.Instance.CurrentReply.GenderOther = Gender;
@@ -164,7 +176,7 @@ namespace Listen.ViewModels
                     await SurveyManager.Instance.AddReplyAsync(SurveyEngineManager.Instance.CurrentReply);
                     // -- Navigate
                     await _nav.PushAsync(new EndPage(new EndPageViewModel(_nav)));
-                //}
+                }
             });
 
         }
@@ -190,7 +202,7 @@ namespace Listen.ViewModels
                 case "genders":
                     list = GenderItems.Where(d => d.Text != tag.Text).ToList();
                     _selectedGender = tag;
-                    if (_selectedGender.Text == "AUTRE")
+                    if (_selectedGender.Text.Equals("Autre"))
                     {
                         GenderIsVisible = true;
                     }
