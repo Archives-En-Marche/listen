@@ -45,7 +45,7 @@
                     </OnPlatform>
                 </Label.FontFamily>
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding AccountCommand}" CommandParameter="{Binding .}" />
+                    <TapGestureRecognizer Tapped="Handle_Tapped" />
                 </Label.GestureRecognizers>
             </Label>
         </StackLayout>
