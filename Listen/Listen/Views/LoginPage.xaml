@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White" Padding="0,0,0,20">
-            <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" MinimumHeightRequest="500">
+        <StackLayout BackgroundColor="White" Padding="0,0,0,40">
+            <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" Aspect="AspectFill" MinimumHeightRequest="500">
                 <Image.Source>
                     <OnPlatform x:TypeArguments="ImageSource">
                         <On Platform="iOS">Images/illustration.png</On>
@@ -31,7 +31,7 @@
                     </Label>
                 </StackLayout>
             </ContentView>
-            <Label HeightRequest="18" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,10">
+<!--            <Label HeightRequest="18" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,10">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="PAS ENCORE ADHÉRENT ?" FontSize="12" FontAttributes="Bold" ForegroundColor="{StaticResource brownGrey}" />
@@ -48,6 +48,6 @@
                     <TapGestureRecognizer Tapped="Handle_Tapped" />
                 </Label.GestureRecognizers>
             </Label>
-        </StackLayout>
+-->        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

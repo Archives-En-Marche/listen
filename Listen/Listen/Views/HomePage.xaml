@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.HomePage">
     <ContentPage.Content>
         <StackLayout Padding="0,0,0,20">
-            <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" MinimumHeightRequest="500">
+            <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" Aspect="AspectFill" MinimumHeightRequest="500">
                 <Image.Source>
                     <OnPlatform x:TypeArguments="ImageSource">
                         <On Platform="iOS">Images/illustration.png</On>
