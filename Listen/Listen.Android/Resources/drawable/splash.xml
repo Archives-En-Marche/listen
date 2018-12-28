@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    //Tried different colored layer at bottom level but did not affect
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/veryLightPink"/>
+        </shape>
+    </item>
+
+    //9-patch Logo at the center
+    <item
+        android:drawable="@drawable/ic_launcher"
+        android:gravity="center"/>
+
+</layer-list>
+

@@ -58,9 +58,9 @@ namespace Listen.ViewModels
                 {
                     var list = new ObservableCollection<IFastViewCell>();
                     list.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
-                    list.Add(new UpdateSurveyViewCellViewModel() 
-                    { 
-                        ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync()) 
+                    list.Add(new UpdateSurveyViewCellViewModel()
+                    {
+                        ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync())
                     });
                     Surveys = list;
                 });
@@ -68,16 +68,18 @@ namespace Listen.ViewModels
             else
             {
                 Surveys.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
-                Surveys.Add(new UpdateSurveyViewCellViewModel() 
-                { 
-                    ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync()) 
+                Surveys.Add(new UpdateSurveyViewCellViewModel()
+                {
+                    ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync())
                 });
             }
 
-            Task.Factory.StartNew(async () =>
-            {
-                await SurveyManager.Instance.GetSurveysAsync();
-            });
+            //Task.Factory.StartNew(async () =>
+            //{
+            //    await SurveyManager.Instance.GetSurveysAsync();
+            //});
+
+            var atask = SurveyManager.Instance.GetSurveysAsync();
 
             SelectedCommand = ReactiveCommand.CreateFromTask<IFastViewCell>(async (s) =>
             {
@@ -100,7 +102,7 @@ namespace Listen.ViewModels
                 }
 
             });
-         }
+        }
 
         private void UpdateUI(object obj)
         {

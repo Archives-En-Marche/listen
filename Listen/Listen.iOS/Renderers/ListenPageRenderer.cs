@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Listen.iOS.Renderers;
 using Listen.Views;
 using UIKit;
@@ -19,6 +20,17 @@ namespace Listen.iOS.Renderers
             if (NavigationController == null)
                 return;
 
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.Default, false);
+                GetCurrentViewController().SetNeedsStatusBarAppearanceUpdate();
+                UINavigationBar.Appearance.BarTintColor = Color.FromHex("#eff9ff").ToUIColor();
+                UINavigationBar.Appearance.TintColor = Color.FromHex("#174163").ToUIColor();
+
+                UINavigationBar.Appearance.ShadowImage = new UIImage();
+                UINavigationBar.Appearance.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
+            });
+
             if (Element is IntroPage)
             {
                 this.NavigationController.TopViewController.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(
@@ -28,5 +40,19 @@ namespace Listen.iOS.Renderers
                     }), true);
             }
         }
+
+        UIViewController GetCurrentViewController()
+        {
+            var window = UIApplication.SharedApplication.KeyWindow;
+            var vc = window.RootViewController;
+            while (vc.PresentedViewController != null)
+                vc = vc.PresentedViewController;
+
+            if (vc is UINavigationController navController)
+                vc = navController.ViewControllers.Last();
+
+            return vc;
+        }
+
     }
 }

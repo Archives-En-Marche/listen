@@ -277,6 +277,9 @@ namespace Listen.ViewModels
             if (current <= questions.Count)
             {
                 QuestionLabel = question.Content;
+                // -- Pour tests Multilignes et AutoAdjustFontSize
+                //QuestionLabel = "Normally, the label text is drawn with the font you specify in the font property. If this property is set to true, and the text in the text property exceeds the label’s bounding rectangle, the label reduces the font size until the string fits or the minimum font scale is reached.";
+
                 if (!string.IsNullOrEmpty(question.Type))
                 {
                     if (question.Type.Trim().ToLower() == "simple_field")

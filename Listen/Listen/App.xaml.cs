@@ -10,6 +10,9 @@ using Listen.Services;
 using Listen.ViewModels;
 using Listen.Views;
 using Listen.VisualElements;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using PopolLib.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -42,7 +45,7 @@ namespace Listen
             Settings.AppSettings.AddOrUpdateValue("DB_NAME", "listen.realm");
             Settings.AppSettings.AddOrUpdateValue("APP_VERSION_SCOPE", "jecoute_surveys");
             //Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://staging.en-marche.fr");
-            
+
 
             MainPage = new InternalNavigationPage(new HomePage(this, new HomePageViewModel(this)));
         }
@@ -53,6 +56,7 @@ namespace Listen
             //var hud = DependencyService.Get<IProgressHUD>();
             //LongRunningTaskManager.Instance.StartLongRunningTask();
 
+            Microsoft.AppCenter.AppCenter.Start("ios=be4e0629-f907-4d17-ac6d-05aee551fcf4;" + "android=ad8a4936-f966-49d0-837d-1e4e42a38010", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

@@ -11,7 +11,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using OAuth2Authenticator = Listen.OAuth.OAuth2Authenticator;
 
-[assembly: ExportRenderer(typeof(LoginPage), typeof(LoginPageRenderer))]
+//[assembly: ExportRenderer(typeof(LoginPage), typeof(LoginPageRenderer))]
 namespace Listen.Droid.Renderers
 {
     public class LoginPageRenderer : PageRenderer
@@ -92,20 +92,20 @@ namespace Listen.Droid.Renderers
                     Console.WriteLine(_e.Message);
                 };
 
-                var page = Element as LoginPage;
-                if (page != null)
-                {
-                    var _vm = page.BindingContext as LoginPageViewModel;
-                    if (_vm != null)
-                    {
-                        _vm.ConnectCommand = new Command((obj) =>
-                        {
-                            // This is what actually launches the auth web UI.
-                            activity.StartActivity(auth.GetUI(activity));
-                            done = true;
-                        });
-                    }
-                }
+                //var page = Element as LoginPage;
+                //if (page != null)
+                //{
+                //    var _vm = page.BindingContext as LoginPageViewModel;
+                //    if (_vm != null)
+                //    {
+                //        _vm.ConnectCommand = new Command((obj) =>
+                //        {
+                //            // This is what actually launches the auth web UI.
+                //            activity.StartActivity(auth.GetUI(activity));
+                //            done = true;
+                //        });
+                //    }
+                //}
 
             }
         }

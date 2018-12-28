@@ -20,6 +20,12 @@
     <PackageReference Include="Xamarin.Auth.Extensions" Version="1.6.0.2" />
     <PackageReference Include="ReactiveUI" Version="9.0.1" />
     <PackageReference Include="ReactiveUI.XamForms" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.11.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.11.0" />
+    <PackageReference Include="AppCenter.Analytics.Metrics" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.11.0" />
+    <PackageReference Include="Microsoft.AppCenter" Version="1.11.0" />
+    <PackageReference Include="Microsoft.AppCenter.Push" Version="1.11.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\..\PERSO\PopolLib\PopolLib\PopolLib.csproj" />

@@ -25,7 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <MtouchArch>x86_64</MtouchArch>
+    <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
@@ -112,6 +112,7 @@
     <Compile Include="Renderers\LabelRender\Region.cs" />
     <Compile Include="Tasks\LongRunningTask.cs" />
     <Compile Include="Renderers\ListenPageRenderer.cs" />
+    <Compile Include="Renderers\NoLineNavigationRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

@@ -14,7 +14,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp></NuGetPackageImportStamp>
@@ -96,13 +95,9 @@
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\_icon.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\_icon_round.xml" />
-    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.9.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.9.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.9.png" />
     <AndroidResource Include="Resources\values-v21\styles.xml" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
     <AndroidResource Include="Resources\font\gillsans_regular.ttf" />
-    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.9.png" />
     <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
@@ -124,13 +119,17 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\mic.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\trolley.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\mic.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.9.png" />
     <AndroidResource Include="Resources\drawable-hdpi\winner.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\winner.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\winner.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\winner.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\home.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\home.png" />
+    <AndroidResource Include="Resources\drawable\splash.xml" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

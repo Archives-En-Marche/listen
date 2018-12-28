@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using GalaSoft.MvvmLight;
 using Listen.Managers;
 using Listen.Models.WebServices;
 using Listen.ViewModels;
 using Listen.VisualElements;
+using Microsoft.AppCenter.Crashes;
 using PopolLib.Services;
 using Xamarin.Forms;
 
@@ -35,7 +37,7 @@ namespace Listen.Views
                 Token newtoken;
                 var user = await UserManager.Instance.GetUserAsync();
 
-                await ServerManager.Instance.GetSurveysAsync();
+                //await ServerManager.Instance.GetSurveysAsync();
 
                 var displayLoginPage = false;
 
@@ -55,12 +57,12 @@ namespace Listen.Views
                     // -- On REFRESH AUTO Le TOKEN ?
                     newtoken = await TokenManager.Instance.RefreshTokenAsync(refresh);
 
-                    var infos = await TokenWS.Instance.GetInfoAsync(newtoken?.AccessToken);
-                    if (infos == null)
-                    {
-                        displayLoginPage = true;
-                    }
-                    else 
+                    //var infos = await TokenWS.Instance.GetInfoAsync(newtoken?.AccessToken);
+                    //if (infos == null)
+                    //{
+                    //    displayLoginPage = true;
+                    //}
+                    //else
                     {
                         LongRunningTaskManager.Instance.StartLongRunningTask();
                     }
@@ -73,7 +75,12 @@ namespace Listen.Views
                 if (displayLoginPage)
                 {
                     // -- On présente la page de login
-                    await ((NavigationPage)Application.Current.MainPage).Navigation.PushModalAsync(new InternalNavigationPage(new LoginPage(new LoginPageViewModel(_nav))));
+                    var nav = ((NavigationPage)Application.Current.MainPage).Navigation;
+                    var mstack = nav.ModalStack;
+                    if (mstack.FirstOrDefault(p => p is InternalNavigationPage) == null)
+                    {
+                        await ((NavigationPage)Application.Current.MainPage).Navigation.PushModalAsync(new InternalNavigationPage(new LoginPage(new LoginPageViewModel(_nav))));
+                    }
                 }
 
                 // -- Check App Version
@@ -106,6 +113,7 @@ namespace Listen.Views
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 Debug.WriteLine(ex.Message);
             }
             finally

@@ -48,8 +48,9 @@ namespace Listen.iOS
             UINavigationBar.Appearance.BarTintColor = Color.FromHex("#eff9ff").ToUIColor();
             UINavigationBar.Appearance.TintColor = Color.FromHex("#174163").ToUIColor();
 
+            UINavigationBar.Appearance.SetBackgroundImage(new UIImage(), UIBarPosition.Any ,UIBarMetrics.Default);
             UINavigationBar.Appearance.ShadowImage = new UIImage();
-
+           
             global::Xamarin.Forms.Forms.Init();
 
             MessagingCenter.Subscribe<StartLongRunningTaskMessage>(this, "StartLongRunningTaskMessage", async message => {

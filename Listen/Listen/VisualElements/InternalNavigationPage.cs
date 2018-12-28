@@ -24,7 +24,8 @@ namespace Listen.VisualElements
 
             if (!(child is HomePage))
             {
-                this.BarBackgroundColor = Color.FromHex("#f6fbff");
+                this.BarBackgroundColor = Color.FromHex("#eff9ff");
+                //this.BarBackgroundColor = Color.FromHex("#f6fbff");
                 this.BarTextColor = Color.FromHex("#174163");
             }
             else

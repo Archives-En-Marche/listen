@@ -60,9 +60,6 @@ namespace Listen.ViewModels
 
             NewCommand = new Command(async (obj) =>
             {
-                var frame = (Frame)obj;
-                ButtonAnimationHelper.Animate(frame);
-
                 for (int i = _nav.NavigationStack.Count - 2; i >= 0; i--)
                 {
                     var p = _nav.NavigationStack[i];
@@ -77,9 +74,6 @@ namespace Listen.ViewModels
 
             AllCommand = new Command(async (obj) =>
             {
-                var frame = (Frame)obj;
-                ButtonAnimationHelper.Animate(frame);
-
                 for (int i = _nav.NavigationStack.Count - 2; i >= 0; i--)
                 {
                     var p = _nav.NavigationStack[i];

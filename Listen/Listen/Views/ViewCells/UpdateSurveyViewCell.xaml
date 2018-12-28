@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flv:FastViewCell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:flv="clr-namespace:PopolLib.VisualElements.FastListView;assembly=PopolLib" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.ViewCells.UpdateSurveyViewCell">
     <StackLayout Spacing="0" WidthRequest="313" HorizontalOptions="CenterAndExpand">
-        <ContentView Padding="0,50,0,0" VerticalOptions="Start" WidthRequest="313" HeightRequest="60" HorizontalOptions="Center">
+<!--        <ContentView Padding="0,50,0,0" VerticalOptions="Start" WidthRequest="313" HeightRequest="60" HorizontalOptions="Center">-->
             <visual:ExtendedButton LetterSpacing="0.25"
               Text="ACTUALISER"
               TextColor="{StaticResource battleshipGrey}"
@@ -22,6 +22,6 @@
                     </OnPlatform>
                 </visual:LetterSpacingButton.FontFamily>
             </visual:ExtendedButton>
-        </ContentView>
+<!--        </ContentView>-->
     </StackLayout>
 </flv:FastViewCell>

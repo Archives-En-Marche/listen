@@ -20,6 +20,10 @@ namespace Listen.Managers
                 return lazy.Value;
             }
         }
+        public async Task<Token> GetTokenAsync(string email, string password)
+        {
+            return await TokenWS.Instance.GetTokenAsync(email, password);
+        }
 
         public async Task<Token> RefreshTokenAsync(string refresh_token)
         {

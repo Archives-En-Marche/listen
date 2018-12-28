@@ -6,7 +6,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(ContentPage), typeof(ExtendedPageRenderer))]
+//[assembly: ExportRenderer(typeof(ContentPage), typeof(ExtendedPageRenderer))]
 namespace Listen.iOS.Renderers
 {
     public class ExtendedPageRenderer : PageRenderer

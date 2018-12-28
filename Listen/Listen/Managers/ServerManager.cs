@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace Listen.Managers
 {
-    public class ServerManager 
+    public class ServerManager
     {
         private static readonly Lazy<ServerManager> lazy = new Lazy<ServerManager>(() => new ServerManager());
 
@@ -54,10 +54,16 @@ namespace Listen.Managers
         {
             var list = await SurveyRealm.Instance.GetRepliesAsync();
             var user = await UserRealm.Instance.GetUserAsync();
-            var infos = await TokenWS.Instance.GetInfoAsync(user?.Token);
-
-            var newToken = await TokenManager.Instance.RefreshTokenAsync(user?.RefreshToken);
-            await SurveyWS.Instance.PostRepliesAsync(list, newToken?.AccessToken);
+//            var infos = await TokenWS.Instance.GetInfoAsync(user?.Token);
+//            if (infos != null)
+//            {
+                await SurveyWS.Instance.PostRepliesAsync(list, user?.Token);
+//            }
+//            else
+//            {
+//                var newToken = await TokenManager.Instance.RefreshTokenAsync(user?.RefreshToken);
+//                await SurveyWS.Instance.PostRepliesAsync(list, newToken?.AccessToken);
+//            }
         }
     }
 }

@@ -10,7 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using OAuth2Authenticator = Listen.OAuth.OAuth2Authenticator;
 
-[assembly: ExportRenderer(typeof(LoginPage), typeof(LoginPageRenderer))]
+//[assembly: ExportRenderer(typeof(LoginPage), typeof(LoginPageRenderer))]
 namespace Listen.iOS.Renderers
 {
     public class LoginPageRenderer : PageRenderer
@@ -32,7 +32,7 @@ namespace Listen.iOS.Renderers
                     "jecoute_surveys",
                     new Uri("https://staging.en-marche.fr/oauth/v2/auth"),
                     new Uri("https://staging.en-marche.fr"),
-                    new Uri("https://staging.en-marche.fr/oauth/v2/token"))
+                    new Uri("https://staging.en-marche.fr/oauth/v2/token"), null, false)
                 {
                     ShowErrors = false,
                     AllowCancel = false,
@@ -93,17 +93,19 @@ namespace Listen.iOS.Renderers
                     Debug.WriteLine(e.Message);
                 };
 
+
+
                 var page = Element as LoginPage;
                 if (page != null)
                 {
                     var _vm = page.BindingContext as LoginPageViewModel;
                     if (_vm != null)
                     {
-                        _vm.ConnectCommand = new Command((obj) =>
-                        {
-                            // This is what actually launches the auth web UI.
-                            PresentViewController(auth.GetUI(), true, null);
-                        });
+                        //_vm.ConnectCommand = new Command((obj) =>
+                        //{
+                        //    // This is what actually launches the auth web UI.
+                        //    PresentViewController(auth.GetUI(), true, null);
+                        //});
                     }
                 }
 

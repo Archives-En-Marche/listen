@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Listen.Helpers;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using PopolLib.Enums;
 using PopolLib.Models;
@@ -47,13 +48,15 @@ namespace Listen.Managers
 
                 return result.Data?.FirstOrDefault(s => s.Scope == scope);
             }
-            catch (OperationCanceledException)
+            catch (OperationCanceledException ex)
             {
+                Crashes.TrackError(ex);
                 throw new Exception("TIME_OUT");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+                Crashes.TrackError(ex);
                 throw ex;
             }
         }

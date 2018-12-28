@@ -24,7 +24,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>fr.en-marche.jecoute</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.7</string>
+	<string>1.1.1</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIAppFonts</key>
@@ -83,7 +83,7 @@
 			<key>UILaunchImageMinimumOSVersion</key>
 			<string>8.0</string>
 			<key>UILaunchImageName</key>
-			<string>IiPhone_750x1334</string>
+			<string>iPhone_750x1334</string>
 			<key>UILaunchImageOrientation</key>
 			<string>Portrait</string>
 			<key>UILaunchImageSize</key>
@@ -121,6 +121,6 @@
 		</dict>
 	</array>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>1.1.0</string>
 </dict>
 </plist>

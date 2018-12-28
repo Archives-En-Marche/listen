@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using Listen.ViewModels;
 using Xamarin.Forms;
 
 namespace Listen.Views
@@ -18,9 +19,14 @@ namespace Listen.Views
         }
 
 
-        public void Handle_Tapped(object sender, EventArgs e)
+        //public void Handle_Tapped(object sender, EventArgs e)
+        //{
+        //    this.Navigation.PushAsync(new SubscribePage());
+        //}
+
+        public void Handle_Clicked(object sender, EventArgs e)
         {
-            this.Navigation.PushAsync(new SubscribePage());
+            this.Navigation.PushAsync(new UserLoginPage(new UserLoginPageViewModel(this.Navigation)));
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Listen.Helpers;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -26,27 +27,35 @@ namespace Listen.Models.WebServices
 
         public async Task<UserInfos> GetUserInfosAsync(string token)
         {
-            if (!string.IsNullOrEmpty(token))
+            try
             {
-                var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
-                var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
-                var client = new RestClient(base_url);
-                var request = new RestRequest("/api/me", Method.GET);
-                request.AddHeader("Authorization", "Bearer " + token);
-                var cts = new CancellationTokenSource(timeout);
-                var result = await client.ExecuteTaskAsync(request, cts.Token);
-
-                if (result.StatusCode == HttpStatusCode.OK)
+                if (!string.IsNullOrEmpty(token))
                 {
-                    return JsonConvert.DeserializeObject<UserInfos>(result.Content);
+                    var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
+                    var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
+                    var client = new RestClient(base_url);
+                    var request = new RestRequest("/api/me", Method.GET);
+                    request.AddHeader("Authorization", "Bearer " + token);
+                    var cts = new CancellationTokenSource(timeout);
+                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+
+                    if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        return JsonConvert.DeserializeObject<UserInfos>(result.Content);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
                     return null;
                 }
             }
-            else
+            catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 return null;
             }
         }

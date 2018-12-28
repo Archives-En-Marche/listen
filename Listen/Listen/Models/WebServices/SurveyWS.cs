@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Listen.Helpers;
 using Listen.Managers;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -29,69 +30,84 @@ namespace Listen.Models.WebServices
 
         public async Task<List<Survey>> GetSurveysAsync(string token)
         {
-            if (!string.IsNullOrEmpty(token))
+            try
             {
-                var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
-                var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
-                var client = new RestClient(base_url);
-                var request = new RestRequest("/api/jecoute/survey", Method.GET);
-                request.AddHeader("Authorization", "Bearer " + token);
-                var cts = new CancellationTokenSource(timeout);
-                var result = await client.ExecuteTaskAsync(request, cts.Token);
-
-                if (result.StatusCode == HttpStatusCode.OK)
+                if (!string.IsNullOrEmpty(token))
                 {
-                    return JsonConvert.DeserializeObject<List<Survey>>(result.Content);
+                    var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
+                    var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
+                    var client = new RestClient(base_url);
+                    var request = new RestRequest("/api/jecoute/survey", Method.GET);
+                    request.AddHeader("Authorization", "Bearer " + token);
+                    var cts = new CancellationTokenSource(timeout);
+                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+
+                    if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        return JsonConvert.DeserializeObject<List<Survey>>(result.Content);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
                     return null;
                 }
             }
-            else
+            catch(Exception ex)
             {
+                Crashes.TrackError(ex);
                 return null;
             }
         }
 
         public async Task PostRepliesAsync(IList<RealmObjects.Reply> list, string token)
         {
-            if (!string.IsNullOrEmpty(token))
+            try
             {
-                var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
-                var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
-                var client = new RestClient(base_url);
-
-                Debug.WriteLine("Token : " + token);
-
-                foreach (var s in list)
+                if (!string.IsNullOrEmpty(token))
                 {
-                    var request = new RestRequest("/api/jecoute/survey/reply", Method.POST);
-                    request.AddHeader("Authorization", "Bearer " + token);
-                    request.AddHeader("Accept", "application/json");
-                    request.AddHeader("Content-Type", "application/json");
-                    request.RequestFormat = DataFormat.Json;
-                    var cts = new CancellationTokenSource(timeout);
-                    request.AddParameter("text/plain", s.Answer, ParameterType.RequestBody);
-                    //request.AddJsonBody(s.Answer);
+                    var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
+                    var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
+                    var client = new RestClient(base_url);
 
-                    var result = await client.ExecuteTaskAsync(request, cts.Token);
-                    if (result.StatusCode == HttpStatusCode.Created)
-                    {
-                        // -- on update la bdd
-                        await SurveyManager.Instance.SetUploaded(s, true);
-                        Debug.WriteLine("Success : " + s.Answer);
-                    }
-                    else
-                    {
-                        Debug.WriteLine("KO : " + s.Answer);
-                    }
+                    Debug.WriteLine("Token : " + token);
 
+                    foreach (var s in list)
+                    {
+                        var request = new RestRequest("/api/jecoute/survey/reply", Method.POST);
+                        request.AddHeader("Authorization", "Bearer " + token);
+                        request.AddHeader("Accept", "application/json");
+                        request.AddHeader("Content-Type", "application/json");
+                        request.RequestFormat = DataFormat.Json;
+                        var cts = new CancellationTokenSource(timeout);
+                        request.AddParameter("text/plain", s.Answer, ParameterType.RequestBody);
+                        //request.AddJsonBody(s.Answer);
+
+                        var result = await client.ExecuteTaskAsync(request, cts.Token);
+                        if (result.StatusCode == HttpStatusCode.Created)
+                        {
+                            // -- on update la bdd
+                            await SurveyManager.Instance.SetUploaded(s, true);
+                            Debug.WriteLine("Success : " + s.Answer);
+                        }
+                        else
+                        {
+                            Debug.WriteLine("KO : " + s.Answer);
+                        }
+
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("KO : Empty Token");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Debug.WriteLine("KO : Empty Token");
+                Crashes.TrackError(ex);
             }
         }
     }

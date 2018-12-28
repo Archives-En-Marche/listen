@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Listen.Helpers;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -25,64 +26,129 @@ namespace Listen.Models.WebServices
             }
         }
 
-        public async Task<TokenInfo> GetInfoAsync(string token)
+        public async Task<Token> GetTokenAsync(string email, string password)
         {
-            if (!string.IsNullOrEmpty(token))
+            try
             {
-                var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
-                var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
-                var client = new RestClient(base_url);
-                var request = new RestRequest("/oauth/v2/tokeninfo?access_token=" + token, Method.GET);
-
-                var cts = new CancellationTokenSource(timeout);
-                var result = await client.ExecuteTaskAsync(request, cts.Token);
-
-                if (result.StatusCode == HttpStatusCode.OK)
+                if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
                 {
-                    return JsonConvert.DeserializeObject<TokenInfo>(result.Content);
+                    var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
+                    var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
+                    var client_id = Settings.AppSettings.GetValueOrDefault("client_id", "");
+                    var client_secret = Settings.AppSettings.GetValueOrDefault("client_secret", "");
+                    var scope = Settings.AppSettings.GetValueOrDefault("APP_VERSION_SCOPE", "");
+
+                    var client = new RestClient(base_url);
+                    var request = new RestRequest("/oauth/v2/token", Method.POST);
+
+                    request.AddParameter("client_id", client_id);
+                    request.AddParameter("client_secret", client_secret);
+                    request.AddParameter("grant_type", "password");
+                    request.AddParameter("scope", scope);
+                    request.AddParameter("username", email);
+                    request.AddParameter("password", password);
+
+                    var cts = new CancellationTokenSource(timeout);
+                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+
+                    if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        return JsonConvert.DeserializeObject<Token>(result.Content);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
-            else
+            catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 return null;
             }
         }
 
-        public async Task<Token> RefreshTokenAsync(string refresh_token)
+        public async Task<TokenInfo> GetInfoAsync(string token)
         {
-            if (!string.IsNullOrEmpty(refresh_token))
+            try
             {
-                var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
-                var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
-                var client_id = Settings.AppSettings.GetValueOrDefault("client_id", "");
-                var client_secret = Settings.AppSettings.GetValueOrDefault("client_secret", "");
-
-                var client = new RestClient(base_url);
-                var request = new RestRequest("/oauth/v2/token", Method.POST);
-
-                request.AddParameter("client_id", client_id);
-                request.AddParameter("client_secret", client_secret);
-                request.AddParameter("grant_type", "refresh_token");
-                request.AddParameter("refresh_token", refresh_token);
-                var cts = new CancellationTokenSource(timeout);
-                var result = await client.ExecuteTaskAsync(request, cts.Token);
-                if (result.StatusCode == HttpStatusCode.OK)
+                if (!string.IsNullOrEmpty(token))
                 {
-                    return JsonConvert.DeserializeObject<Token>(result.Content); ;
+                    var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
+                    var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
+                    var client = new RestClient(base_url);
+                    var request = new RestRequest("/oauth/v2/tokeninfo?access_token=" + token, Method.GET);
+
+                    var cts = new CancellationTokenSource(timeout);
+                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+
+                    if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        return JsonConvert.DeserializeObject<TokenInfo>(result.Content);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
                     return null;
                 }
-                    ;
             }
-            else
+            catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 return null;
+            }
+        }
+
+        static SemaphoreSlim readWrite = new SemaphoreSlim(1, 1);
+
+        public async Task<Token> RefreshTokenAsync(string refresh_token)
+        {
+            await readWrite.WaitAsync();
+            try
+            {
+                if (!string.IsNullOrEmpty(refresh_token))
+                {
+                    var base_url = Settings.AppSettings.GetValueOrDefault("WS_BASE_URL", "");
+                    var timeout = Settings.AppSettings.GetValueOrDefault("WS_TIME_OUT", 0);
+                    var client_id = Settings.AppSettings.GetValueOrDefault("client_id", "");
+                    var client_secret = Settings.AppSettings.GetValueOrDefault("client_secret", "");
+
+                    var client = new RestClient(base_url);
+                    var request = new RestRequest("/oauth/v2/token", Method.POST);
+
+                    request.AddParameter("client_id", client_id);
+                    request.AddParameter("client_secret", client_secret);
+                    request.AddParameter("grant_type", "refresh_token");
+                    request.AddParameter("refresh_token", refresh_token);
+                    var cts = new CancellationTokenSource(timeout);
+                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+                    if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        return JsonConvert.DeserializeObject<Token>(result.Content); ;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                return null;
+            }
+            finally
+            {
+                readWrite.Release();
             }
         }
     }
