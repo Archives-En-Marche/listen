@@ -30,15 +30,18 @@ namespace Listen.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            MessagingCenter.Subscribe<StartLongRunningTaskMessage>(this, "StartLongRunningTaskMessage", message => {
+            MessagingCenter.Subscribe<StartLongRunningTaskMessage>(this, "StartLongRunningTaskMessage", message =>
+            {
                 var intent = new Intent(this, typeof(LongRunningTaskService));
                 var parcelable = new UploadLongRunningTaskParcelable();
                 parcelable.Task = new UploadLongRunningTask();
                 intent.PutExtra("task", parcelable);
-                StartService(intent);
+                //StartService(intent);
+                LongRunningTaskService.EnqueueWork(this, intent);
             });
 
-            MessagingCenter.Subscribe<StopLongRunningTaskMessage>(this, "StopLongRunningTaskMessage", message => {
+            MessagingCenter.Subscribe<StopLongRunningTaskMessage>(this, "StopLongRunningTaskMessage", message =>
+            {
                 var intent = new Intent(this, typeof(LongRunningTaskService));
                 StopService(intent);
             });
@@ -59,5 +62,7 @@ namespace Listen.Droid
 
             LoadApplication(new App());
         }
+
+
     }
 }

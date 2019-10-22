@@ -4,11 +4,12 @@ using GalaSoft.MvvmLight;
 using Listen.Contracts;
 using Listen.Managers;
 using Listen.ViewModels;
+using Listen.VisualElements;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class QuestionPage : ContentPage
+    public partial class QuestionPage : SoftInputPage
     {
         public QuestionPage(ViewModelBase vm)
         {

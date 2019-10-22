@@ -28,23 +28,26 @@ namespace Listen.Managers
             }
         }
 
-        public async Task<IList<Survey>> GetSurveysAsync()
-        {
-            var list = await SurveyRealm.Instance.GetSurveysAsync();
-            if (list?.Count == 0)
-            {
-                // -- On chage les surveys
-                await ServerManager.Instance.GetSurveysAsync();
-                var _list = await SurveyRealm.Instance.GetSurveysAsync();
-                MessagingCenter.Send<SurveyManager, IList<Survey>>(this, "UpdateUI", _list);
-                return _list;
-            }
-            else
-            {
-                MessagingCenter.Send<SurveyManager, IList<Survey>>(this, "UpdateUI", list);
-                return list;
-            }
-        }
+        //public async Task<IList<Survey>> GetSurveysAsync()
+        //{
+        //    await ServerManager.Instance.GetSurveysAsync();
+        //    var list = await SurveyRealm.Instance.GetSurveysAsync();
+        //    if (list?.Count == 0)
+        //    {
+        //        // -- On charge les surveys
+        //        await ServerManager.Instance.GetSurveysAsync();
+        //        var _list = await SurveyRealm.Instance.GetSurveysAsync();
+        //        _list = _list.OrderByDescending(o => o.Type == "national").ToList();
+        //        MessagingCenter.Send<SurveyManager, IList<Survey>>(this, "UpdateUI", _list);
+        //        return _list;
+        //    }
+        //    else
+        //    {
+        //        list = list.OrderByDescending(o => o.Type == "national").ToList();
+        //        MessagingCenter.Send<SurveyManager, IList<Survey>>(this, "UpdateUI", list);
+        //        return list;
+        //    }
+        //}
 
         public async Task AddOrUpdateAsync(IList<Models.WebServices.Survey> surveys) => await SurveyRealm.Instance.AddOrUpdateAsync(surveys);
 

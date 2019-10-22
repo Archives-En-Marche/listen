@@ -24,10 +24,18 @@ namespace Listen.Models.RealmAccess
             }
         }
 
+        static string db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+
+        // -- Ajout du champs Type sur Survey => SchemaVersion = 1
+        RealmConfiguration config = new RealmConfiguration(db_name)
+        {
+            SchemaVersion = 1
+        };
+
+
         public async Task AddOrUpdateAsync(string lastname, string firstname, string mail, string country, string zipcode, string uuid, string token, string refreshtoken)
         {
-            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-            var realm = Realm.GetInstance(db_name);
+             var realm = Realm.GetInstance(config);
 
             var users = realm.All<User>();
             if (users.Count() == 0) // -- ADD
@@ -117,8 +125,7 @@ namespace Listen.Models.RealmAccess
 
         public async Task UpdateTokenAsync(Token token)
         {
-            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-            var realm = Realm.GetInstance(db_name);
+            var realm = Realm.GetInstance(config);
 
             var users = realm.All<User>();
             var user = users.FirstOrDefault();
@@ -139,8 +146,7 @@ namespace Listen.Models.RealmAccess
         {
             return await Task.Factory.StartNew(() =>
             {
-                var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-                using (var realm = Realm.GetInstance(db_name))
+                 using (var realm = Realm.GetInstance(config))
                 {
                     var users = realm.All<User>();
                     var user = users.FirstOrDefault();
@@ -151,8 +157,7 @@ namespace Listen.Models.RealmAccess
 
         public User GetUser()
         {
-            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-            using (var realm = Realm.GetInstance(db_name))
+            using (var realm = Realm.GetInstance(config))
             {
                 var users = realm.All<User>();
                 var user = users.FirstOrDefault();
@@ -162,8 +167,7 @@ namespace Listen.Models.RealmAccess
 
         public async Task DeleteUserAsync()
         {
-            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-            var realm = Realm.GetInstance(db_name);
+            var realm = Realm.GetInstance(config);
             await realm.WriteAsync(r =>
             {
                 r.RemoveAll<User>();

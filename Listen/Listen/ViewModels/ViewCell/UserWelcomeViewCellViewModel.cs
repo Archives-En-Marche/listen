@@ -11,10 +11,17 @@ namespace Listen.ViewModels.ViewCell
 
         public string Departement { get; set; }
 
-        public UserWelcomeViewCellViewModel(string fullname, string dept)
+        public UserWelcomeViewCellViewModel(string fullname, string dept, bool hasSurvey = true)
         {
             Fullname = "Bonjour " + fullname + ",";
-            Departement = "Voici les questionnaires disponibles dans votre département (" + dept + "). ";
+            if (hasSurvey)
+            {
+                Departement = "Voici les questionnaires disponibles dans votre département (" + dept + "). ";
+            }
+            else
+            {
+                Departement = "Aucun questionnaire disponible actuellement dans votre département (" + dept + "). ";
+            }
         }
 
         public DataTemplate ItemTemplate { get => new DataTemplate(typeof(UserWelcomeViewCell)); set => throw new NotImplementedException(); }

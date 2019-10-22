@@ -181,6 +181,10 @@ namespace Listen.ViewModels
 
                         var list = new List<string>();
 
+                        // -- Evite doublons sur Android - Return Back Button
+                        SurveyEngineManager.Instance.CurrentReply.Answers.Remove(
+                            SurveyEngineManager.Instance.CurrentReply.Answers.FirstOrDefault(q => q.SurveyQuestion == question.Id)
+                            );
                         SurveyEngineManager.Instance.CurrentReply.Answers.Add(new Answer()
                         {
                             SurveyQuestion = question.Id,
@@ -274,7 +278,7 @@ namespace Listen.ViewModels
 
             NextButtonColor = Color.FromHex("#ffeae0");
 
-            if (current <= questions.Count)
+            if (question != null && current <= questions.Count)
             {
                 QuestionLabel = question.Content;
                 // -- Pour tests Multilignes et AutoAdjustFontSize

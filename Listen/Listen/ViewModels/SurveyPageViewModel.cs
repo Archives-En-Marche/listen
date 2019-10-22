@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Listen.Models.RealmObjects;
 using Listen.Views;
 using PopolLib.Contracts.FastListView;
+using System.Reactive;
 
 namespace Listen.ViewModels
 {
@@ -34,20 +35,11 @@ namespace Listen.ViewModels
             }
         }
 
-        public ReactiveCommand SelectedCommand { get; set; }
+        public ReactiveCommand<IFastViewCell, Unit> SelectedCommand { get; set; }
 
         public SurveyPageViewModel(INavigation nav, IList<Survey> surveys)
         {
             _nav = nav;
-
-            MessagingCenter.Subscribe<SurveyManager, IList<Survey>>(this, "UpdateUI", (sender, arg) =>
-            {
-                UpdateUI(arg);
-                if (Device.RuntimePlatform == Device.Android)
-                {
-                    MessagingCenter.Unsubscribe<SurveyManager, IList<Survey>>(this, "UpdateUI");
-                }
-            });
 
             var user = UserManager.Instance.GetUser();
 
@@ -60,7 +52,24 @@ namespace Listen.ViewModels
                     list.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
                     list.Add(new UpdateSurveyViewCellViewModel()
                     {
-                        ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync())
+                        ActualiserCommand = new Command(async () =>
+                        {
+                            var _list = await ServerManager.Instance.GetSurveysAsync();
+                            if (_list == null)
+                            {
+                                Debug.WriteLine("[TOKEN_ERROR]");
+                                // -- On delete le user en base
+                                await UserManager.Instance.DeleteUserAsync();
+                                Device.BeginInvokeOnMainThread(async () =>
+                                {
+                                    await _nav.PopToRootAsync();
+                                });
+                            }
+                            else
+                            {
+                                UpdateUI(_list);
+                            }
+                        })
                     });
                     Surveys = list;
                 });
@@ -70,16 +79,45 @@ namespace Listen.ViewModels
                 Surveys.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
                 Surveys.Add(new UpdateSurveyViewCellViewModel()
                 {
-                    ActualiserCommand = new Command(async () => await SurveyManager.Instance.GetSurveysAsync())
+                    ActualiserCommand = new Command(async () =>
+                    {
+                        var list = await ServerManager.Instance.GetSurveysAsync();
+                        if (list == null)
+                        {
+                            Debug.WriteLine("[TOKEN_ERROR]");
+                            // -- On delete le user en base
+                            await UserManager.Instance.DeleteUserAsync();
+                            Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                await _nav.PopToRootAsync();
+                            });
+                        }
+                        else
+                        {
+                            UpdateUI(list);
+                        }
+                    })
                 });
             }
 
-            //Task.Factory.StartNew(async () =>
-            //{
-            //    await SurveyManager.Instance.GetSurveysAsync();
-            //});
-
-            var atask = SurveyManager.Instance.GetSurveysAsync();
+            Task.Factory.StartNew(async () =>
+            {
+                var list = await ServerManager.Instance.GetSurveysAsync();
+                if (list == null)
+                {
+                    Debug.WriteLine("[TOKEN ERROR]");
+                    // -- On delete le user en base
+                    await UserManager.Instance.DeleteUserAsync();
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await _nav.PopToRootAsync();
+                    });
+                }
+                else
+                {
+                    UpdateUI(list);
+                }
+            });
 
             SelectedCommand = ReactiveCommand.CreateFromTask<IFastViewCell>(async (s) =>
             {
@@ -94,10 +132,20 @@ namespace Listen.ViewModels
                     }
                 }
                 {
-                    //vm.ActualiserCommand.Execute(null);
                     if (s is UpdateSurveyViewCellViewModel vm)
                     {
-                        await SurveyManager.Instance.GetSurveysAsync();
+                        var list = await ServerManager.Instance.GetSurveysAsync();
+                        if (list == null)
+                        {
+                            Debug.WriteLine("[TOKEN ERROR]");
+                            // -- On delete le user en base
+                            await UserManager.Instance.DeleteUserAsync();
+                            Device.BeginInvokeOnMainThread(async () =>
+                                                        {
+                                                            await _nav.PopToRootAsync();
+                                                        });
+
+                        }
                     }
                 }
 
@@ -108,35 +156,53 @@ namespace Listen.ViewModels
         {
             Observable.FromAsync<ObservableCollection<IFastViewCell>>(async () =>
             {
-                await Task.Delay(500);
-                var user = await UserManager.Instance.GetUserAsync();
-                if (string.IsNullOrEmpty(user.FirstName) || string.IsNullOrEmpty(user.ZipCode))
+                try
                 {
-                    await ServerManager.Instance.GetUserInfosAsync(user.Token);
-                    user = await UserManager.Instance.GetUserAsync();
-                }
-                var list = new ObservableCollection<IFastViewCell>();
-                list.Add(new UserWelcomeViewCellViewModel(user.FirstName, user.ZipCode.Substring(0, 2)));
-                //var surveys = await SurveyManager.Instance.GetSurveysAsync();
-                var surveys = (IList<Survey>)obj;
-                if (surveys?.Count > 0)
-                {
-                    foreach (var s in surveys)
+                    await Task.Delay(500);
+                    var user = await UserManager.Instance.GetUserAsync();
+                    if (string.IsNullOrEmpty(user.FirstName) || string.IsNullOrEmpty(user.ZipCode))
                     {
-                        list.Add(new SurveyViewCellViewModel(s));
+                        await ServerManager.Instance.GetUserInfosAsync(user.Token);
+                        user = await UserManager.Instance.GetUserAsync();
                     }
+                    var surveys = (IList<Survey>)obj;
+                    var list = new ObservableCollection<IFastViewCell>();
+                    list.Add(new UserWelcomeViewCellViewModel(user.FirstName, user.ZipCode.Substring(0, 2), surveys?.Count > 0));
+                    //var surveys = await SurveyManager.Instance.GetSurveysAsync();
+                    if (surveys?.Count > 0)
+                    {
+                        foreach (var s in surveys)
+                        {
+                            list.Add(new SurveyViewCellViewModel(s));
+                        }
+                    }
+                    return list;
                 }
-                return list;
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return null;
+                }
             })
             .ObserveOn(RxApp.MainThreadScheduler)
             .Subscribe(list =>
             {
-                var start = DateTime.Now;
+                try
+                {
+                    if (list.Count > 0)
+                    {
+                        var start = DateTime.Now;
 
-                Surveys = list;
+                        Surveys = list;
 
-                var stop = DateTime.Now;
-                Debug.WriteLine("Diff : " + (stop - start).TotalMilliseconds.ToString());
+                        var stop = DateTime.Now;
+                        Debug.WriteLine("Diff : " + (stop - start).TotalMilliseconds.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
             });
         }
     }

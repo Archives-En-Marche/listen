@@ -29,12 +29,19 @@ namespace Listen.Models.RealmAccess
             }
         }
 
+        static string  db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
+
+        // -- Ajout du champs Type sur Survey => SchemaVersion = 1
+        RealmConfiguration config = new RealmConfiguration(db_name)
+        {
+            SchemaVersion = 1
+        };
+
         public async Task<IList<SurveyRealmObject>> GetSurveysAsync()
         {
             return await Task<IList<SurveyRealmObject>>.Factory.StartNew(() =>
-            {
-                var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-                var realm = Realm.GetInstance(db_name);
+            { 
+                var realm = Realm.GetInstance(config);
                 var all = realm.All<SurveyRealmObject>();
                 return all.ToList().Clone();
             });
@@ -42,8 +49,7 @@ namespace Listen.Models.RealmAccess
 
         public async Task AddOrUpdateAsync(IList<WebServices.Survey> surveys)
         {
-            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-            var realm = Realm.GetInstance(db_name);
+            var realm = Realm.GetInstance(config);
 
             var all = realm.All<SurveyRealmObject>();
 
@@ -65,6 +71,7 @@ namespace Listen.Models.RealmAccess
                         {
                             Uuid = s.Id,
                             Name = s.Name,
+                            Type = s.Type,
                             Questions = JsonConvert.SerializeObject(s.Questions),
                         };
                         r.Add(_s);
@@ -76,8 +83,7 @@ namespace Listen.Models.RealmAccess
 
         public async Task AddReplyAsync(Reply reply)
         {
-            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-            var realm = Realm.GetInstance(db_name);
+            var realm = Realm.GetInstance(config);
 
             await realm.WriteAsync(r =>
             {
@@ -96,8 +102,7 @@ namespace Listen.Models.RealmAccess
         {
             return await Task.Factory.StartNew(() =>
             {
-                var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-                var realm = Realm.GetInstance(db_name);
+               var realm = Realm.GetInstance(config);
                 var list = realm.All<RealmObjects.Reply>().Where(r => r.Uploading == false).ToList();
                 return list.Clone();
             });
@@ -105,8 +110,7 @@ namespace Listen.Models.RealmAccess
 
         public async Task SetUploaded(Models.RealmObjects.Reply reply, bool uploaded)
         {
-            var db_name = Settings.AppSettings.GetValueOrDefault("DB_NAME", "");
-            var realm = Realm.GetInstance(db_name);
+            var realm = Realm.GetInstance(config);
 
             await realm.WriteAsync(r =>
             {

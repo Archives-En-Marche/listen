@@ -15,12 +15,12 @@
               SelectedTextColor="White"
               Command="{Binding ActualiserCommand}"
               CornerRadius="4">
-                <visual:LetterSpacingButton.FontFamily>
+                <visual:ExtendedButton.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <On Platform="iOS">Roboto</On>
                         <On Platform="Android">Roboto-Bold.ttf</On>
                     </OnPlatform>
-                </visual:LetterSpacingButton.FontFamily>
+                </visual:ExtendedButton.FontFamily>
             </visual:ExtendedButton>
 <!--        </ContentView>-->
     </StackLayout>

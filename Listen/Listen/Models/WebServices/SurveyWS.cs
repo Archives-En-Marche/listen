@@ -141,6 +141,9 @@ namespace Listen.Models.WebServices
         [JsonProperty("id")]
         public string Id { get; set; }
 
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
         [JsonProperty("questions")]
         public IList<Question> Questions { get; set; }
 
@@ -152,6 +155,9 @@ namespace Listen.Models.WebServices
     {
         [JsonProperty("survey")]
         public string Survey { get; set; }
+
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
         [JsonProperty("lastName")]
         public string Lastmame { get; set; }

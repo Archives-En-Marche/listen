@@ -23,8 +23,6 @@
 	<string>J&apos;écoute</string>
 	<key>CFBundleIdentifier</key>
 	<string>fr.en-marche.jecoute</string>
-	<key>CFBundleVersion</key>
-	<string>1.1.1</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIAppFonts</key>
@@ -121,6 +119,8 @@
 		</dict>
 	</array>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.0</string>
+	<string>1.1.6</string>
+	<key>CFBundleVersion</key>
+	<string>103</string>
 </dict>
 </plist>
