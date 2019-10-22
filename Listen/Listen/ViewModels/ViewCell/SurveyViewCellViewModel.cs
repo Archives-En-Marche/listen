@@ -18,6 +18,8 @@ namespace Listen.ViewModels.ViewCell
 
         public Survey Survey { get; set; }
 
+        public bool IsNational { get; set; }
+
         public SurveyViewCellViewModel(Survey survey)
         {
             Text = survey.Name;
@@ -26,6 +28,8 @@ namespace Listen.ViewModels.ViewCell
             Count = questions?.Count.ToString() + " questions";
 
             Survey = survey;
+
+            IsNational = survey.Type == "national" ? true : false;
         }
 
         public DataTemplate ItemTemplate { get => new DataTemplate(typeof(SurveyViewCell)); set => throw new NotImplementedException(); }

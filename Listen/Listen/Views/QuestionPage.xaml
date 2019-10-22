@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:tev="clr-namespace:PopolLib.VisualElements.TagEntryView;assembly=PopolLib" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:conv="clr-namespace:PopolLib.Converters;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.QuestionPage">
+<lvisual:SoftInputPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:tev="clr-namespace:PopolLib.VisualElements.TagEntryView;assembly=PopolLib"
+    xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
+    xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen"
+    xmlns:conv="clr-namespace:PopolLib.Converters;assembly=PopolLib"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.QuestionPage">
     <ContentPage.Content>
         <ScrollView>
             <Grid Padding="20,38,20,20" HorizontalOptions="CenterAndExpand" RowSpacing="0" ColumnSpacing="0">
@@ -23,7 +29,7 @@
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
                             <visual:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
-                                <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand">
+                                <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
                                             <On Platform="iOS">Roboto</On>
@@ -46,16 +52,16 @@
                         </OnPlatform>
                     </Editor.FontFamily>
                 </Editor>
-                <visual:ExtendedButton Padding="0,30,0,0" LetterSpacing="0.25" Text="CONTINUER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="313" HeightRequest="60" BackgroundColor="{Binding NextButtonColor}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
+                <visual:ExtendedButton Margin="0,30,0,0" LetterSpacing="0.25" Text="CONTINUER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{Binding NextButtonColor}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
                     SelectedTextColor="White" CornerRadius="4" Grid.Row="2" VerticalOptions="EndAndExpand" Command="{Binding NextQuestion}">
-                    <visual:LetterSpacingButton.FontFamily>
+                    <visual:ExtendedButton.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
                             <On Platform="Android">Roboto-Bold.ttf</On>
                         </OnPlatform>
-                    </visual:LetterSpacingButton.FontFamily>
+                    </visual:ExtendedButton.FontFamily>
                 </visual:ExtendedButton>
             </Grid>
         </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:SoftInputPage>

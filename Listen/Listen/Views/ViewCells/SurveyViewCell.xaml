@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flv:FastViewCell xmlns="http://xamarin.com/schemas/2014/forms"
   xmlns:flv="clr-namespace:PopolLib.VisualElements.FastListView;assembly=PopolLib"
+                  xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   x:Class="Listen.Views.ViewCells.SurveyViewCell">
-    <StackLayout Spacing="26" Padding="30,22,20,22" Orientation="Horizontal" HeightRequest="42" BackgroundColor="White">
+    <StackLayout Spacing="26" Padding="20,12,20,12" HeightRequest="60" Orientation="Horizontal" BackgroundColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
         <Image VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="17" HeightRequest="29">
             <Image.Source>
                 <OnPlatform x:TypeArguments="ImageSource">
@@ -12,7 +13,7 @@
                 </OnPlatform>
             </Image.Source>
         </Image>
-        <StackLayout BackgroundColor="White" HeightRequest="42" VerticalOptions="Center">
+        <StackLayout BackgroundColor="White" VerticalOptions="CenterAndExpand">
             <Label FontSize="18" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" HorizontalTextAlignment="Start" Text="{Binding Text}" TextColor="Black">
                 <Label.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
@@ -30,5 +31,15 @@
                 </Label.FontFamily>
             </Label>
         </StackLayout>
+        <visual:RoundedStackLayout Padding="5" BackgroundColor="{StaticResource brownishGrey}" CornerRadius="5" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand" IsVisible="{Binding IsNational}">
+            <visual:LetterSpacingLabel LetterSpacing="0" FontSize="8" Text="NATIONAL" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <visual:LetterSpacingLabel.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS">Roboto</On>
+                        <On Platform="Android">Roboto-Bold.ttf</On>
+                    </OnPlatform>
+                </visual:LetterSpacingLabel.FontFamily>
+            </visual:LetterSpacingLabel>
+        </visual:RoundedStackLayout>
     </StackLayout>
 </flv:FastViewCell>

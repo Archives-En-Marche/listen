@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Listen.Models.RealmAccess;
+using Listen.Models.RealmObjects;
 using Listen.Models.WebServices;
 using Listen.ViewModels;
 using Newtonsoft.Json;
@@ -25,7 +27,7 @@ namespace Listen.Managers
             }
         }
 
-        public async Task<List<Survey>> GetSurveysAsync()
+        public async Task<IList<Models.RealmObjects.Survey>> GetSurveysAsync()
         {
             string token = "";
             var user = await UserManager.Instance.GetUserAsync();
@@ -37,10 +39,21 @@ namespace Listen.Managers
                 var newtoken = await TokenManager.Instance.RefreshTokenAsync(user?.RefreshToken);
                 token = newtoken?.AccessToken;
             }
-            var list = await SurveyWS.Instance.GetSurveysAsync(token);
-            await SurveyManager.Instance.AddOrUpdateAsync(list);
-            MessagingCenter.Send<ServerManager, IList<Survey>>(this, "UpdateUI", list);
-            return list;
+
+            //token = null; // -- TEST
+
+            if (token != null)
+            {
+                var list = await SurveyWS.Instance.GetSurveysAsync(token);
+                await SurveyManager.Instance.AddOrUpdateAsync(list);
+                var _list = await SurveyRealm.Instance.GetSurveysAsync();
+                _list = _list.OrderByDescending(o => o.Type == "national").ToList();
+                return _list;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public async Task<UserInfos> GetUserInfosAsync(string token)

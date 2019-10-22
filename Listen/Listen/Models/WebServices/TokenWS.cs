@@ -129,7 +129,7 @@ namespace Listen.Models.WebServices
                     var result = await client.ExecuteTaskAsync(request, cts.Token);
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
-                        return JsonConvert.DeserializeObject<Token>(result.Content); ;
+                        return JsonConvert.DeserializeObject<Token>(result.Content);
                     }
                     else
                     {

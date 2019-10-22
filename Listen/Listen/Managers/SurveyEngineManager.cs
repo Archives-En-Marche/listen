@@ -51,6 +51,7 @@ namespace Listen.Managers
 
             CurrentReply = new Reply();
             CurrentReply.Survey = CurrentSurvey.Uuid;
+            CurrentReply.Type = CurrentSurvey.Type;
             CurrentReply.Answers = new List<Answer>();
         }
 
@@ -59,6 +60,7 @@ namespace Listen.Managers
             _pos = -1;
             CurrentReply = new Reply();
             CurrentReply.Survey = CurrentSurvey.Uuid;
+            CurrentReply.Type = CurrentSurvey.Type;
             CurrentReply.Answers = new List<Answer>();
         }
 

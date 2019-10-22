@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.1" package="fr.en-marche.jecoute" android:versionCode="2">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
-	<provider android:name="android.support.v4.content.FileProvider" android:authorities="fr.edecision.listen.fileprovider" android:exported="false" android:grantUriPermissions="true">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.1.7" package="fr.en-marche.jecoute" android:versionCode="9">
+	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="28" />
+	<!-- <provider android:name="android.support.v4.content.FileProvider" android:authorities="fr.edecision.listen.fileprovider" android:exported="false" android:grantUriPermissions="true">
 		<meta-data android:name="android.support.fr.edecision.parisetmoi" android:resource="@xml/file_paths"></meta-data>
-	</provider>
-	<application android:icon="@mipmap/icon" android:label="J'écoute"></application>
+	</provider> -->
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<application android:icon="@mipmap/icon" android:label="J'écoute">
+		<uses-library android:name="org.apache.http.legacy" android:required="false" />
+		<service android:name=".LongRunningTaskService" android:permission="android.permission.BIND_JOB_SERVICE" />
+	</application>
 </manifest>
