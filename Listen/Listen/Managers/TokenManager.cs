@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Listen.Models.RealmAccess;
+using Listen.Models.Tasks;
 using Listen.Models.WebServices;
 
 namespace Listen.Managers
@@ -25,6 +26,22 @@ namespace Listen.Managers
             return await TokenWS.Instance.GetTokenAsync(email, password);
         }
 
+        public async Task<string> GetTokenAsync()
+        {
+            var user = await UserManager.Instance.GetUserAsync();
+            var token = user?.Token;
+            // -- On  checke si Token valide
+            var infos = await GetInfoAsync(token);
+            if (infos == null)
+            {
+                var newtoken = await RefreshTokenAsync(user?.RefreshToken);
+                if(newtoken != null) { 
+                    return newtoken?.AccessToken;
+                }
+            }
+            return token;
+        }
+
         public async Task<Token> RefreshTokenAsync(string refresh_token)
         {
             var rt = refresh_token;
@@ -35,10 +52,10 @@ namespace Listen.Managers
             }
 
             var newtoken = await TokenWS.Instance.RefreshTokenAsync(rt);
-
-            // -- Update User in DB
-            await UserRealm.Instance.UpdateTokenAsync(newtoken);
-
+            if (newtoken != null) {
+                // -- Update User in DB
+                await UserRealm.Instance.UpdateTokenAsync(newtoken);
+            }
             return newtoken;
         }
 

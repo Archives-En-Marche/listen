@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using Listen.Managers;
-using Listen.Models.WebServices;
 using Listen.ViewModels;
 using Listen.VisualElements;
 using Microsoft.AppCenter.Crashes;
@@ -34,7 +32,7 @@ namespace Listen.Views
             {
                 // -- On charge les questionnaires
                 //hud.Show("Chargement ...");
-                Token newtoken;
+                //Token newtoken;
                 var user = await UserManager.Instance.GetUserAsync();
 
                 //await ServerManager.Instance.GetSurveysAsync();
@@ -55,7 +53,7 @@ namespace Listen.Views
                     //else
 
                     // -- On REFRESH AUTO Le TOKEN ?
-                    newtoken = await TokenManager.Instance.RefreshTokenAsync(refresh);
+                    await TokenManager.Instance.GetTokenAsync();
 
                     //var infos = await TokenWS.Instance.GetInfoAsync(newtoken?.AccessToken);
                     //if (infos == null)
