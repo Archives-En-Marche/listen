@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Listen.Models.RealmAccess;
-using Listen.Models.Tasks;
 using Listen.Models.WebServices;
 
 namespace Listen.Managers
