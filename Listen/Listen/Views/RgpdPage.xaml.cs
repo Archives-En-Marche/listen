@@ -1,9 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
+using Listen.VisualElements;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class RgpdPage : ContentPage
+    public partial class RgpdPage : BaseContentPage
     {
         public RgpdPage(ViewModelBase vm)
         {

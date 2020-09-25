@@ -7,7 +7,7 @@
     xmlns:conv="clr-namespace:PopolLib.Converters;assembly=PopolLib"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.QuestionPage">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView BackgroundColor="{StaticResource white}">
             <Grid Padding="20,38,20,20" HorizontalOptions="CenterAndExpand" RowSpacing="0" ColumnSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

@@ -1,9 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
+using Listen.VisualElements;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class UserLoginPage : ContentPage
+    public partial class UserLoginPage : BaseContentPage
     {
         public UserLoginPage()
         {

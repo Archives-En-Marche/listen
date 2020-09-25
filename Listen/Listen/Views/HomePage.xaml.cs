@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class HomePage : ContentPage
+    public partial class HomePage : BaseContentPage
     {
         INavigation _nav;
 
