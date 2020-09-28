@@ -74,15 +74,15 @@ namespace Listen.ViewModels
 
             AllCommand = new Command(async (obj) =>
             {
-                for (int i = _nav.NavigationStack.Count - 2; i >= 0; i--)
+                for (int i = _nav.NavigationStack.Count - 1; i >= 0; i--)
                 {
                     var p = _nav.NavigationStack[i];
-                    if (!(p is SurveyPage) && !(p is HomePage))
+                    if (!(p is HomePage))
                     {
                         _nav.RemovePage(p);
                     }
                 }
-                await _nav.PopAsync();
+                await _nav.PushAsync(new SurveyPage(new SurveyPageViewModel(_nav, null)));
             });
         }
     }

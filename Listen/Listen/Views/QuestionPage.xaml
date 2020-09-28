@@ -17,7 +17,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="313" />
                 </Grid.ColumnDefinitions>
-                <Label MaxLines="5" LineBreakMode="WordWrap" FontAttributes="Bold" FontSize="20" Text="{Binding QuestionLabel}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" HorizontalTextAlignment="Start">
+                <Label LineBreakMode="WordWrap" FontAttributes="Bold" FontSize="20" Text="{Binding QuestionLabel}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" HorizontalTextAlignment="Start">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>

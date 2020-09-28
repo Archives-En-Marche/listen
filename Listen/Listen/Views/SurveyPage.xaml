@@ -6,7 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Listen.Views.SurveyPage">
     <ContentPage.Content>
-        <StackLayout Padding="0,0,0,200" BackgroundColor="{StaticResource white}">
+        <StackLayout Padding="0" Margin="0" BackgroundColor="{StaticResource white}">
             <visual:FastListView BackgroundColor="{StaticResource white}" ItemsSource="{Binding Surveys}" ScrollEnabled="true" HasUnevenRows="true" SelectedCommand="{Binding SelectedCommand}" SeparatorVisibility="None" />
         </StackLayout>
     </ContentPage.Content>

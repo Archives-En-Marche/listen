@@ -23,7 +23,7 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <Label FontSize="14" Padding="0,0,0,20" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" HorizontalTextAlignment="Start" Text="{Binding Count}" TextColor="{StaticResource brownGrey}">
+                <Label FontSize="14" Padding="0,0,0,30" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" HorizontalTextAlignment="Start" Text="{Binding Count}" TextColor="{StaticResource brownGrey}">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
