@@ -18,9 +18,17 @@
                         </Label.FontFamily>
                     </Label>
                 </StackLayout>
-                <StackLayout BackgroundColor="{StaticResource white}" Padding="0,45,0,0" Spacing="40" VerticalOptions="StartAndExpand">
+                <StackLayout BackgroundColor="{StaticResource white}" Padding="0,45,0,0" Spacing="20" VerticalOptions="StartAndExpand">
                     <lvisual:MaterialEntry Text="{Binding Email}" WidthRequest="313" Placeholder="Entrez votre e-mail" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Email" />
-                    <lvisual:MaterialEntry Text="{Binding Password}" WidthRequest="313" Placeholder="Entrez votre mot de passe" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" IsPassword="true" Keyboard="Default" />
+                    <lvisual:MaterialEntry Text="{Binding Password}" WidthRequest="313" Placeholder="Entrez votre mot de passe" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" IsPassword="{Binding HidePassword}" Keyboard="Default" />
+                    <Button FontSize="12" Padding="0" Margin="0,-20,15,0" WidthRequest="150" HorizontalOptions="EndAndExpand" TextTransform="None" Text="{Binding HidePasswordMessage}" TextColor="{StaticResource darkSlateBlue}" BackgroundColor="Transparent" Command="{Binding ShowPasswordCommand}">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS">Roboto</On>
+                                <On Platform="Android">Roboto-Regular.ttf</On>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
                     <visual:ExtendedButton Margin="0,20,0,0" LetterSpacing="0.25" Text="CONNEXION" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}"
                         SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding ValiderCommand}">
                         <visual:LetterSpacingButton.FontFamily>

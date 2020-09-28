@@ -37,6 +37,27 @@ namespace Listen.ViewModels
             }
         }
 
+        bool _hidePassword;
+        public bool HidePassword
+        {
+            get => _hidePassword;
+            set
+            {
+                Set(ref _hidePassword, value);
+                HidePasswordMessage = HidePassword ? "Afficher le mot de passe" : "Masquer le mot de passe";
+            }
+        }
+
+        string _hidePasswordMessage;
+        public string HidePasswordMessage
+        {
+            get => _hidePasswordMessage;
+            set
+            {
+                Set(ref _hidePasswordMessage, value);
+            }
+        }
+
         public ICommand ValiderCommand
         {
             get;
@@ -44,6 +65,12 @@ namespace Listen.ViewModels
         }
 
         public ICommand PasswordLostCommand
+        {
+            get;
+            set;
+        }
+
+        public ICommand ShowPasswordCommand
         {
             get;
             set;
@@ -113,6 +140,12 @@ namespace Listen.ViewModels
 #endif
 
                 await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
+            });
+
+            HidePassword = true;
+            ShowPasswordCommand = new Command(() =>
+            {
+                HidePassword = !HidePassword;
             });
         }
     }
