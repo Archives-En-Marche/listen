@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using Listen.Managers;
 using PopolLib.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Listen.ViewModels
@@ -38,6 +38,12 @@ namespace Listen.ViewModels
         }
 
         public ICommand ValiderCommand
+        {
+            get;
+            set;
+        }
+
+        public ICommand PasswordLostCommand
         {
             get;
             set;
@@ -96,6 +102,17 @@ namespace Listen.ViewModels
                     var dialog = DependencyService.Get<IDialogService>();
                     dialog.Show("Oups !", "Vos identifiants ne sont pas valides.", "OK", null);
                 }
+            });
+
+            PasswordLostCommand = new Command(async () =>
+            {
+                var url = "https://www.en-marche.fr/mot-de-passe-oublie";
+
+#if DEBUG
+                url = "https://staging.en-marche.fr/mot-de-passe-oublie";
+#endif
+
+                await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
             });
         }
     }

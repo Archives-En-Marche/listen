@@ -30,6 +30,14 @@
                             </OnPlatform>
                         </visual:LetterSpacingButton.FontFamily>
                     </visual:ExtendedButton>
+                    <Button FontSize="12" Margin="0,-20,0,40" HorizontalOptions="Center" Text="MOT DE PASSE OUBLIÉ" FontAttributes="Bold" TextColor="{StaticResource warmGrey}" BackgroundColor="Transparent" Command="{Binding PasswordLostCommand}">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS">Roboto-Bold</On>
+                                <On Platform="Android">Roboto-Bold.ttf</On>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
