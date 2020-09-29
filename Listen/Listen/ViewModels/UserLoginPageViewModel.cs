@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using Listen.Managers;
+using Listen.Views;
 using PopolLib.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -112,11 +113,15 @@ namespace Listen.ViewModels
                     if (token != null)
                     {
                         await UserManager.Instance.AddOrUpdateAsync(null, null, null, null, null, null, token?.AccessToken, token?.RefreshToken);
-                        //var mstack = _nav.ModalStack;
-                        if (_nav.ModalStack.Count > 0)
+                        for (int i = _nav.NavigationStack.Count - 1; i >= 0; i--)
                         {
-                            await _nav.PopModalAsync();
+                            var p = _nav.NavigationStack[i];
+                            if (!(p is HomePage))
+                            {
+                                _nav.RemovePage(p);
+                            }
                         }
+                        await _nav.PushAsync(new HomePage(_nav, new HomePageViewModel(_nav)));
                     }
                     else
                     {

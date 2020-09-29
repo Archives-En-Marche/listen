@@ -7,14 +7,14 @@ namespace Listen.VisualElements
     {
         public InternalNavigationPage()
         {
-            //this.BarBackgroundColor = Color.FromHex("#f6fbff");
-            //this.BarTextColor = Color.FromHex("#174163");
+            this.BarBackgroundColor = (Color)Application.Current.Resources["paleGrey"];
+            this.BarTextColor = (Color)Application.Current.Resources["darkSlateBlue"];
         }
 
         public InternalNavigationPage(Page root) : base(root)
         {
-            //this.BarBackgroundColor = Color.FromHex("#f6fbff");
-            //this.BarTextColor = Color.FromHex("#174163");
+            this.BarBackgroundColor = (Color)Application.Current.Resources["paleGrey"];
+            this.BarTextColor = (Color)Application.Current.Resources["darkSlateBlue"];
         }
 
         protected override void OnChildAdded(Element child)

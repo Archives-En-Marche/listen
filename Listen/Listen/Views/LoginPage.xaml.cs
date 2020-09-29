@@ -16,16 +16,5 @@ namespace Listen.Views
             BindingContext = vm;
             InitializeComponent();
         }
-
-
-        //public void Handle_Tapped(object sender, EventArgs e)
-        //{
-        //    this.Navigation.PushAsync(new SubscribePage());
-        //}
-
-        public void Handle_Clicked(object sender, EventArgs e)
-        {
-            this.Navigation.PushAsync(new UserLoginPage(new UserLoginPageViewModel(this.Navigation)));
-        }
     }
 }

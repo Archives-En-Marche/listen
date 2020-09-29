@@ -16,10 +16,10 @@
                         </OnPlatform>
                     </Image.Source>
                 </Image>
-                <ContentView VerticalOptions="Center" WidthRequest="313" HeightRequest="90" HorizontalOptions="Center">
+                <ContentView VerticalOptions="Center" HorizontalOptions="Center">
                     <StackLayout Spacing="10" WidthRequest="313" VerticalOptions="CenterAndExpand">
                         <visual:ExtendedButton LetterSpacing="0.25" Text="CONNEXION" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White"
-                            CornerRadius="4" Clicked="Handle_Clicked" Command="{Binding ConnectCommand}">
+                            CornerRadius="4" Command="{Binding ConnectCommand}">
                             <visual:LetterSpacingButton.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                     <On Platform="iOS">Roboto</On>
@@ -35,6 +35,24 @@
                                 </OnPlatform>
                             </Label.FontFamily>
                         </Label>
+                        <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Margin="0,20,0,40">
+                            <Button FontSize="12" HorizontalOptions="Center" Text="PAS ENCORE ADHÉRENT ?" FontAttributes="Bold" TextColor="{StaticResource warmGrey}" BackgroundColor="Transparent" Command="{Binding RegisterCommand}">
+                                <Button.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto-Bold</On>
+                                        <On Platform="Android">Roboto-Bold.ttf</On>
+                                    </OnPlatform>
+                                </Button.FontFamily>
+                            </Button>
+                            <Button FontSize="12" HorizontalOptions="Center" Text="S'INSCRIRE" FontAttributes="Bold" TextColor="{StaticResource slateGrey}" BackgroundColor="Transparent" Command="{Binding RegisterCommand}">
+                                <Button.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto-Bold</On>
+                                        <On Platform="Android">Roboto-Bold.ttf</On>
+                                    </OnPlatform>
+                                </Button.FontFamily>
+                            </Button>
+                        </StackLayout>
                     </StackLayout>
                 </ContentView>
             </StackLayout>

@@ -15,7 +15,8 @@ namespace Listen.Views
             //NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetBackButtonTitle(this, "");
             this.Title = "";
-            BindingContext = vm; InitializeComponent();
+            BindingContext = vm;
+            InitializeComponent();
         }
     }
 }

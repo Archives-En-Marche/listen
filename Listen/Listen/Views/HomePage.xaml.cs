@@ -73,12 +73,7 @@ namespace Listen.Views
                 if (displayLoginPage)
                 {
                     // -- On présente la page de login
-                    var nav = ((NavigationPage)Application.Current.MainPage).Navigation;
-                    var mstack = nav.ModalStack;
-                    if (mstack.FirstOrDefault(p => p is InternalNavigationPage) == null)
-                    {
-                        await ((NavigationPage)Application.Current.MainPage).Navigation.PushModalAsync(new InternalNavigationPage(new LoginPage(new LoginPageViewModel(_nav))));
-                    }
+                    await _nav.PushAsync(new LoginPage(new LoginPageViewModel(_nav)));
                 }
 
                 // -- Check App Version
