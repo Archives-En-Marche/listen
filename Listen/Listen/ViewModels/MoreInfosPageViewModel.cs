@@ -29,6 +29,7 @@ namespace Listen.ViewModels
 
         public ICommand SelectCommand { get; set; }
         public ICommand SoumettreCommand { get; set; }
+        public ICommand BackHome { get; set; }
 
         string[] ages = new string[] { "-20 ans", "20-24 ans", "25-39 ans", "40-54 ans", "55-64 ans", "65-80 ans", "80+ ans" };
         string[] jobs = new string[] { "Agriculteurs exploitants", "Artisans, commerçants et chefs d’entreprise",
@@ -179,6 +180,25 @@ namespace Listen.ViewModels
                 }
             });
 
+            BackHome = new Command(async (obj) =>
+            {
+                var dialog = DependencyService.Get<IDialogService>();
+                dialog.Show("Retour accueil", "Souhaitez-vous effacer les questions déjà remplies et revenir au choix du questionnaire ?", "Oui", "Non", (res) =>
+                {
+                    if (res)
+                    {
+                        for (int i = _nav.NavigationStack.Count - 1; i >= 0; i--)
+                        {
+                            var p = _nav.NavigationStack[i];
+                            if (!(p is HomePage) && !(p is SurveyPage) && !(p is IntroPage))
+                            {
+                                _nav.RemovePage(p);
+                            }
+                        }
+                        _nav.PopAsync();
+                    }
+                });
+            });
         }
 
         void SelectAction(object obj)

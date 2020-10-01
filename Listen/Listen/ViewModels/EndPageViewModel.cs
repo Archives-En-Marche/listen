@@ -77,12 +77,12 @@ namespace Listen.ViewModels
                 for (int i = _nav.NavigationStack.Count - 1; i >= 0; i--)
                 {
                     var p = _nav.NavigationStack[i];
-                    if (!(p is HomePage))
+                    if (!(p is HomePage) && !(p is SurveyPage) && !(p is IntroPage))
                     {
                         _nav.RemovePage(p);
                     }
                 }
-                await _nav.PushAsync(new SurveyPage(new SurveyPageViewModel(_nav, null)));
+                await _nav.PopAsync();
             });
         }
     }

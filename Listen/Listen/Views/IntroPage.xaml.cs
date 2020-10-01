@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using Listen.Managers;
 using Listen.VisualElements;
 using Xamarin.Forms;
 
@@ -8,7 +9,7 @@ namespace Listen.Views
     {
         public IntroPage(ViewModelBase vm)
         {
-            Title = "";
+            Title = "Intro";
             NavigationPage.SetBackButtonTitle(this, "");
             BindingContext = vm;
             InitializeComponent();
