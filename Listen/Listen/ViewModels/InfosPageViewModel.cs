@@ -8,6 +8,7 @@ using Listen.Managers;
 using Listen.Models.RealmObjects;
 using ReactiveUI;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace Listen.ViewModels
 {
@@ -41,6 +42,7 @@ namespace Listen.ViewModels
             }
         }
 
+        public ICommand AccountCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
 
         public InfosPageViewModel(INavigation navigation)
@@ -80,6 +82,17 @@ namespace Listen.ViewModels
                 {
                     await _nav.PopToRootAsync();
                 });
+            });
+
+            AccountCommand = new Command(async (obj) =>
+            {
+                var url = "https://www.en-marche.fr/parametres/mon-compte/modifier";
+
+#if DEBUG
+                url = "https://staging.en-marche.fr/parametres/mon-compte/modifier";
+#endif
+
+                await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
             });
         }
     }

@@ -7,8 +7,8 @@
     x:Class="Listen.Views.InfosPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="0,30,0,35" BackgroundColor="{StaticResource white}">
-                <Label FontSize="24" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" HorizontalTextAlignment="Start" Text="{Binding Fullname}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313">
+            <StackLayout Padding="40,30,40,35" BackgroundColor="{StaticResource white}">
+                <Label FontSize="24" HorizontalOptions="Start" FontAttributes="Bold" HorizontalTextAlignment="Start" Text="{Binding Fullname}" TextColor="{StaticResource darkSlateBlue}">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
@@ -16,7 +16,7 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <Label FontSize="24" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="{Binding Departement}" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                <Label FontSize="24" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="{Binding Departement}" TextColor="{StaticResource brownishGrey}">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
@@ -24,7 +24,27 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <visual:ExtendedButton Margin="0,46,0,0" LetterSpacing="0.25" Text="SE DECONNECTER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
+                <StackLayout Orientation="Horizontal" Margin="0,30,0,0">
+                    <Label FontSize="14" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" TextColor="{StaticResource brownishGrey}">
+                         <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Vous n'êtes plus dans ce département ? Changez votre adresse dans " />
+                                    <Span Text="votre profil adhérent." TextColor="{StaticResource darkSlateBlue}" FontAttributes="Bold">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding AccountCommand}" />
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS">Roboto</On>
+                                <On Platform="Android">Roboto-Regular.ttf</On>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                </StackLayout>
+                <visual:ExtendedButton Margin="0,46,0,0" LetterSpacing="0.25" Text="SE DECONNECTER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="300" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
                     SelectedTextColor="White" CornerRadius="4" Command="{Binding LogoutCommand}">
                     <visual:LetterSpacingButton.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
