@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using Listen.Contracts;
-using Listen.Helpers;
 using Listen.Managers;
 using Listen.Models.WebServices;
 using Listen.ViewModels.Tags;
@@ -16,7 +15,7 @@ using Xamarin.Forms;
 
 namespace Listen.ViewModels
 {
-    public class QuestionPageViewModel : ViewModelBase, IResetQuestion
+    public class QuestionPageViewModel : ViewModelBase, IQuestion
     {
         INavigation _nav;
 
@@ -154,62 +153,14 @@ namespace Listen.ViewModels
 
             NextQuestion = new Command(async (obj) =>
             {
-                bool validated = true;
-                // -- On checke
-                if (!string.IsNullOrEmpty(question.Type))
+                if (current == questions.Count - 1)
                 {
-                    if (question.Type.Trim().ToLower() == "simple_field")
-                    {
-                        // -- Question Libre
-                        IsReponseLibreVisible = true;
-
-                        SurveyEngineManager.Instance.CurrentReply.Answers.Add(new Answer()
-                        {
-                            SurveyQuestion = question.Id,
-                            TextField = ReponseLibre,
-                            SelectedChoices = null
-                        });
-
-                        if (string.IsNullOrEmpty(ReponseLibre))
-                        {
-                            ReponseLibre = "";
-                        }
-                    }
-                    else
-                    {
-                        IsReponseLibreVisible = false;
-                        // -- Choix
-                        if (SelectedTags?.Count == 0)
-                        {
-                            validated = false;
-                        }
-
-                        var list = new List<string>();
-
-                        // -- Evite doublons sur Android - Return Back Button
-                        SurveyEngineManager.Instance.CurrentReply.Answers.Remove(
-                            SurveyEngineManager.Instance.CurrentReply.Answers.FirstOrDefault(q => q.SurveyQuestion == question.Id)
-                            );
-                        SurveyEngineManager.Instance.CurrentReply.Answers.Add(new Answer()
-                        {
-                            SurveyQuestion = question.Id,
-                            TextField = null,
-                            SelectedChoices = SelectedTags.Select(_t => _t.Id).ToList()
-                        });
-                    }
+                    await _nav.PushAsync(new RgpdPage(new RgpdPageViewModel(_nav)));
                 }
-
-                if (validated)
+                else
                 {
-                    if (current == questions.Count - 1)
-                    {
-                        await _nav.PushAsync(new RgpdPage(new RgpdPageViewModel(_nav)));
-                    }
-                    else
-                    {
-                        await _nav.PushAsync(new QuestionPage(new QuestionPageViewModel(_nav)));
-                    }
-                }
+                    await _nav.PushAsync(new QuestionPage(new QuestionPageViewModel(_nav)));
+                }                
             });
 
             BackHome = new Command(async (obj) =>
@@ -232,6 +183,59 @@ namespace Listen.ViewModels
                     }
                 });
             });
+        }
+
+        public bool HasValidated()
+        {
+            bool validated = true;
+            // -- On checke
+            if (!string.IsNullOrEmpty(question.Type))
+            {
+                if (question.Type.Trim().ToLower() == "simple_field")
+                {
+                    // -- Question Libre
+                    IsReponseLibreVisible = true;
+
+                    // -- Evite doublons sur Android - Return Back Button
+                    SurveyEngineManager.Instance.CurrentReply.Answers.Remove(
+                        SurveyEngineManager.Instance.CurrentReply.Answers.FirstOrDefault(q => q.SurveyQuestion == question.Id)
+                        );
+                    SurveyEngineManager.Instance.CurrentReply.Answers.Add(new Answer()
+                    {
+                        SurveyQuestion = question.Id,
+                        TextField = ReponseLibre,
+                        SelectedChoices = null
+                    });
+
+                    if (string.IsNullOrEmpty(ReponseLibre))
+                    {
+                        ReponseLibre = "";
+                    }
+                }
+                else
+                {
+                    IsReponseLibreVisible = false;
+                    // -- Choix
+                    if (SelectedTags?.Count == 0)
+                    {
+                        validated = false;
+                    }
+
+                    var list = new List<string>();
+
+                    // -- Evite doublons sur Android - Return Back Button
+                    SurveyEngineManager.Instance.CurrentReply.Answers.Remove(
+                        SurveyEngineManager.Instance.CurrentReply.Answers.FirstOrDefault(q => q.SurveyQuestion == question.Id)
+                        );
+                    SurveyEngineManager.Instance.CurrentReply.Answers.Add(new Answer()
+                    {
+                        SurveyQuestion = question.Id,
+                        TextField = null,
+                        SelectedChoices = SelectedTags.Select(_t => _t.Id).ToList()
+                    });
+                }
+            }
+            return validated;
         }
 
         private void TagSelected(object obj)
@@ -343,6 +347,33 @@ namespace Listen.ViewModels
                 else
                 {
                     // -- Alert ! Probleme sur le questionnaire
+                }
+            }
+        }
+
+        public void UpdateAnswers(Question question)
+        {
+            var currentQuestion = SurveyEngineManager.Instance.CurrentReply.Answers.FirstOrDefault(q => q.SurveyQuestion == question.Id);
+
+            if (currentQuestion != null)
+            {
+                if (IsReponseLibreVisible)
+                {
+                    ReponseLibre = currentQuestion.TextField;
+                }
+                else
+                {                 
+                    SelectedTags.Clear();
+                    foreach (var tag in TagList)
+                    {
+                        if(currentQuestion.SelectedChoices.Contains(tag.Id)) { 
+                            // -- ON
+                            tag.TextColor = Color.White;
+                            tag.BackgroundColor = Color.FromHex("#174163");
+                            // -- On ajoute le tag
+                            SelectedTags.Add(tag);
+                        }
+                    }                    
                 }
             }
         }
