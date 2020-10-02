@@ -77,6 +77,8 @@ namespace Listen.Managers
 
         public void SetPosition(int pos) { _pos = pos; }
 
+        public Question GetQuestion() { return Questions[_pos]; }
+
         public bool IsLastQuestion { get => _pos == Count - 1; }
     }
 }

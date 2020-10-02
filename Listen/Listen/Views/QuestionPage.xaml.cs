@@ -33,13 +33,26 @@ namespace Listen.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            var vm = BindingContext as IResetQuestion;
+            var vm = BindingContext as IQuestion;
             if (vm != null)
             {
                 vm.Reset();
+
+                if (nb > 0)
+                {
+                    SurveyEngineManager.Instance.SetPosition(nb - 1);
+                    vm.UpdateAnswers(SurveyEngineManager.Instance.GetQuestion());
+                }
             }
-            if(nb > 0) { 
-                SurveyEngineManager.Instance.SetPosition(nb-1);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            var vm = BindingContext as IQuestion;
+            if (vm != null)
+            {
+                vm.HasValidated();
             }
         }
     }
