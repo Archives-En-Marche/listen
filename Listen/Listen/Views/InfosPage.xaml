@@ -28,8 +28,8 @@
                     <Label FontSize="14" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" TextColor="{StaticResource brownishGrey}">
                          <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Vous n'êtes plus dans ce département ? Changez votre adresse dans " />
-                                    <Span Text="votre profil adhérent." TextColor="{StaticResource darkSlateBlue}" FontAttributes="Bold">
+                                    <Span Text="Vous n'êtes plus dans ce département ? Changez votre adresse dans " FontSize="14" />
+                                    <Span Text="votre profil adhérent." TextColor="{StaticResource darkSlateBlue}" FontAttributes="Bold" FontSize="14">
                                         <Span.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding AccountCommand}" />
                                         </Span.GestureRecognizers>
