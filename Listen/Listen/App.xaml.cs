@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Listen.Helpers;
+using Listen.Managers;
 using Listen.ViewModels;
 using Listen.Views;
 using Listen.VisualElements;
@@ -38,7 +39,16 @@ namespace Listen
             Settings.AppSettings.AddOrUpdateValue("DB_NAME", "listen.realm");
             Settings.AppSettings.AddOrUpdateValue("APP_VERSION_SCOPE", "jecoute_surveys");
 
-            MainPage = new InternalNavigationPage(new HomePage(this, new HomePageViewModel(this)));
+            var user = UserManager.Instance.GetUser();
+
+            if(user?.Token != null)
+            {
+                MainPage = new InternalNavigationPage(new HomePage(this, new HomePageViewModel(this)));
+            }
+            else
+            {
+                MainPage = new InternalNavigationPage(new LoginPage(new LoginPageViewModel(this)));
+            }
         }
 
         protected override void OnStart()
@@ -47,7 +57,7 @@ namespace Listen
             //var hud = DependencyService.Get<IProgressHUD>();
             //LongRunningTaskManager.Instance.StartLongRunningTask();
 
-            Microsoft.AppCenter.AppCenter.Start("ios=7755cdbe-dc4f-4e87-84f7-ddc120cfcd07;" + "android=010f04f0-339f-4458-803a-92b46333ec9a", typeof(Analytics), typeof(Crashes));
+            Microsoft.AppCenter.AppCenter.Start("ios=7755cdbe-dc4f-4e87-84f7-ddc120cfcd07;" + "android=010f04f0-339f-4458-803a-92b46333ec9a;", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

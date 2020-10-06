@@ -9,6 +9,8 @@ using Listen.Models.RealmObjects;
 using ReactiveUI;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using Listen.Views;
+using Listen.VisualElements;
 
 namespace Listen.ViewModels
 {
@@ -80,7 +82,7 @@ namespace Listen.ViewModels
                 await UserManager.Instance.DeleteUserAsync();
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await _nav.PopToRootAsync();
+                    Application.Current.MainPage = new InternalNavigationPage(new LoginPage(new LoginPageViewModel(_nav)));
                 });
             });
 

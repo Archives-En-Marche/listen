@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using Listen.Managers;
 using Listen.Views;
+using Listen.VisualElements;
 using PopolLib.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -113,15 +114,7 @@ namespace Listen.ViewModels
                     if (token != null)
                     {
                         await UserManager.Instance.AddOrUpdateAsync(null, null, null, null, null, null, token?.AccessToken, token?.RefreshToken);
-                        for (int i = _nav.NavigationStack.Count - 1; i >= 0; i--)
-                        {
-                            var p = _nav.NavigationStack[i];
-                            if (!(p is HomePage))
-                            {
-                                _nav.RemovePage(p);
-                            }
-                        }
-                        await _nav.PushAsync(new HomePage(_nav, new HomePageViewModel(_nav)));
+                        Application.Current.MainPage = new InternalNavigationPage(new HomePage(_nav, new HomePageViewModel(_nav)));
                     }
                     else
                     {
