@@ -7,6 +7,7 @@ using Listen.ViewModels;
 using Listen.VisualElements;
 using Microsoft.AppCenter.Crashes;
 using PopolLib.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Listen.Views
@@ -91,13 +92,11 @@ namespace Listen.Views
                             {
                                 if (Device.RuntimePlatform == Device.iOS)
                                 {
-                                    var ass = DependencyService.Get<IAppStoreService>();
-                                    ass.OpenAppInStore("id1438099575");
+                                    Browser.OpenAsync("itms-apps://itunes.apple.com/app/id1441973895", BrowserLaunchMode.SystemPreferred);
                                 }
                                 else
                                 {
-                                    var ass = DependencyService.Get<IAppStoreService>();
-                                    ass.OpenAppInStore("fr.en-marche.listen");
+                                    Browser.OpenAsync("https://play.google.com/store/apps/details?id=fr.en_marche.jecoute", BrowserLaunchMode.SystemPreferred);
                                 }
                             }
                         });
