@@ -93,6 +93,7 @@ namespace Listen.ViewModels
         public IList<TagViewModel> SelectedTags { get; set; }
 
         Question question;
+        int questionLength;
 
         public QuestionPageViewModel(INavigation nav, bool isFirstQuestion = false)
         {
@@ -102,6 +103,7 @@ namespace Listen.ViewModels
                 SurveyEngineManager.Instance.InitCurrentSurvey();
             }
             question = SurveyEngineManager.Instance.GetNextQuestion();
+            questionLength = question.Choices.OrderByDescending(x => x.Content.Length).FirstOrDefault().Content.Length;
 
             var questions = SurveyEngineManager.Instance.Questions;
             var current = SurveyEngineManager.Instance.QuestionNumber;
@@ -136,6 +138,7 @@ namespace Listen.ViewModels
                                 Parameters = question,
                                 TextColor = Color.FromHex("#174163"),
                                 BackgroundColor = Color.White,
+                                Height = GetQuestionHeight(questionLength)
                             };
                             TagList.Add(tag);
                         }
@@ -183,6 +186,13 @@ namespace Listen.ViewModels
                     }
                 });
             });
+        }
+
+        private int GetQuestionHeight(int questionLength)
+        {
+            int result = (questionLength / 30);
+
+            return (result < 1 ? 1 : result) * 50;
         }
 
         public bool HasValidated()
@@ -242,6 +252,7 @@ namespace Listen.ViewModels
         {
             var tag = (TagViewModel)obj;
             var _question = tag.Parameters as Question;
+            tag.Height = GetQuestionHeight(questionLength);
             // -- Question choix simple ou multiple
             if (_question.Type.Trim().ToLower() == "multiple_choice")
             {
@@ -337,6 +348,7 @@ namespace Listen.ViewModels
                                 Parameters = question,
                                 TextColor = Color.FromHex("#174163"),
                                 BackgroundColor = Color.White,
+                                Height = GetQuestionHeight(questionLength)
                             };
                             TagList.Add(tag);
                         }
