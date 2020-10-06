@@ -103,7 +103,6 @@ namespace Listen.ViewModels
                 SurveyEngineManager.Instance.InitCurrentSurvey();
             }
             question = SurveyEngineManager.Instance.GetNextQuestion();
-            questionLength = question.Choices.OrderByDescending(x => x.Content.Length).FirstOrDefault().Content.Length;
 
             var questions = SurveyEngineManager.Instance.Questions;
             var current = SurveyEngineManager.Instance.QuestionNumber;
@@ -125,6 +124,8 @@ namespace Listen.ViewModels
                     }
                     else
                     {
+                        questionLength = question.Choices.OrderByDescending(x => x.Content.Length).FirstOrDefault().Content.Length;
+
                         IsReponseLibreVisible = false;
                         // -- Choix
                         TagList = new ObservableCollection<TagViewModel>();
