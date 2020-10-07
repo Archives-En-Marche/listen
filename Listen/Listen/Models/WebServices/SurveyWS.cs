@@ -40,7 +40,7 @@ namespace Listen.Models.WebServices
                     var request = new RestRequest("/api/jecoute/survey", Method.GET);
                     request.AddHeader("Authorization", "Bearer " + token);
                     var cts = new CancellationTokenSource(timeout);
-                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+                    var result = await client.ExecuteAsync(request, cts.Token);
 
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
@@ -86,7 +86,7 @@ namespace Listen.Models.WebServices
                         request.AddParameter("text/plain", s.Answer, ParameterType.RequestBody);
                         //request.AddJsonBody(s.Answer);
 
-                        var result = await client.ExecuteTaskAsync(request, cts.Token);
+                        var result = await client.ExecuteAsync(request, cts.Token);
                         if (result.StatusCode == HttpStatusCode.Created)
                         {
                             // -- on update la bdd
