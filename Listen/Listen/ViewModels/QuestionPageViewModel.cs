@@ -191,9 +191,12 @@ namespace Listen.ViewModels
 
         private int GetQuestionHeight(int questionLength)
         {
-            int result = (questionLength / 30);
+            double result = (questionLength / 30.0);
 
-            return (result < 1 ? 1 : result) * 50;
+           if(result < 1.0) {
+                return 1 * 60;
+            }
+            return Convert.ToInt16(result * 55.0);
         }
 
         public bool HasValidated()
