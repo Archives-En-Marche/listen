@@ -27,13 +27,13 @@ namespace Listen
             InitializeComponent();
 
 #if DEBUG
-            Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://staging.en-marche.fr");
-            Settings.AppSettings.AddOrUpdateValue("client_id", "2b494496-4eae-4946-9ae1-efa3f593595c");
-            Settings.AppSettings.AddOrUpdateValue("client_secret", "vcyrJys1sdvaTCXN0BFfOuw2A8KxdA9QkYDMErViM68=");
+            Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "");
+            Settings.AppSettings.AddOrUpdateValue("client_id", "");
+            Settings.AppSettings.AddOrUpdateValue("client_secret", "");
 #else
-            Settings.AppSettings.AddOrUpdateValue("client_id", "33f63935-0793-41b9-89a8-1d9bb74e5fe5");
-            Settings.AppSettings.AddOrUpdateValue("client_secret", "_X5lVzYtkoVBotQM1pmty/8el3UGrRgIpfzqXeUL0jbY=");
-            Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://en-marche.fr");
+            Settings.AppSettings.AddOrUpdateValue("client_id", "");
+            Settings.AppSettings.AddOrUpdateValue("client_secret", "");
+            Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "");
 #endif
             Settings.AppSettings.AddOrUpdateValue("WS_TIME_OUT", 30000);
             Settings.AppSettings.AddOrUpdateValue("DB_NAME", "listen.realm");
@@ -57,7 +57,7 @@ namespace Listen
             //var hud = DependencyService.Get<IProgressHUD>();
             //LongRunningTaskManager.Instance.StartLongRunningTask();
 
-            Microsoft.AppCenter.AppCenter.Start("ios=7755cdbe-dc4f-4e87-84f7-ddc120cfcd07;" + "android=010f04f0-339f-4458-803a-92b46333ec9a;", typeof(Analytics), typeof(Crashes));
+            Microsoft.AppCenter.AppCenter.Start("ios=;" + "android=;", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

@@ -18,7 +18,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>9.0</string>
+	<string>13.6</string>
 	<key>CFBundleDisplayName</key>
 	<string>J&apos;écoute</string>
 	<key>CFBundleIdentifier</key>
@@ -49,8 +49,6 @@
 		<string>Fonts/Roboto-Thin.ttf</string>
 		<string>Fonts/Roboto-ThinItalic.ttf</string>
 	</array>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>CFBundleName</key>
@@ -119,8 +117,8 @@
 		</dict>
 	</array>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.6</string>
+	<string>1.1.16</string>
 	<key>CFBundleVersion</key>
-	<string>103</string>
+	<string>114</string>
 </dict>
 </plist>

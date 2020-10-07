@@ -82,30 +82,6 @@ namespace Listen.ViewModels
         {
             _nav = nav;
 
-#if DEBUG
-
-            Email = "paulin.laroche@edecision.fr";
-            Password = "capmobile02";
-
-            Email = "techsupport@en-marche.fr";
-            Password = "enmarche123!";
-
-            Email = "antoinetamano+13@gmail.com";
-            Password = "antoinetamano+13@gmail.com";
-
-         
-
-            Email = "paulin.laroche@edecision.fr";
-            Password = "capmobile02";
-
-            //Email = "jul.hebrard@gmail.com";
-            //Password = "123456789";
-
-            //Email = "techsupport@en-marche.fr";
-            //Password = "testapple";
-
-#endif
-
             ValiderCommand = new Command(async () =>
             {
                 if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))

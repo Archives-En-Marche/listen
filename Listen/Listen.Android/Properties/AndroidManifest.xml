@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.1.7" package="fr.en-marche.jecoute" android:versionCode="9">
-	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="28" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.1.16" package="fr.en-marche.jecoute" android:versionCode="15">
+	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="29" />
 	<!-- <provider android:name="android.support.v4.content.FileProvider" android:authorities="fr.edecision.listen.fileprovider" android:exported="false" android:grantUriPermissions="true">
 		<meta-data android:name="android.support.fr.edecision.parisetmoi" android:resource="@xml/file_paths"></meta-data>
 	</provider> -->

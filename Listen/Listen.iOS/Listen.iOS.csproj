@@ -25,11 +25,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>Apple Development: Mathieu Masset (RCL4ZC22JH)</CodesignKey>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
-    <CodesignKey>iPhone Developer: Paulin Laroche (92SB6YXNWG)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -41,8 +41,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <ConsolePause>false</ConsolePause>
     <MtouchUseLlvm>true</MtouchUseLlvm>
+    <CodesignKey>Apple Development: Mathieu Masset (RCL4ZC22JH)</CodesignKey>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
-    <CodesignKey>iPhone Developer: Paulin Laroche (92SB6YXNWG)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,7 +54,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer: Paulin Laroche (92SB6YXNWG)</CodesignKey>
+    <CodesignKey>Apple Development: Mathieu Masset (RCL4ZC22JH)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
@@ -66,9 +66,9 @@
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer: Paulin Laroche (92SB6YXNWG)</CodesignKey>
+    <CodesignKey>Apple Development: Mathieu Masset (RCL4ZC22JH)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
@@ -83,7 +83,7 @@
     <MtouchArch>ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
-    <CodesignKey>iPhone Developer: Paulin Laroche (92SB6YXNWG)</CodesignKey>
+    <CodesignKey>Apple Development: Mathieu Masset (RCL4ZC22JH)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
@@ -95,7 +95,7 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
-    <CodesignKey>iPhone Developer: Paulin Laroche (92SB6YXNWG)</CodesignKey>
+    <CodesignKey>Apple Development: Mathieu Masset (RCL4ZC22JH)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchUseLlvm>true</MtouchUseLlvm>
   </PropertyGroup>
