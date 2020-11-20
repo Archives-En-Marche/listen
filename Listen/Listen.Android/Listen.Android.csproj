@@ -70,7 +70,7 @@
       <Version>10.5.1</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI">
-      <Version>10.5.1</Version>
+      <Version>10.5.43</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Annotations">
       <Version>28.0.0.3</Version>
