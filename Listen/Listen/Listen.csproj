@@ -21,7 +21,7 @@
     <PackageReference Include="ReactiveUI" Version="10.5.1" />
     <PackageReference Include="ReactiveUI.XamForms" Version="10.5.1" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.0.0" />
     <PackageReference Include="AppCenter.Analytics.Metrics" Version="1.1.0" />
     <PackageReference Include="Microsoft.AppCenter.Distribute" Version="2.1.1" />
     <PackageReference Include="Microsoft.AppCenter" Version="2.1.1" />
