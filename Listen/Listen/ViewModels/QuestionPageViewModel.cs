@@ -87,16 +87,21 @@ namespace Listen.ViewModels
             }
         }
 
+        public ICommand BackHome { get; set; }
+
         public ICommand TagCommand { get; set; }
 
         public IList<TagViewModel> SelectedTags { get; set; }
 
         Question question;
 
-        public QuestionPageViewModel(INavigation nav)
+        public QuestionPageViewModel(INavigation nav, bool isFirstQuestion = false)
         {
             _nav = nav;
-
+            if (isFirstQuestion)
+            {
+                SurveyEngineManager.Instance.InitCurrentSurvey();
+            }
             question = SurveyEngineManager.Instance.GetNextQuestion();
 
             var questions = SurveyEngineManager.Instance.Questions;
@@ -205,6 +210,27 @@ namespace Listen.ViewModels
                         await _nav.PushAsync(new QuestionPage(new QuestionPageViewModel(_nav)));
                     }
                 }
+            });
+
+            BackHome = new Command(async (obj) =>
+            {
+                var dialog = DependencyService.Get<IDialogService>();
+                dialog.Show("Retour accueil", "Souhaitez-vous effacer les questions déjà remplies et revenir au choix du questionnaire ?", "Oui", "Non", (res) =>
+                {
+                    if (res)
+                    {
+                        for (int i = _nav.NavigationStack.Count - 1; i >= 0; i--)
+                        {
+                            var p = _nav.NavigationStack[i];
+                            if (!(p is HomePage) && !(p is SurveyPage) && !(p is IntroPage))
+                            {
+                                _nav.RemovePage(p);
+                                SurveyEngineManager.Instance.Rewind();
+                            }
+                        }
+                        _nav.PopAsync();
+                    }
+                });
             });
         }
 

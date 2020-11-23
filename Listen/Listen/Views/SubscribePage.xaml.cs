@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿using Listen.VisualElements;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class SubscribePage : ContentPage
+    public partial class SubscribePage : BaseContentPage
     {
         public SubscribePage()
         {

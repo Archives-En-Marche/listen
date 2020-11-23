@@ -42,7 +42,7 @@ namespace Listen.ViewModels
                 var user = await UserManager.Instance.GetUserAsync();
                 if (user != null && string.IsNullOrEmpty(user?.FirstName))
                 {
-                    await ServerManager.Instance.GetUserInfosAsync(user.Token);
+                    await ServerManager.Instance.GetUserInfosAsync();
                     user = await UserManager.Instance.GetUserAsync();
                 }
                 return user;
@@ -74,10 +74,10 @@ namespace Listen.ViewModels
 
             AllCommand = new Command(async (obj) =>
             {
-                for (int i = _nav.NavigationStack.Count - 2; i >= 0; i--)
+                for (int i = _nav.NavigationStack.Count - 1; i >= 0; i--)
                 {
                     var p = _nav.NavigationStack[i];
-                    if (!(p is SurveyPage) && !(p is HomePage))
+                    if (!(p is HomePage) && !(p is SurveyPage) && !(p is IntroPage))
                     {
                         _nav.RemovePage(p);
                     }

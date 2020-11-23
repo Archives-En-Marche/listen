@@ -11,20 +11,21 @@ namespace Listen.Views
 {
     public partial class QuestionPage : SoftInputPage
     {
+        int nb;
         public QuestionPage(ViewModelBase vm)
         {
             BindingContext = vm;
-            var nb = SurveyEngineManager.Instance.QuestionNumber + 1;
-            this.Title = "Question " + nb;
+            nb = SurveyEngineManager.Instance.QuestionNumber + 1;
+            this.Title = "Question " + nb + "/"+ SurveyEngineManager.Instance.Count;
             NavigationPage.SetBackButtonTitle(this, "");
-            NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasBackButton(this, true);
             InitializeComponent();
 
             var toolbar_arrow = new ToolbarItem()
             {
-                Icon = (Device.RuntimePlatform == Device.iOS ? "Images/path.png" : "path.png"),
-                Text = "Suivante",
-                Command = ((QuestionPageViewModel)BindingContext).NextQuestion
+                IconImageSource = (Device.RuntimePlatform == Device.iOS ? "Images/home.png" : "home.png"),
+                Text = "Accueil",
+                Command = ((QuestionPageViewModel)BindingContext).BackHome
             };
             this.ToolbarItems.Add(toolbar_arrow);
         }
@@ -36,6 +37,9 @@ namespace Listen.Views
             if (vm != null)
             {
                 vm.Reset();
+            }
+            if(nb > 0) { 
+                SurveyEngineManager.Instance.SetPosition(nb-1);
             }
         }
     }

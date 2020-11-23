@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight;
 using Listen.Managers;
 using Listen.Views;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace Listen.ViewModels
 {
@@ -12,21 +13,37 @@ namespace Listen.ViewModels
     {
         INavigation _nav;
 
-        //ICommand _connectCommand;
-        //public ICommand ConnectCommand
-        //{
-        //    get { return _connectCommand; }
-        //    set { Set(() => ConnectCommand, ref _connectCommand, value); }
-        //}
+        public ICommand RegisterCommand
+        {
+            get;
+            set;
+        }
+
+        public ICommand ConnectCommand
+        {
+            get;
+            set;
+        }
 
         public LoginPageViewModel(INavigation nav)
         {
             _nav = nav;
 
-            //ConnectCommand = new Command((obj) =>
-            //{
-            //    PushAsync();
-            //});
+            ConnectCommand = new Command(async (obj) =>
+            {
+                await _nav.PushAsync(new UserLoginPage(new UserLoginPageViewModel(_nav)));
+            });
+
+            RegisterCommand = new Command(async () =>
+            {
+                var url = "https://www.en-marche.fr/adhesion";
+
+#if DEBUG
+                url = "https://staging.en-marche.fr/adhesion";
+#endif
+
+                await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
+            });
         }
 
         public async Task AddOrUpdateTokenAsync(string token, string refreshtoken)

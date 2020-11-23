@@ -9,4 +9,14 @@
 		<uses-library android:name="org.apache.http.legacy" android:required="false" />
 		<service android:name=".LongRunningTaskService" android:permission="android.permission.BIND_JOB_SERVICE" />
 	</application>
+	<queries>
+		<intent>
+			<action android:name="android.intent.action.VIEW" />
+			<data android:scheme="http" />
+		</intent>
+		<intent>
+			<action android:name="android.intent.action.VIEW" />
+			<data android:scheme="https" />
+		</intent>
+	</queries>
 </manifest>
