@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using Listen.Managers;
 using PopolLib.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Listen.ViewModels
@@ -37,7 +37,40 @@ namespace Listen.ViewModels
             }
         }
 
+        bool _hidePassword;
+        public bool HidePassword
+        {
+            get => _hidePassword;
+            set
+            {
+                Set(ref _hidePassword, value);
+                HidePasswordMessage = HidePassword ? "Afficher le mot de passe" : "Masquer le mot de passe";
+            }
+        }
+
+        string _hidePasswordMessage;
+        public string HidePasswordMessage
+        {
+            get => _hidePasswordMessage;
+            set
+            {
+                Set(ref _hidePasswordMessage, value);
+            }
+        }
+
         public ICommand ValiderCommand
+        {
+            get;
+            set;
+        }
+
+        public ICommand PasswordLostCommand
+        {
+            get;
+            set;
+        }
+
+        public ICommand ShowPasswordCommand
         {
             get;
             set;
@@ -96,6 +129,23 @@ namespace Listen.ViewModels
                     var dialog = DependencyService.Get<IDialogService>();
                     dialog.Show("Oups !", "Vos identifiants ne sont pas valides.", "OK", null);
                 }
+            });
+
+            PasswordLostCommand = new Command(async () =>
+            {
+                var url = "https://www.en-marche.fr/mot-de-passe-oublie";
+
+#if DEBUG
+                url = "https://staging.en-marche.fr/mot-de-passe-oublie";
+#endif
+
+                await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
+            });
+
+            HidePassword = true;
+            ShowPasswordCommand = new Command(() =>
+            {
+                HidePassword = !HidePassword;
             });
         }
     }
