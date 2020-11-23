@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
+using Listen.Managers;
+using Listen.VisualElements;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class IntroPage : ContentPage
+    public partial class IntroPage : BaseContentPage
     {
         public IntroPage(ViewModelBase vm)
         {
-            Title = "";
+            Title = "Intro";
             NavigationPage.SetBackButtonTitle(this, "");
             BindingContext = vm;
             InitializeComponent();
