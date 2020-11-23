@@ -1,16 +1,9 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-using System.Text;
 using System.Globalization;
 using System.Threading;
 using Android.Graphics.Drawables;
-using Android.Graphics;
 using Android.Content;
 using Xamarin.Forms;
 using Listen.Models.Tasks;
@@ -62,7 +55,5 @@ namespace Listen.Droid
 
             LoadApplication(new App());
         }
-
-
     }
 }

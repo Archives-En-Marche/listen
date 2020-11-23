@@ -7,8 +7,6 @@ using System.Threading;
 using Foundation;
 using Listen.iOS.Tasks;
 using Listen.Models.Tasks;
-using PopolLib.iOS.Services;
-using PopolLib.Services;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;

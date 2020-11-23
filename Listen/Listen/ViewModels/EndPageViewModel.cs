@@ -42,7 +42,7 @@ namespace Listen.ViewModels
                 var user = await UserManager.Instance.GetUserAsync();
                 if (user != null && string.IsNullOrEmpty(user?.FirstName))
                 {
-                    await ServerManager.Instance.GetUserInfosAsync(user.Token);
+                    await ServerManager.Instance.GetUserInfosAsync();
                     user = await UserManager.Instance.GetUserAsync();
                 }
                 return user;

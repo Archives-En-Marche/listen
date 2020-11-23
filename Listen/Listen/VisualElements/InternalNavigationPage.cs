@@ -1,5 +1,4 @@
-﻿using System;
-using Listen.Views;
+﻿using Listen.Views;
 using Xamarin.Forms;
 
 namespace Listen.VisualElements
@@ -28,11 +27,6 @@ namespace Listen.VisualElements
                 //this.BarBackgroundColor = Color.FromHex("#f6fbff");
                 this.BarTextColor = Color.FromHex("#174163");
             }
-            else
-            {
-
-            }
         }
-
     }
 }
