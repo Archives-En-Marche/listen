@@ -10,6 +10,7 @@ namespace Listen.ViewModels.Tags
 
         public string Id { get; set; }
         public string Text { get; set; }
+        public int Height { get; set; } = 50;
 
         Color _backgroundColor;
         public Color BackgroundColor

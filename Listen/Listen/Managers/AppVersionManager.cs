@@ -44,7 +44,7 @@ namespace Listen.Managers
                 var request = new RestRequest("versions.json", Method.GET);
 
                 var cts = new CancellationTokenSource(timeout);
-                var result = await client.ExecuteTaskAsync<List<AppVersionResult>>(request, cts.Token);
+                var result = await client.ExecuteAsync<List<AppVersionResult>>(request, cts.Token);
 
                 return result.Data?.FirstOrDefault(s => s.Scope == scope);
             }
