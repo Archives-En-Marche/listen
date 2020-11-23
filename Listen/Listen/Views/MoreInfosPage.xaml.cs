@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using GalaSoft.MvvmLight;
-using Xamarin.Forms;
+﻿using GalaSoft.MvvmLight;
+using Listen.VisualElements;
 
 namespace Listen.Views
 {
-    public partial class MoreInfosPage : ContentPage
+    public partial class MoreInfosPage : BaseContentPage
     {
         public MoreInfosPage(ViewModelBase vm)
         {

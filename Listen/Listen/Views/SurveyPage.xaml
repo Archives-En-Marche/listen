@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:flv="clr-namespace:PopolLib.VisualElements.FastListView;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.SurveyPage">
+<lvisual:BaseContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:visual="clr-namespace:PopolLib.VisualElements.FastListView;assembly=PopolLib"
+    xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Listen.Views.SurveyPage">
     <ContentPage.Content>
-        <StackLayout Padding="0,0,0,0">
-            <flv:FastListView BackgroundColor="{StaticResource paleGrey}" ItemsSource="{Binding Surveys}" ScrollEnabled="true" HasUnevenRows="true" SelectedCommand="{Binding SelectedCommand}" SeparatorColor="{StaticResource white}" SeparatorVisibility="Default" VerticalOptions="FillAndExpand" />
+        <StackLayout Padding="0,0,0,200" BackgroundColor="{StaticResource white}">
+            <visual:FastListView BackgroundColor="{StaticResource white}" ItemsSource="{Binding Surveys}" ScrollEnabled="true" HasUnevenRows="true" SelectedCommand="{Binding SelectedCommand}" SeparatorVisibility="None" />
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:BaseContentPage>
