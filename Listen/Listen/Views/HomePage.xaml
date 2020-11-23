@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.HomePage">
+<lvisual:BaseContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
+    xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Listen.Views.HomePage">
     <ContentPage.Content>
-        <StackLayout Padding="0,0,0,20">
-            <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" Aspect="AspectFill" MinimumHeightRequest="500">
-                <Image.Source>
-                    <OnPlatform x:TypeArguments="ImageSource">
-                        <On Platform="iOS">Images/illustration.png</On>
-                        <On Platform="Android">illustration.png</On>
-                    </OnPlatform>
-                </Image.Source>
-            </Image>
-            <ContentView VerticalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="137" HorizontalOptions="Center">
-                <StackLayout Spacing="17">
-                    <visual:ExtendedButton LetterSpacing="0.25" Text="QUESTIONNAIRES" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
-                        SelectedTextColor="White" CornerRadius="4" Command="{Binding QuestionnaireCommand}">
-                        <visual:LetterSpacingButton.FontFamily>
-                            <OnPlatform x:TypeArguments="x:String">
-                                <On Platform="iOS">Roboto</On>
-                                <On Platform="Android">Roboto-Bold.ttf</On>
-                            </OnPlatform>
-                        </visual:LetterSpacingButton.FontFamily>
-                    </visual:ExtendedButton>
-                    <StackLayout Orientation="Horizontal" Spacing="17" WidthRequest="313">
-                        <visual:ExtendedButton LetterSpacing="0.25" Text="MES INFOS" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="148" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
-                            SelectedTextColor="White" CornerRadius="4" Command="{Binding InfosCommand}">
+        <ScrollView>
+            <StackLayout Padding="0,0,0,20" BackgroundColor="{StaticResource white}">
+                <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" Aspect="AspectFill" MinimumHeightRequest="500">
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="iOS">Images/illustration.png</On>
+                            <On Platform="Android">illustration.png</On>
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
+                <ContentView VerticalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="137" HorizontalOptions="Center">
+                    <StackLayout Spacing="17">
+                        <visual:ExtendedButton LetterSpacing="0.25" Text="QUESTIONNAIRES" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
+                            SelectedTextColor="White" CornerRadius="4" Command="{Binding QuestionnaireCommand}">
                             <visual:LetterSpacingButton.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                     <On Platform="iOS">Roboto</On>
@@ -31,18 +27,29 @@
                                 </OnPlatform>
                             </visual:LetterSpacingButton.FontFamily>
                         </visual:ExtendedButton>
-                        <visual:ExtendedButton LetterSpacing="0.25" Text="À PROPOS" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="148" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
-                            SelectedTextColor="White" CornerRadius="4" Command="{Binding AboutCommand}">
-                            <visual:LetterSpacingButton.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Bold.ttf</On>
-                                </OnPlatform>
-                            </visual:LetterSpacingButton.FontFamily>
-                        </visual:ExtendedButton>
+                        <StackLayout Orientation="Horizontal" Spacing="17" WidthRequest="313">
+                            <visual:ExtendedButton LetterSpacing="0.25" Text="MES INFOS" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="148" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
+                                SelectedTextColor="White" CornerRadius="4" Command="{Binding InfosCommand}">
+                                <visual:LetterSpacingButton.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Bold.ttf</On>
+                                    </OnPlatform>
+                                </visual:LetterSpacingButton.FontFamily>
+                            </visual:ExtendedButton>
+                            <visual:ExtendedButton LetterSpacing="0.25" Text="À PROPOS" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" WidthRequest="148" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
+                                SelectedTextColor="White" CornerRadius="4" Command="{Binding AboutCommand}">
+                                <visual:LetterSpacingButton.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Bold.ttf</On>
+                                    </OnPlatform>
+                                </visual:LetterSpacingButton.FontFamily>
+                            </visual:ExtendedButton>
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-            </ContentView>
-        </StackLayout>
+                </ContentView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:BaseContentPage>

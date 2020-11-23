@@ -7,7 +7,7 @@
     xmlns:conv="clr-namespace:PopolLib.Converters;assembly=PopolLib"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.QuestionPage">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView BackgroundColor="{StaticResource white}">
             <Grid Padding="20,38,20,20" HorizontalOptions="CenterAndExpand" RowSpacing="0" ColumnSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -17,19 +17,19 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="313" />
                 </Grid.ColumnDefinitions>
-                <visual:ExtendedLabel MaxLines="5" AutoAdjustFontSize="true" LineBreakMode="WordWrap" FontAttributes="Bold" FontSize="20" Text="{Binding QuestionLabel}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" HorizontalTextAlignment="Start">
+                <Label LineBreakMode="WordWrap" FontAttributes="Bold" FontSize="20" Text="{Binding QuestionLabel}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" HorizontalTextAlignment="Start">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
                             <On Platform="Android">Roboto-Bold.ttf</On>
                         </OnPlatform>
                     </Label.FontFamily>
-                </visual:ExtendedLabel>
+                </Label>
                 <tev:TagEntryView IsVisible="{Binding IsReponseLibreVisible, Converter={conv:InverseBoolConverter}}" Grid.Row="1" Margin="0,35,0,0" Spacing="27" TagItems="{Binding TagList}" TagTappedCommand="{Binding TagCommand}" WidthRequest="313" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
-                            <visual:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
-                                <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                            <visual:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" Padding="0" Margin="0" WidthRequest="313" HorizontalOptions="Fill">
+                                <Label FontSize="18" Padding="10" Margin="0" HeightRequest="{Binding Height}" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
                                             <On Platform="iOS">Roboto</On>
