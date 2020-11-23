@@ -131,25 +131,17 @@ namespace Listen.Models.WebServices
                     {
                         return JsonConvert.DeserializeObject<Token>(result.Content);
                     }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                else
-                {
-                    return null;
                 }
             }
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
-                return null;
             }
             finally
             {
                 readWrite.Release();
             }
+            return null;
         }
     }
 

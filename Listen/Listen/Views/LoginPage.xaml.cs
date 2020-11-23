@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using Listen.ViewModels;
+using Listen.VisualElements;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class LoginPage : ContentPage
+    public partial class LoginPage : BaseContentPage
     {
         public LoginPage(ViewModelBase vm)
         {

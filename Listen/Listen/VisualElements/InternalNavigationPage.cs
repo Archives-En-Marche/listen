@@ -1,5 +1,4 @@
-﻿using System;
-using Listen.Views;
+﻿using Listen.Views;
 using Xamarin.Forms;
 
 namespace Listen.VisualElements
@@ -24,15 +23,10 @@ namespace Listen.VisualElements
 
             if (!(child is HomePage))
             {
-                this.BarBackgroundColor = Color.FromHex("#eff9ff");
+                this.BarBackgroundColor = (Color) Application.Current.Resources["paleGrey"];
                 //this.BarBackgroundColor = Color.FromHex("#f6fbff");
-                this.BarTextColor = Color.FromHex("#174163");
-            }
-            else
-            {
-
+                this.BarTextColor = (Color)Application.Current.Resources["darkSlateBlue"];
             }
         }
-
     }
 }

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:visual="clr-namespace:Listen.VisualElements;assembly=Listen" xmlns:visual2="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" x:Class="Listen.Views.UserLoginPage" BackgroundColor="White">
+<lvisual:BaseContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen"
+    xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
+    x:Class="Listen.Views.UserLoginPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Spacing="0">
-                <StackLayout BackgroundColor="{StaticResource paleGrey}" HeightRequest="171" VerticalOptions="Start">
+            <StackLayout Spacing="0" BackgroundColor="{StaticResource white}">
+                <StackLayout BackgroundColor="{StaticResource paleGrey}" HeightRequest="90" VerticalOptions="Start">
                     <Label FontSize="24" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" HorizontalTextAlignment="Start" Text="Connexion" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313">
                         <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">
@@ -13,20 +18,28 @@
                         </Label.FontFamily>
                     </Label>
                 </StackLayout>
-                <StackLayout Padding="0,45,0,0" Spacing="40" VerticalOptions="StartAndExpand">
-                    <visual:MaterialEntry Text="{Binding Email}" WidthRequest="313" Placeholder="Entrez votre e-mail" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Email" />
-                    <visual:MaterialEntry Text="{Binding Password}" WidthRequest="313" Placeholder="Entrez votre mot de passe" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" IsPassword="true" Keyboard="Default" />
-                    <visual2:ExtendedButton Margin="0,20,0,0" LetterSpacing="0.25" Text="CONNEXION" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}"
+                <StackLayout BackgroundColor="{StaticResource white}" Padding="0,45,0,0" Spacing="40" VerticalOptions="StartAndExpand">
+                    <lvisual:MaterialEntry Text="{Binding Email}" WidthRequest="313" Placeholder="Entrez votre e-mail" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Email" />
+                    <lvisual:MaterialEntry Text="{Binding Password}" WidthRequest="313" Placeholder="Entrez votre mot de passe" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" IsPassword="true" Keyboard="Default" />
+                    <visual:ExtendedButton Margin="0,20,0,0" LetterSpacing="0.25" Text="CONNEXION" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}"
                         SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding ValiderCommand}">
-                        <visual2:LetterSpacingButton.FontFamily>
+                        <visual:LetterSpacingButton.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="iOS">Roboto</On>
                                 <On Platform="Android">Roboto-Bold.ttf</On>
                             </OnPlatform>
-                        </visual2:LetterSpacingButton.FontFamily>
-                    </visual2:ExtendedButton>
+                        </visual:LetterSpacingButton.FontFamily>
+                    </visual:ExtendedButton>
+                    <Button FontSize="12" Margin="0,-20,0,40" HorizontalOptions="Center" Text="MOT DE PASSE OUBLIÉ" FontAttributes="Bold" TextColor="{StaticResource warmGrey}" BackgroundColor="Transparent" Command="{Binding PasswordLostCommand}">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS">Roboto-Bold</On>
+                                <On Platform="Android">Roboto-Bold.ttf</On>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:BaseContentPage>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:Listen.VisualElements;assembly=Listen" xmlns:visual2="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:tev="clr-namespace:PopolLib.VisualElements.TagEntryView;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.MoreInfosPage">
+<lvisual:BaseContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen"
+    xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
+    xmlns:tev="clr-namespace:PopolLib.VisualElements.TagEntryView;assembly=PopolLib"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Listen.Views.MoreInfosPage">
     <ContentPage.Content>
-        <ScrollView BackgroundColor="White">
+        <ScrollView BackgroundColor="{StaticResource white}">
             <StackLayout WidthRequest="313" Spacing="0">
                 <Label Margin="0,30,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Nous aimerions vous poser 3 questions supplémentaires qui nous permettront de mieux analyser les réponses à cette consultation." TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
                     <Label.FontFamily>
@@ -19,7 +25,7 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <visual:MaterialEntry Text="{Binding PostalCode}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Entrez le code postal" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
+                <lvisual:MaterialEntry Text="{Binding PostalCode}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Entrez le code postal" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
                 <Label Margin="0,54,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Quelle est votre profession ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
@@ -31,7 +37,7 @@
                 <tev:TagEntryView WidthRequest="313" Margin="0,36,0,0" Spacing="27" TagItems="{Binding JobItems}" TagTappedCommand="{Binding SelectCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
-                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
+                            <visual:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
                                 <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
@@ -40,7 +46,7 @@
                                         </OnPlatform>
                                     </Label.FontFamily>
                                 </Label>
-                            </visual2:RoundedStackLayout>
+                            </visual:RoundedStackLayout>
                         </DataTemplate>
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
@@ -55,7 +61,7 @@
                 <tev:TagEntryView WidthRequest="313" Margin="0,36,0,0" Spacing="27" TagItems="{Binding AgeItems}" TagTappedCommand="{Binding SelectCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
-                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
+                            <visual:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
                                 <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
@@ -64,7 +70,7 @@
                                         </OnPlatform>
                                     </Label.FontFamily>
                                 </Label>
-                            </visual2:RoundedStackLayout>
+                            </visual:RoundedStackLayout>
                         </DataTemplate>
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
@@ -79,7 +85,7 @@
                 <tev:TagEntryView WidthRequest="313" Margin="0,36,0,0" Spacing="27" TagItems="{Binding GenderItems}" TagTappedCommand="{Binding SelectCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
-                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
+                            <visual:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
                                 <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
@@ -88,21 +94,21 @@
                                         </OnPlatform>
                                     </Label.FontFamily>
                                 </Label>
-                            </visual2:RoundedStackLayout>
+                            </visual:RoundedStackLayout>
                         </DataTemplate>
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
-                <visual:MaterialEntry IsVisible="{Binding GenderIsVisible}" Text="{Binding Gender}" Margin="0,23,0,0" WidthRequest="313" Placeholder="Personalisez votre genre" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
-                <visual2:ExtendedButton Margin="0,60,0,20" LetterSpacing="0.25" Text="SOUMETTRE" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
+                <lvisual:MaterialEntry IsVisible="{Binding GenderIsVisible}" Text="{Binding Gender}" Margin="0,23,0,0" WidthRequest="313" Placeholder="Personalisez votre genre" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
+                <visual:ExtendedButton Margin="0,60,0,20" LetterSpacing="0.25" Text="SOUMETTRE" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
                     SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding SoumettreCommand}">
-                    <visual2:LetterSpacingButton.FontFamily>
+                    <visual:LetterSpacingButton.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
                             <On Platform="Android">Roboto-Bold.ttf</On>
                         </OnPlatform>
-                    </visual2:LetterSpacingButton.FontFamily>
-                </visual2:ExtendedButton>
+                    </visual:LetterSpacingButton.FontFamily>
+                </visual:ExtendedButton>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:BaseContentPage>
