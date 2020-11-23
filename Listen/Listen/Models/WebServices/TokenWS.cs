@@ -49,7 +49,7 @@ namespace Listen.Models.WebServices
                     request.AddParameter("password", password);
 
                     var cts = new CancellationTokenSource(timeout);
-                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+                    var result = await client.ExecuteAsync(request, cts.Token);
 
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
@@ -81,7 +81,7 @@ namespace Listen.Models.WebServices
                     var request = new RestRequest("/oauth/v2/tokeninfo?access_token=" + token, Method.GET);
 
                     var cts = new CancellationTokenSource(timeout);
-                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+                    var result = await client.ExecuteAsync(request, cts.Token);
 
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
@@ -126,30 +126,22 @@ namespace Listen.Models.WebServices
                     request.AddParameter("grant_type", "refresh_token");
                     request.AddParameter("refresh_token", refresh_token);
                     var cts = new CancellationTokenSource(timeout);
-                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+                    var result = await client.ExecuteAsync(request, cts.Token);
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
                         return JsonConvert.DeserializeObject<Token>(result.Content);
                     }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                else
-                {
-                    return null;
                 }
             }
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
-                return null;
             }
             finally
             {
                 readWrite.Release();
             }
+            return null;
         }
     }
 

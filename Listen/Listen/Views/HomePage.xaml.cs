@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using Listen.Managers;
-using Listen.Models.WebServices;
 using Listen.ViewModels;
 using Listen.VisualElements;
 using Microsoft.AppCenter.Crashes;
 using PopolLib.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class HomePage : ContentPage
+    public partial class HomePage : BaseContentPage
     {
         INavigation _nav;
 
@@ -34,7 +33,7 @@ namespace Listen.Views
             {
                 // -- On charge les questionnaires
                 //hud.Show("Chargement ...");
-                Token newtoken;
+                //Token newtoken;
                 var user = await UserManager.Instance.GetUserAsync();
 
                 //await ServerManager.Instance.GetSurveysAsync();
@@ -55,7 +54,7 @@ namespace Listen.Views
                     //else
 
                     // -- On REFRESH AUTO Le TOKEN ?
-                    newtoken = await TokenManager.Instance.RefreshTokenAsync(refresh);
+                    await TokenManager.Instance.GetTokenAsync();
 
                     //var infos = await TokenWS.Instance.GetInfoAsync(newtoken?.AccessToken);
                     //if (infos == null)
@@ -75,12 +74,7 @@ namespace Listen.Views
                 if (displayLoginPage)
                 {
                     // -- On présente la page de login
-                    var nav = ((NavigationPage)Application.Current.MainPage).Navigation;
-                    var mstack = nav.ModalStack;
-                    if (mstack.FirstOrDefault(p => p is InternalNavigationPage) == null)
-                    {
-                        await ((NavigationPage)Application.Current.MainPage).Navigation.PushModalAsync(new InternalNavigationPage(new LoginPage(new LoginPageViewModel(_nav))));
-                    }
+                    await _nav.PushAsync(new LoginPage(new LoginPageViewModel(_nav)));
                 }
 
                 // -- Check App Version
@@ -98,13 +92,11 @@ namespace Listen.Views
                             {
                                 if (Device.RuntimePlatform == Device.iOS)
                                 {
-                                    var ass = DependencyService.Get<IAppStoreService>();
-                                    ass.OpenAppInStore("id1438099575");
+                                    Browser.OpenAsync("itms-apps://itunes.apple.com/app/id1441973895", BrowserLaunchMode.SystemPreferred);
                                 }
                                 else
                                 {
-                                    var ass = DependencyService.Get<IAppStoreService>();
-                                    ass.OpenAppInStore("fr.en-marche.listen");
+                                    Browser.OpenAsync("https://play.google.com/store/apps/details?id=fr.en_marche.jecoute", BrowserLaunchMode.SystemPreferred);
                                 }
                             }
                         });

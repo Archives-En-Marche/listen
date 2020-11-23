@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-  xmlns:visual="clr-namespace:Listen.VisualElements;assembly=Listen"
-  xmlns:visual2="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
+<lvisual:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen"
+  xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
   xmlns:tev="clr-namespace:PopolLib.VisualElements.TagEntryView;assembly=PopolLib"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   x:Class="Listen.Views.RgpdPage">
     <ContentPage.Content>
-        <ScrollView BackgroundColor="White">
+        <ScrollView BackgroundColor="{StaticResource white}">
             <StackLayout WidthRequest="313" Spacing="0">
                 <Label Margin="0,30,0,0" FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Les données personnelles recueillies par les bénévoles du mouvement sont traitées exclusivement par LaREM dans le cadre du questionnaire qui vient de vous être soumis." TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start">
                     <Label.FontFamily>
@@ -35,7 +35,7 @@
                 <tev:TagEntryView WidthRequest="313" Margin="0,36,0,0" Spacing="27" TagItems="{Binding Q1Items}" TagTappedCommand="{Binding YesNoCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
-                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
+                            <visual:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
                                 <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
@@ -44,7 +44,7 @@
                                         </OnPlatform>
                                     </Label.FontFamily>
                                 </Label>
-                            </visual2:RoundedStackLayout>
+                            </visual:RoundedStackLayout>
                         </DataTemplate>
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
@@ -59,7 +59,7 @@
                 <tev:TagEntryView WidthRequest="313" Margin="0,31,0,0" Spacing="27" TagItems="{Binding Q2Items}" TagTappedCommand="{Binding YesNoCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
-                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
+                            <visual:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
                                 <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
@@ -68,13 +68,13 @@
                                         </OnPlatform>
                                     </Label.FontFamily>
                                 </Label>
-                            </visual2:RoundedStackLayout>
+                            </visual:RoundedStackLayout>
                         </DataTemplate>
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
-                <visual:MaterialEntry Text="{Binding Prenom}" Margin="0,40,0,0" WidthRequest="313" Placeholder="Prénom" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
-                <visual:MaterialEntry Text="{Binding Nom}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Nom" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
-                <visual:MaterialEntry Text="{Binding Email}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Email" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Email" />
+                <lvisual:MaterialEntry Text="{Binding Prenom}" Margin="0,40,0,0" WidthRequest="313" Placeholder="Prénom" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
+                <lvisual:MaterialEntry Text="{Binding Nom}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Nom" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Default" />
+                <lvisual:MaterialEntry Text="{Binding Email}" Margin="0,20,0,0" WidthRequest="313" Placeholder="Email" AccentColor="{StaticResource lightPeach}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Keyboard="Email" />
                 <Label FontAttributes="Bold" FontSize="20" WidthRequest="313" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand" Text="Pourrions-nous vous contacter via e-mail afin de vous proposer de devenir adhérent de La République En Marche ?" TextColor="{StaticResource darkSlateBlue}" VerticalOptions="Start" Margin="0,51,0,0">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
@@ -86,7 +86,7 @@
                 <tev:TagEntryView WidthRequest="313" Margin="0,35,0,0" Spacing="27" TagItems="{Binding Q3Items}" TagTappedCommand="{Binding YesNoCommand}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>
-                            <visual2:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
+                            <visual:RoundedStackLayout BorderColor="{StaticResource darkSlateBlue}" BorderThickness="2" BackgroundColor="{Binding BackgroundColor}" HeightRequest="60" WidthRequest="313" HorizontalOptions="Fill">
                                 <Label LineHeight="-1" FontSize="18" HorizontalOptions="CenterAndExpand" Text="{Binding Text}" TextColor="{Binding TextColor}" VerticalOptions="CenterAndExpand">
                                     <Label.FontFamily>
                                         <OnPlatform x:TypeArguments="x:String">
@@ -95,20 +95,20 @@
                                         </OnPlatform>
                                     </Label.FontFamily>
                                 </Label>
-                            </visual2:RoundedStackLayout>
+                            </visual:RoundedStackLayout>
                         </DataTemplate>
                     </tev:TagEntryView.TagItemTemplate>
                 </tev:TagEntryView>
-                <visual2:ExtendedButton Margin="0,60,0,20" LetterSpacing="0.25" Text="CONTINUER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
+                <visual:ExtendedButton Margin="0,60,0,20" LetterSpacing="0.25" Text="CONTINUER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}"
                     SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding ValiderCommand}">
-                    <visual2:LetterSpacingButton.FontFamily>
+                    <visual:LetterSpacingButton.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
                             <On Platform="Android">Roboto-Bold.ttf</On>
                         </OnPlatform>
-                    </visual2:LetterSpacingButton.FontFamily>
-                </visual2:ExtendedButton>
+                    </visual:LetterSpacingButton.FontFamily>
+                </visual:ExtendedButton>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:BaseContentPage>

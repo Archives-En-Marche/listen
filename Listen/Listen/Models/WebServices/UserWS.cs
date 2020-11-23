@@ -37,7 +37,7 @@ namespace Listen.Models.WebServices
                     var request = new RestRequest("/api/me", Method.GET);
                     request.AddHeader("Authorization", "Bearer " + token);
                     var cts = new CancellationTokenSource(timeout);
-                    var result = await client.ExecuteTaskAsync(request, cts.Token);
+                    var result = await client.ExecuteAsync(request, cts.Token);
 
                     if (result.StatusCode == HttpStatusCode.OK)
                     {

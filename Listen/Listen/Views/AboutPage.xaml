@@ -1,63 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.AboutPage">
+<lvisual:BaseContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Listen.Views.AboutPage"
+    xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen">
     <ContentPage.Content>
-        <StackLayout Padding="0,30,0,35">
-            <Label FontSize="24" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" HorizontalTextAlignment="Start" Text="À Propos" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313">
-                <Label.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="iOS">Roboto</On>
-                        <On Platform="Android">Roboto-Bold.ttf</On>
-                    </OnPlatform>
-                </Label.FontFamily>
-            </Label>
-            <Label Margin="0,26,0,0" FontSize="20" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="J'écoute" FontAttributes="Bold" FontSize="20">
-                            <Span.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Bold.ttf</On>
-                                </OnPlatform>
-                            </Span.FontFamily>
-                        </Span>
-                        <Span Text=" est une application mobile créée par " FontSize="20">
-                            <Span.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Regular.ttf</On>
-                                </OnPlatform>
-                            </Span.FontFamily>
-                        </Span>
-                        <Span Text="La République En Marche. " FontAttributes="Italic" FontSize="20">
-                            <Span.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Italic.ttf</On>
-                                </OnPlatform>
-                            </Span.FontFamily>
-                        </Span>
-                        <Span Text="Elle permet aux bénévoles du mouvement de faire remonter le ressenti des français sur différentes thématiques." FontSize="20">
-                            <Span.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Regular.ttf</On>
-                                </OnPlatform>
-                            </Span.FontFamily>
-                        </Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label Margin="0,30,0,0" FontSize="14" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="D'après une idée originale de Paulin Laroche (co-animateur du comité local Masséna Paris 13)." TextColor="{StaticResource brownishGrey}" WidthRequest="313">
-                <Label.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="iOS">Roboto</On>
-                        <On Platform="Android">Roboto-Regular.ttf</On>
-                    </OnPlatform>
-                </Label.FontFamily>
-            </Label>
-            <StackLayout Margin="0,30,0,0" VerticalOptions="StartAndExpand" WidthRequest="313" HorizontalOptions="CenterAndExpand">
-                <Label FontSize="14" HorizontalTextAlignment="Start" Text="Crédits des icônes et images utilisées :" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+        <ScrollView>
+            <StackLayout Padding="0,30,0,35" BackgroundColor="{StaticResource white}">
+                <Label FontSize="24" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" HorizontalTextAlignment="Start" Text="À Propos" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS">Roboto</On>
+                            <On Platform="Android">Roboto-Bold.ttf</On>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Label Margin="0,26,0,0" FontSize="20" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="J'écoute" FontAttributes="Bold" FontSize="20">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Bold.ttf</On>
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                            <Span Text=" est une application mobile créée par " FontSize="20">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Regular.ttf</On>
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                            <Span Text="La République En Marche. " FontAttributes="Italic" FontSize="20">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Italic.ttf</On>
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                            <Span Text="Elle permet aux bénévoles du mouvement de faire remonter le ressenti des français sur différentes thématiques." FontSize="20">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Regular.ttf</On>
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Margin="0,30,0,0" FontSize="14" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="D'après une idée originale de Paulin Laroche (co-animateur du comité local Masséna Paris 13)." TextColor="{StaticResource brownishGrey}" WidthRequest="313">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
@@ -65,8 +61,8 @@
                         </OnPlatform>
                     </Label.FontFamily>
                 </Label>
-                <StackLayout WidthRequest="288" HorizontalOptions="CenterAndExpand" Spacing="0" >
-                    <Label FontSize="14" HorizontalTextAlignment="Start" Text="- “Conversation” par Freepik sur flaticon.com" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                <StackLayout Margin="0,30,0,0" VerticalOptions="StartAndExpand" WidthRequest="313" HorizontalOptions="CenterAndExpand">
+                    <Label FontSize="14" HorizontalTextAlignment="Start" Text="Crédits des icônes et images utilisées :" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
                         <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="iOS">Roboto</On>
@@ -74,32 +70,42 @@
                             </OnPlatform>
                         </Label.FontFamily>
                     </Label>
-                    <Label FontSize="14" HorizontalTextAlignment="Start" Text="- “Mic” par Jemis Mali sur thenounproject.com" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
-                        <Label.FontFamily>
-                            <OnPlatform x:TypeArguments="x:String">
-                                <On Platform="iOS">Roboto</On>
-                                <On Platform="Android">Roboto-Regular.ttf</On>
-                            </OnPlatform>
-                        </Label.FontFamily>
-                    </Label>
-                    <Label FontSize="14" HorizontalTextAlignment="Start" Text="- “Trolley” par Vectors Market sur flaticon.com" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
-                        <Label.FontFamily>
-                            <OnPlatform x:TypeArguments="x:String">
-                                <On Platform="iOS">Roboto</On>
-                                <On Platform="Android">Roboto-Regular.ttf</On>
-                            </OnPlatform>
-                        </Label.FontFamily>
-                    </Label>
-                    <Label FontSize="14" HorizontalTextAlignment="Start" Text="- “Winner” par Freepik sur flaticon.com" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
-                        <Label.FontFamily>
-                            <OnPlatform x:TypeArguments="x:String">
-                                <On Platform="iOS">Roboto</On>
-                                <On Platform="Android">Roboto-Regular.ttf</On>
-                            </OnPlatform>
-                        </Label.FontFamily>
-                    </Label>
+                    <StackLayout WidthRequest="288" HorizontalOptions="CenterAndExpand" Spacing="0" >
+                        <Label FontSize="14" HorizontalTextAlignment="Start" Text="- “Conversation” par Freepik sur flaticon.com" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Regular.ttf</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label FontSize="14" HorizontalTextAlignment="Start" Text="- “Mic” par Jemis Mali sur thenounproject.com" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Regular.ttf</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label FontSize="14" HorizontalTextAlignment="Start" Text="- “Trolley” par Vectors Market sur flaticon.com" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Regular.ttf</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label FontSize="14" HorizontalTextAlignment="Start" Text="- “Winner” par Freepik sur flaticon.com" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Regular.ttf</On>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:BaseContentPage>

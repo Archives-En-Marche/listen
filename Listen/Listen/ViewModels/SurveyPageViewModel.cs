@@ -1,7 +1,6 @@
 ﻿using System;
 using GalaSoft.MvvmLight;
 using System.Collections.Generic;
-using System.Windows.Input;
 using Xamarin.Forms;
 using Listen.ViewModels.ViewCell;
 using System.Collections.ObjectModel;
@@ -49,7 +48,7 @@ namespace Listen.ViewModels
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     var list = new ObservableCollection<IFastViewCell>();
-                    list.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
+                    list.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user?.FirstName + " !" });
                     list.Add(new UpdateSurveyViewCellViewModel()
                     {
                         ActualiserCommand = new Command(async () =>
@@ -76,7 +75,7 @@ namespace Listen.ViewModels
             }
             else
             {
-                Surveys.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user.FirstName + " !" });
+                Surveys.Add(new NoSurveyViewCellViewModel() { Name = "Bonjour " + user?.FirstName + " !" });
                 Surveys.Add(new UpdateSurveyViewCellViewModel()
                 {
                     ActualiserCommand = new Command(async () =>
@@ -162,7 +161,7 @@ namespace Listen.ViewModels
                     var user = await UserManager.Instance.GetUserAsync();
                     if (string.IsNullOrEmpty(user.FirstName) || string.IsNullOrEmpty(user.ZipCode))
                     {
-                        await ServerManager.Instance.GetUserInfosAsync(user.Token);
+                        await ServerManager.Instance.GetUserInfosAsync();
                         user = await UserManager.Instance.GetUserAsync();
                     }
                     var surveys = (IList<Survey>)obj;
