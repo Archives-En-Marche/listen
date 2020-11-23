@@ -1,8 +1,6 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Listen.Managers;
-using Xamarin.Forms;
 
 namespace Listen.Models.Tasks
 {

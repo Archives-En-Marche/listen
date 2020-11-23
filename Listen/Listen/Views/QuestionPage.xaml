@@ -17,14 +17,14 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="313" />
                 </Grid.ColumnDefinitions>
-                <visual:ExtendedLabel MaxLines="5" AutoAdjustFontSize="true" LineBreakMode="WordWrap" FontAttributes="Bold" FontSize="20" Text="{Binding QuestionLabel}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" HorizontalTextAlignment="Start">
+                <Label MaxLines="5" LineBreakMode="WordWrap" FontAttributes="Bold" FontSize="20" Text="{Binding QuestionLabel}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" HorizontalTextAlignment="Start">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="iOS">Roboto</On>
                             <On Platform="Android">Roboto-Bold.ttf</On>
                         </OnPlatform>
                     </Label.FontFamily>
-                </visual:ExtendedLabel>
+                </Label>
                 <tev:TagEntryView IsVisible="{Binding IsReponseLibreVisible, Converter={conv:InverseBoolConverter}}" Grid.Row="1" Margin="0,35,0,0" Spacing="27" TagItems="{Binding TagList}" TagTappedCommand="{Binding TagCommand}" WidthRequest="313" HorizontalOptions="CenterAndExpand">
                     <tev:TagEntryView.TagItemTemplate>
                         <DataTemplate>

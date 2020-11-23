@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using Xamarin.Forms;
 
 namespace Listen.Views
