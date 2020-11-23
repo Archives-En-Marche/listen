@@ -1,62 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.IntroPage">
+<lvisual:BaseContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
+    xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Listen.Views.IntroPage">
     <ContentPage.Content>
-        <StackLayout Padding="0,0,0,20">
-            <Label Margin="0,37,0,0" FontSize="20" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" TextColor="Black" WidthRequest="313">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Bonjour je m'appelle " FontAttributes="Bold" FontSize="20">
-                            <Span.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Bold.ttf</On>
-                                </OnPlatform>
-                            </Span.FontFamily>
-                        </Span>
-                        <Span Text="{Binding Name}" FontAttributes="Bold" FontSize="20">
-                            <Span.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Bold.ttf</On>
-                                </OnPlatform>
-                            </Span.FontFamily>
-                        </Span>
-                        <Span Text=". Je suis bénévole à " FontAttributes="Bold" FontSize="20">
-                            <Span.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Bold.ttf</On>
-                                </OnPlatform>
-                            </Span.FontFamily>
-                        </Span>
-                        <Span Text="La République En Marche " FontAttributes="Bold,Italic" FontSize="20">
-                            <Span.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-BoldItalic.ttf</On>
-                                </OnPlatform>
-                            </Span.FontFamily>
-                        </Span>
-                        <Span Text="et j’aimerais vous poser quelques questions si vous avez 5 minutes." FontAttributes="Bold" FontSize="20">
-                            <Span.FontFamily>
-                                <OnPlatform x:TypeArguments="x:String">
-                                    <On Platform="iOS">Roboto</On>
-                                    <On Platform="Android">Roboto-Bold.ttf</On>
-                                </OnPlatform>
-                            </Span.FontFamily>
-                        </Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <visual:ExtendedButton x:Name="continueCommand" LetterSpacing="0.25" Text="CONTINUER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" WidthRequest="313" HeightRequest="60"
-                BackgroundColor="{StaticResource veryLightPink}" SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding ContinueCommand}" CommandParameter="{Binding Source={x:Reference continueCommand}}">
-                <visual:LetterSpacingButton.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="iOS">Roboto</On>
-                        <On Platform="Android">Roboto-Bold.ttf</On>
-                    </OnPlatform>
-                </visual:LetterSpacingButton.FontFamily>
-            </visual:ExtendedButton>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="0,0,0,20" BackgroundColor="{StaticResource white}">
+                <Label Margin="0,37,0,0" FontSize="20" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" TextColor="Black" WidthRequest="313">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Bonjour je m'appelle " FontAttributes="Bold" FontSize="20">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Bold.ttf</On>
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                            <Span Text="{Binding Name}" FontAttributes="Bold" FontSize="20">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Bold.ttf</On>
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                            <Span Text=". Je suis bénévole à " FontAttributes="Bold" FontSize="20">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Bold.ttf</On>
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                            <Span Text="La République En Marche " FontAttributes="Bold,Italic" FontSize="20">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-BoldItalic.ttf</On>
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                            <Span Text="et j’aimerais vous poser quelques questions si vous avez 5 minutes." FontAttributes="Bold" FontSize="20">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS">Roboto</On>
+                                        <On Platform="Android">Roboto-Bold.ttf</On>
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <visual:ExtendedButton x:Name="continueCommand" LetterSpacing="0.25" Text="CONTINUER" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" WidthRequest="313" HeightRequest="60"
+                    BackgroundColor="{StaticResource veryLightPink}" SelectedBackgroundColor="{StaticResource battleshipGrey}" SelectedTextColor="White" CornerRadius="4" Command="{Binding ContinueCommand}" CommandParameter="{Binding Source={x:Reference continueCommand}}">
+                    <visual:LetterSpacingButton.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS">Roboto</On>
+                            <On Platform="Android">Roboto-Bold.ttf</On>
+                        </OnPlatform>
+                    </visual:LetterSpacingButton.FontFamily>
+                </visual:ExtendedButton>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:BaseContentPage>
