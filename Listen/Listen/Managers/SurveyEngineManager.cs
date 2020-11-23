@@ -25,7 +25,7 @@ namespace Listen.Managers
             }
         }
 
-        int _pos = 0;
+        int _pos;
 
         public Survey CurrentSurvey { get; set; }
 
@@ -57,11 +57,7 @@ namespace Listen.Managers
 
         public void InitCurrentSurvey()
         {
-            _pos = -1;
-            CurrentReply = new Reply();
-            CurrentReply.Survey = CurrentSurvey.Uuid;
-            CurrentReply.Type = CurrentSurvey.Type;
-            CurrentReply.Answers = new List<Answer>();
+            Init(CurrentSurvey);
         }
 
         public Question GetNextQuestion()
@@ -78,6 +74,10 @@ namespace Listen.Managers
         }
 
         public void Rewind() { _pos--; }
+
+        public void SetPosition(int pos) { _pos = pos; }
+
+        public Question GetQuestion() { return Questions[_pos]; }
 
         public bool IsLastQuestion { get => _pos == Count - 1; }
     }

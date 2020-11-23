@@ -30,6 +30,7 @@ namespace Listen.ViewModels
         public IList<TagViewModel> Q3Items { get { return _q3Items; } set { Set(() => Q3Items, ref _q3Items, value); } }
 
         public ICommand YesNoCommand { get; set; }
+        public ICommand BackHome { get; set; }
 
         string _nom;
         public string Nom
@@ -221,6 +222,25 @@ namespace Listen.ViewModels
                 }
             });
 
+            BackHome = new Command(async (obj) =>
+            {
+                var dialog = DependencyService.Get<IDialogService>();
+                dialog.Show("Retour accueil", "Souhaitez-vous effacer les questions déjà remplies et revenir au choix du questionnaire ?", "Oui", "Non", (res) =>
+                {
+                    if (res)
+                    {
+                        for (int i = _nav.NavigationStack.Count - 1; i >= 0; i--)
+                        {
+                            var p = _nav.NavigationStack[i];
+                            if (!(p is HomePage) && !(p is SurveyPage) && !(p is IntroPage))
+                            {
+                                _nav.RemovePage(p);
+                            }
+                        }
+                        _nav.PopAsync();
+                    }
+                });
+            });
         }
 
         void YesNoSelected(object obj)

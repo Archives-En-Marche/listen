@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
-using Listen.Helpers;
-using Listen.Managers;
-using Listen.Models.WebServices;
 using Listen.Views;
-using PopolLib.Services;
-using ReactiveUI;
 using Xamarin.Forms;
 
 namespace Listen.ViewModels

@@ -29,22 +29,21 @@ namespace Listen.ViewModels
 
         public ICommand SelectCommand { get; set; }
         public ICommand SoumettreCommand { get; set; }
+        public ICommand BackHome { get; set; }
 
         string[] ages = new string[] { "-20 ans", "20-24 ans", "25-39 ans", "40-54 ans", "55-64 ans", "65-80 ans", "80+ ans" };
-        string[] jobs = new string[] { "Agriculteurs exploitants", "Artisans, commerçants et chefs d’entreprise",
-            "Cadres et professions intellectuelles", "Professions Intermédiaires", "Employés", "Ouvriers", "Retraités",
-        "Auto-Entrepreneurs", "Étudiants", "Parents au foyer", "Demandeurs d’emploi"};
+        string[] jobs = new string[] { "Employé", "Ouvrier", "Cadre", "Profession intermédiaire", "Indépendants et professions libérales", "Retraité", "Étudiant" };
         string[] genders = new string[] { "Féminin", "Masculin", "Autre" };
 
         Dictionary<string, string> _resultAges = new Dictionary<string, string>() { { "-20 ans", "less_than_20" }, { "20-24 ans", "between_20_24" },
             { "25-39 ans", "between_25_39" }, { "40-54 ans", "between_40_54" }, { "55-64 ans", "between_55_64" },
             { "65-80 ans", "between_65_80" }, { "80+ ans", "greater_than_80" } };
 
-        Dictionary<string, string> _resultJobs = new Dictionary<string, string>() { { "Agriculteurs exploitants", "farmers" },
-            { "Artisans, commerçants et chefs d’entreprise", "craftsmen" }, { "Cadres et professions intellectuelles", "managerial staff" },
-            { "Professions Intermédiaires", "intermediate_professions" }, { "Employés", "employees" }, { "Ouvriers", "workers" },
-            { "Retraités", "retirees" }, { "Auto-Entrepreneurs", "self_contractor" }, { "Étudiants", "student" },
-            { "Parents au foyer", "home_parent" },  { "Demandeurs d’emploi", "jobseeker" } };
+        Dictionary<string, string> _resultJobs = new Dictionary<string, string>() {
+            { "Employé", "employees" }, { "Ouvrier", "workers" }, { "Cadre", "managerial staff" },
+            { "Profession intermédiaire", "intermediate_professions" }, { "Indépendants et professions libérales", "self_contractor" },
+            { "Retraité", "retirees" }, { "Étudiant", "student" }
+        };
 
         string _postalCode;
         public string PostalCode
@@ -179,6 +178,25 @@ namespace Listen.ViewModels
                 }
             });
 
+            BackHome = new Command(async (obj) =>
+            {
+                var dialog = DependencyService.Get<IDialogService>();
+                dialog.Show("Retour accueil", "Souhaitez-vous effacer les questions déjà remplies et revenir au choix du questionnaire ?", "Oui", "Non", (res) =>
+                {
+                    if (res)
+                    {
+                        for (int i = _nav.NavigationStack.Count - 1; i >= 0; i--)
+                        {
+                            var p = _nav.NavigationStack[i];
+                            if (!(p is HomePage) && !(p is SurveyPage) && !(p is IntroPage))
+                            {
+                                _nav.RemovePage(p);
+                            }
+                        }
+                        _nav.PopAsync();
+                    }
+                });
+            });
         }
 
         void SelectAction(object obj)
