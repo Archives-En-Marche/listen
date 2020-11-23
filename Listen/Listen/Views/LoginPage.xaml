@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.LoginPage">
+<lvisual:BaseContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
+    xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Listen.Views.LoginPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout BackgroundColor="White" Padding="0,0,0,40">
+            <StackLayout BackgroundColor="{StaticResource white}" Padding="0,0,0,40">
                 <Image VerticalOptions="Start" HorizontalOptions="FillAndExpand" Aspect="AspectFill" MinimumHeightRequest="500">
                     <Image.Source>
                         <OnPlatform x:TypeArguments="ImageSource">
@@ -35,4 +40,4 @@
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:BaseContentPage>
