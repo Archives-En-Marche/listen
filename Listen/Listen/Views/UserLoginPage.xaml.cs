@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
+using Listen.VisualElements;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class UserLoginPage : ContentPage
+    public partial class UserLoginPage : BaseContentPage
     {
         public UserLoginPage()
         {
@@ -16,7 +15,8 @@ namespace Listen.Views
             //NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetBackButtonTitle(this, "");
             this.Title = "";
-            BindingContext = vm; InitializeComponent();
+            BindingContext = vm;
+            InitializeComponent();
         }
     }
 }
