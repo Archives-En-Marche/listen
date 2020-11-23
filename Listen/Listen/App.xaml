@@ -16,11 +16,12 @@
             <Color x:Key="lightNavy">#FF1A5B91</Color>
             <Color x:Key="lightPeach">#FFFCD2BE</Color>
             <Color x:Key="paleGrey">#eff9ff</Color>
-            <Color x:Key="paleGrey2">#eff9ff</Color>
             <Color x:Key="powderBlue">#FFB4DDFF</Color>
             <Color x:Key="slateGrey">#FF50515B</Color>
             <Color x:Key="veryLightPink">#FFFFEAE0</Color>
-            <Color x:Key="white">#f5f5f5</Color>
+            <Color x:Key="white">#ffffff</Color>
+            <Color x:Key="warmGrey">#999999</Color>
+            <Color x:Key="separator">#f5f5f5</Color>
             <Color x:Key="denim">#3a5d7a</Color>
             <Color x:Key="veryLightPinkTwo">#dddddd</Color>
             <Color x:Key="whiteTwo">#fbfbfb</Color>

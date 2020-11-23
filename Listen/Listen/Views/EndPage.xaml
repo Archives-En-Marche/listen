@@ -1,55 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Listen.Views.EndPage">
+<lvisual:BaseContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:visual="clr-namespace:PopolLib.VisualElements;assembly=PopolLib"
+    xmlns:lvisual="clr-namespace:Listen.VisualElements;assembly=Listen"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Listen.Views.EndPage">
     <ContentPage.Content>
-        <StackLayout Spacing="0">
-            <StackLayout Padding="0,20,0,35" BackgroundColor="{StaticResource paleGrey}">
-                <Image Margin="0,45,0,25" HorizontalOptions="CenterAndExpand" WidthRequest="210" HeightRequest="210">
-                    <Image.Source>
-                        <OnPlatform x:TypeArguments="ImageSource">
-                            <On Platform="iOS">Images/winner.png</On>
-                            <On Platform="Android">winner.png</On>
-                        </OnPlatform>
-                    </Image.Source>
-                </Image>
-                <Label FontSize="24" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" HorizontalTextAlignment="Start" Text="{Binding Fullname}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313">
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS">Roboto</On>
-                            <On Platform="Android">Roboto-Bold.ttf</On>
-                        </OnPlatform>
-                    </Label.FontFamily>
-                </Label>
-                <Label FontSize="24" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="Un questionnaire de plus de rempli. Merci de votre engagement à nos côtés !" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="iOS">Roboto</On>
-                            <On Platform="Android">Roboto-Regular.ttf</On>
-                        </OnPlatform>
-                    </Label.FontFamily>
-                </Label>
-            </StackLayout>
-            <ContentView VerticalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="130" HorizontalOptions="Center">
-                <StackLayout Spacing="10">
-                    <visual:ExtendedButton LetterSpacing="0.25" Text="NOUVEAU QUESTIONNAIRE" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
-                        SelectedTextColor="White" CornerRadius="4" Command="{Binding NewCommand}">
-                        <visual:LetterSpacingButton.FontFamily>
+        <ScrollView>
+            <StackLayout Spacing="0" BackgroundColor="{StaticResource white}">
+                <StackLayout Padding="0,20,0,35" BackgroundColor="{StaticResource paleGrey}">
+                    <Image Margin="0,45,0,25" HorizontalOptions="CenterAndExpand" WidthRequest="210" HeightRequest="210">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="iOS">Images/winner.png</On>
+                                <On Platform="Android">winner.png</On>
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                    <Label FontSize="24" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" HorizontalTextAlignment="Start" Text="{Binding Fullname}" TextColor="{StaticResource darkSlateBlue}" WidthRequest="313">
+                        <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="iOS">Roboto</On>
                                 <On Platform="Android">Roboto-Bold.ttf</On>
                             </OnPlatform>
-                        </visual:LetterSpacingButton.FontFamily>
-                    </visual:ExtendedButton>
-                    <visual:ExtendedButton LetterSpacing="0.25" Text="TOUS LES QUESTIONNAIRES" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
-                        SelectedTextColor="White" CornerRadius="4" Command="{Binding AllCommand}">
-                        <visual:LetterSpacingButton.FontFamily>
+                        </Label.FontFamily>
+                    </Label>
+                    <Label FontSize="24" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="Un questionnaire de plus de rempli. Merci de votre engagement à nos côtés !" TextColor="{StaticResource brownishGrey}" WidthRequest="313">
+                        <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="iOS">Roboto</On>
-                                <On Platform="Android">Roboto-Bold.ttf</On>
+                                <On Platform="Android">Roboto-Regular.ttf</On>
                             </OnPlatform>
-                        </visual:LetterSpacingButton.FontFamily>
-                    </visual:ExtendedButton>
+                        </Label.FontFamily>
+                    </Label>
                 </StackLayout>
-            </ContentView>
-        </StackLayout>
+                <ContentView VerticalOptions="StartAndExpand" Margin="0,40,0,40" WidthRequest="313" HeightRequest="130" HorizontalOptions="Center">
+                    <StackLayout Spacing="10">
+                        <visual:ExtendedButton LetterSpacing="0.25" Text="NOUVEAU QUESTIONNAIRE" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource lightPeach}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
+                            SelectedTextColor="White" CornerRadius="4" Command="{Binding NewCommand}">
+                            <visual:LetterSpacingButton.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Bold.ttf</On>
+                                </OnPlatform>
+                            </visual:LetterSpacingButton.FontFamily>
+                        </visual:ExtendedButton>
+                        <visual:ExtendedButton LetterSpacing="0.25" Text="TOUS LES QUESTIONNAIRES" TextColor="{StaticResource battleshipGrey}" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="313" HeightRequest="60" BackgroundColor="{StaticResource veryLightPink}" SelectedBackgroundColor="{StaticResource battleshipGrey}"
+                            SelectedTextColor="White" CornerRadius="4" Command="{Binding AllCommand}">
+                            <visual:LetterSpacingButton.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="iOS">Roboto</On>
+                                    <On Platform="Android">Roboto-Bold.ttf</On>
+                                </OnPlatform>
+                            </visual:LetterSpacingButton.FontFamily>
+                        </visual:ExtendedButton>
+                    </StackLayout>
+                </ContentView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</lvisual:BaseContentPage>
