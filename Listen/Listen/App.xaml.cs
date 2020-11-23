@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Listen.Helpers;
 using Listen.Managers;
-using Listen.Models.RealmAccess;
-using Listen.Models.WebServices;
-using Listen.Services;
 using Listen.ViewModels;
 using Listen.Views;
 using Listen.VisualElements;
-using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using PopolLib.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,10 +30,6 @@ namespace Listen
             Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://staging.en-marche.fr");
             Settings.AppSettings.AddOrUpdateValue("client_id", "2b494496-4eae-4946-9ae1-efa3f593595c");
             Settings.AppSettings.AddOrUpdateValue("client_secret", "vcyrJys1sdvaTCXN0BFfOuw2A8KxdA9QkYDMErViM68=");
-
-            Settings.AppSettings.AddOrUpdateValue("client_id", "33f63935-0793-41b9-89a8-1d9bb74e5fe5");
-            Settings.AppSettings.AddOrUpdateValue("client_secret", "_X5lVzYtkoVBotQM1pmty/8el3UGrRgIpfzqXeUL0jbY=");
-            Settings.AppSettings.AddOrUpdateValue("WS_BASE_URL", "https://en-marche.fr");
 #else
             Settings.AppSettings.AddOrUpdateValue("client_id", "33f63935-0793-41b9-89a8-1d9bb74e5fe5");
             Settings.AppSettings.AddOrUpdateValue("client_secret", "_X5lVzYtkoVBotQM1pmty/8el3UGrRgIpfzqXeUL0jbY=");
@@ -49,7 +39,16 @@ namespace Listen
             Settings.AppSettings.AddOrUpdateValue("DB_NAME", "listen.realm");
             Settings.AppSettings.AddOrUpdateValue("APP_VERSION_SCOPE", "jecoute_surveys");
 
-            MainPage = new InternalNavigationPage(new HomePage(this, new HomePageViewModel(this)));
+            var user = UserManager.Instance.GetUser();
+
+            if(user?.Token != null)
+            {
+                MainPage = new InternalNavigationPage(new HomePage(this, new HomePageViewModel(this)));
+            }
+            else
+            {
+                MainPage = new InternalNavigationPage(new LoginPage(new LoginPageViewModel(this)));
+            }
         }
 
         protected override void OnStart()
@@ -58,7 +57,7 @@ namespace Listen
             //var hud = DependencyService.Get<IProgressHUD>();
             //LongRunningTaskManager.Instance.StartLongRunningTask();
 
-            Microsoft.AppCenter.AppCenter.Start("ios=7755cdbe-dc4f-4e87-84f7-ddc120cfcd07;" + "android=010f04f0-339f-4458-803a-92b46333ec9a", typeof(Analytics), typeof(Crashes));
+            Microsoft.AppCenter.AppCenter.Start("ios=7755cdbe-dc4f-4e87-84f7-ddc120cfcd07;" + "android=010f04f0-339f-4458-803a-92b46333ec9a;", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

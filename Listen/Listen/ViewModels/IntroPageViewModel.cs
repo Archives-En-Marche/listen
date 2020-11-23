@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using Listen.ViewModels;
 using Listen.Managers;
 using Listen.Views;
 using Xamarin.Forms;
@@ -36,7 +37,7 @@ namespace Listen.ViewModels
 
             ContinueCommand = new Command(async () =>
             {
-                await _nav.PushAsync(new QuestionPage(new QuestionPageViewModel(_nav)));
+                await _nav.PushAsync(new QuestionPage(new QuestionPageViewModel(_nav, true)));
             });
         }
     }

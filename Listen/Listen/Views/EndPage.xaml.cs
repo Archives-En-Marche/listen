@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using Listen.Managers;
 using Listen.Models.WebServices;
-using Listen.ViewModels;
-using PopolLib.Extensions;
+using Listen.VisualElements;
 using Xamarin.Forms;
 
 namespace Listen.Views
 {
-    public partial class EndPage : ContentPage
+    public partial class EndPage : BaseContentPage
     {
         public EndPage(ViewModelBase vm)
         {

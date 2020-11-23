@@ -8,6 +8,9 @@ using Listen.Managers;
 using Listen.Models.RealmObjects;
 using ReactiveUI;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using Listen.Views;
+using Listen.VisualElements;
 
 namespace Listen.ViewModels
 {
@@ -41,6 +44,7 @@ namespace Listen.ViewModels
             }
         }
 
+        public ICommand AccountCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
 
         public InfosPageViewModel(INavigation navigation)
@@ -52,7 +56,7 @@ namespace Listen.ViewModels
                 var user = await UserManager.Instance.GetUserAsync();
                 if (user != null && string.IsNullOrEmpty(user?.Token) && string.IsNullOrEmpty(user?.FirstName) || string.IsNullOrEmpty(user?.ZipCode))
                 {
-                    await ServerManager.Instance.GetUserInfosAsync(user?.Token);
+                    await ServerManager.Instance.GetUserInfosAsync();
                     user = await UserManager.Instance.GetUserAsync();
                 }
                 return user;
@@ -78,8 +82,19 @@ namespace Listen.ViewModels
                 await UserManager.Instance.DeleteUserAsync();
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await _nav.PopToRootAsync();
+                    Application.Current.MainPage = new InternalNavigationPage(new LoginPage(new LoginPageViewModel(_nav)));
                 });
+            });
+
+            AccountCommand = new Command(async (obj) =>
+            {
+                var url = "https://www.en-marche.fr/parametres/mon-compte/modifier";
+
+#if DEBUG
+                url = "https://staging.en-marche.fr/parametres/mon-compte/modifier";
+#endif
+
+                await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
             });
         }
     }
