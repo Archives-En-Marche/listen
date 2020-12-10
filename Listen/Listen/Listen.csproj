@@ -18,14 +18,14 @@
     <PackageReference Include="RestSharp" Version="106.11.7" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Xamarin.Auth.Extensions" Version="1.7.0" />
-    <PackageReference Include="ReactiveUI" Version="10.5.43" />
-    <PackageReference Include="ReactiveUI.XamForms" Version="10.5.43" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.6.4" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.6.4" />
+    <PackageReference Include="ReactiveUI" Version="13.0.1" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.0.0" />
     <PackageReference Include="AppCenter.Analytics.Metrics" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="2.6.4" />
-    <PackageReference Include="Microsoft.AppCenter" Version="2.6.4" />
-    <PackageReference Include="Microsoft.AppCenter.Push" Version="2.6.4" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AppCenter" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AppCenter.Push" Version="3.4.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\..\PERSO\PopolLib\PopolLib\PopolLib.csproj" />
